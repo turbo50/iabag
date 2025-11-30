@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="900" viewBox="0 0 2000 900" role="img" aria-label="IA BAG logo">
+  <defs>
+    <linearGradient id="goldGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#E9C46A"/>
+      <stop offset="50%" stop-color="#C9A54A"/>
+      <stop offset="100%" stop-color="#B8862B"/>
+    </linearGradient>
+    <linearGradient id="shadowGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.02"/>
+    </linearGradient>
+    <style>
+      .brand { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-weight:700; letter-spacing:6px; }
+    </style>
+  </defs>
+
+  <!-- Transparent background -->
+  <rect width="100%" height="100%" fill="transparent"/>
+
+  <!-- Icon group (left) -->
+  <g id="icon" transform="translate(220,150) scale(1.0)">
+    <!-- bag body -->
+    <path d="M120 420 H540 Q560 420 560 400 V240 Q560 200 520 180 H140 Q100 200 100 240 V400 Q100 420 120 420 Z"
+          fill="white" stroke="url(#goldGrad)" stroke-width="14" />
+    <!-- inner fill for subtle ivory -->
+    <path d="M132 410 H528 Q540 410 540 396 V246 Q540 214 516 198 H144 Q120 214 120 246 V396 Q120 410 132 410 Z"
+          fill="#F7F3EE" />
+    <!-- handle -->
+    <path d="M160 188 C200 90 460 90 500 188" fill="none" stroke="url(#goldGrad)" stroke-width="18" stroke-linecap="round"/>
+    <!-- hardware lock -->
+    <rect x="320" y="304" width="60" height="34" rx="6" ry="6" fill="url(#goldGrad)" stroke="#8A5B1A" stroke-width="1"/>
+    <circle cx="350" cy="321" r="6" fill="#6b4813"/>
+    <!-- subtle shadow under bag -->
+    <ellipse cx="330" cy="444" rx="200" ry="28" fill="url(#shadowGrad)"/>
+    <!-- small tech motif (circuit-style) on right of handle -->
+    <g transform="translate(420,128) scale(0.9)">
+      <line x1="0" y1="0" x2="30" y2="-18" stroke="#C9A54A" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="34" cy="-22" r="6" fill="#C9A54A"/>
+      <line x1="0" y1="0" x2="30" y2="18" stroke="#C9A54A" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="34" cy="22" r="6" fill="#C9A54A"/>
+    </g>
+  </g>
+
+  <!-- Brand text to the right -->
+  <g transform="translate(820,420)">
+    <text class="brand" x="0" y="0" font-size="160" fill="#111111">IA</text>
+    <text class="brand" x="220" y="0" font-size="160" fill="url(#goldGrad)">BAG</text>
+    <!-- thin separator line -->
+    <rect x="-20" y="30" width="620" height="6" rx="3" fill="#EEEEEE" />
+  </g>
+</svg>
