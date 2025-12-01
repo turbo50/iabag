@@ -1,0 +1,1244 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <!--Required Meta Tags-->
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="description">
+        <!-- Title Of Site -->
+        <title>IA BAG</title>
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.png" />
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="assets/css/plugins.css" />
+        <!-- Main Style CSS -->
+        <link rel="stylesheet" href="assets/css/style.css" />
+        <link rel="stylesheet" href="assets/css/responsive.css" />
+    </head>
+
+    <body class="template-index index-demo18">
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
+        <!-- End Page Loader -->
+
+        <!--Page Wrapper-->
+        <div class="page-wrapper">
+            <!--Topbar-->
+            <div class="top-info-bar style1">
+                <div class="topBar-slider-style2 alert fade show" role="alert">
+                    <div class="item text-center d-flex-center justify-content-center">
+                        Bienvenue dans la haute maroquinerie - <a href="#" class="btn-link text-decoration-underline ms-1">Acheter</a>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"><i class="an an-times-l"></i></button>
+                    </div>
+                </div>
+            </div>
+            <!--End Topbar-->
+
+            <!--Header wrap-->
+            <div class="header-main header-18">
+                <!--Header-->
+                <header id="header" class="header header-wrap d-flex align-items-center">
+                    <div class="container">        
+                        <div class="row">
+                            <!--Logo / Menu Toggle-->
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center justify-content-start d-flex">
+                                <!--Mobile Toggle-->
+                                <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none"><i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i></button>
+                                <!--End Mobile Toggle-->
+                                <!--Logo-->
+                                <div class="logo"><a href="index.html"><img class="logo-img mh-100" src="assets/images/logo-ia-bag.svg" alt="IA BAG" title="IA BAG" width="120" /><span class="logo-txt d-none">IA BAG</span></a></div>
+                                <!--End Logo-->
+                            </div>
+                            <!--End Logo / Menu Toggle-->
+                            <!--Search Inline-->
+                            <div class="col-1 col-sm-1 col-md-1 col-lg-8 d-none d-lg-block">
+                                <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
+                                    <label class="label d-none"><span>Rechercher</span></label>
+                                    <div class="control">
+                                        <div class="searchField d-flex">
+                                            <div class="search-category">
+                                                <select id="rgsearch-category1" name="rgsearch[category]" data-default="Toutes Categories" class="rounded-pill-start">
+                                                    <option value="00" label="All Categories" selected="selected">Toutes Categories</option>
+                                                    <optgroup id="rgsearch-shop1" label="Shop">
+                                                        <option value="0">- Tous</option>
+                                                        <option value="1">- Hommes</option>
+                                                        <option value="2">- Femmes</option>
+                                                        <option value="3">- Chaussures</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                            <div class="input-box d-flex w-100">
+                                                <input type="text" name="q" value="" placeholder="Rechercher les articles #" class="input-text rounded-0 border-start-0 border-end-0">
+                                                <button type="submit" title="Rechercher" class="action search rounded-pill-end"><i class="icon an an-search-l"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--End Search Inline-->
+                            <!--Right Action-->
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center icons-col text-right d-flex justify-content-end">
+                                <!--Search-->
+                                <div class="site-search iconset d-block d-lg-none"><i class="icon an an-search-l"></i><span class="tooltip-label">Rechercher</span></div>
+                                <!--End Search-->
+                                <!--Wishlist-->
+                                <div class="wishlist-link iconset d-none"><i class="icon an an-heart-l"></i><span class="wishlist-count counter d-flex-center justify-content-center position-absolute translate-middle rounded-circle">0</span><span class="tooltip-label">Wishlist</span></div>
+                                <!--End Wishlist-->
+                                <!--Setting Dropdown-->
+                                <div class="user-link iconset"><i class="icon an an-user d-block d-lg-none"></i><span class="text d-none d-lg-flex">Connexion</span></div>
+                                <div id="userLinks">
+                                    <ul class="user-links">
+                                        <li><a href="login.html">Connexion</a></li>
+                                        <li><a href="register.html">S'inscrire</a></li>
+                                        <li><a href="my-wishlist.html">Ma collection</a></li>
+                                        <li><a href="compare-style1.html">Comparaison</a></li>
+                                    </ul>
+                                </div>
+                                <!--End Setting Dropdown-->
+                                <!--Minicart Drawer-->
+                                <div class="header-cart iconset">
+                                    <a href="#" class="site-header__cart btn-minicart d-flex-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
+                                        <i class="icon an an-sq-bag d-block d-lg-none"></i><span class="text d-none d-lg-flex">Panier</span><span class="site-cart-count counter d-flex-center justify-content-center rounded-circle ms-1">0</span>
+                                    </a>
+                                </div>
+                                <!--End Minicart Drawer-->
+                                <!--Setting Dropdown-->
+                                <div class="setting-link iconset pe-0"><i class="icon an an-right-bar-s"></i><span class="tooltip-label">Réglage</span></div>
+                                <div id="settingsBox">
+                                    <div class="currency-picker">
+                                        <span class="ttl">Dévise</span>
+                                        <ul id="currencies" class="cnrLangList">
+                                            <li class="selected"><a href="#;" class="active">FCFA</a><li><a href="#;">EUR</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="language-picker">
+                                        <span class="ttl">LANGUE</span>
+                                        <ul id="language" class="cnrLangList">
+                                            <li><a href="#" class="active">FRANCAIS</a></li><li><a href="#">ENGLISH</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Setting Dropdown-->
+                            </div>
+                            <!--End Right Action-->
+                        </div>
+                    </div>
+                    <!--Search Popup-->
+                    <div id="search-popup" class="search-drawer">
+                        <div class="container">
+                            <span class="closeSearch an an-times-l"></span>
+                            <form class="form minisearch" id="header-search" action="#" method="get">
+                                <label class="label"><span>Rechercher</span></label>
+                                <div class="control">
+                                    <div class="searchField">
+                                        <div class="search-category">
+                                            <select id="rgsearch-category" name="rgsearch[category]" data-default="All Categories">
+                                                <option value="00" label="All Categories" selected="selected">Toutes Categories</option>
+                                                <optgroup id="rgsearch-shop" label="">
+                                                        <option value="0">- Tout</option>
+                                                        <option value="1">- Hommes</option>
+                                                        <option value="2">- Femmes</option>
+                                                        <option value="3">- Chaussures</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
+                                        <div class="input-box">
+                                            <button type="submit" title="Search" class="action search"><i class="icon an an-search-l"></i></button>
+                                            <input type="text" name="q" value="" placeholder="Rechercher par mot clé #" class="input-text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--End Search Popup-->
+                </header>
+                <!--End Header-->
+                <!--Main Navigation Desktop-->
+                <div class="menu-outer d-none d-lg-block pb-1">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
+                                <nav class="grid__item" id="AccessibleNav">
+                                    <ul id="siteNav" class="site-nav medium center hidearrow">
+                                        <li class="lvl1 parent megamenu"><a href="index.html">Accueil <i class="an an-angle-down-l"></i></a>
+                                        </li>
+                                        <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-angle-down-l"></i></a>
+                                            
+                                        </li>
+                                        <li class="lvl1 parent dropdown"><a href="#;">Pages <i class="an an-angle-down-l"></i></a>
+                                            <ul class="dropdown">
+                                                <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-angle-right-l"></i></a>
+                                                    
+                                                </li>
+                                                <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-angle-right-l"></i></a>
+                                                    
+                                                </li>
+                                                <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-angle-right-l"></i></a>
+                                                    
+                                                </li>
+                                                <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a>
+                                                    
+                                                </li>
+                                                
+                                                <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-angle-right-l"></i></a>
+                                                    <ul class="dropdown">
+                                                        <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
+                                                        <li><a href="login-sliding-style.html" class="site-nav">Connexion</a></li>
+                                                    </ul>
+                                                </li>
+                                                
+                                            </ul>
+                                        </li>
+                                        <li class="lvl1 parent dropdown"><a href="blog-left-sidebar.html">Blog <i class="an an-angle-down-l"></i></a>
+                                           
+                                        </li>
+                                    </ul>
+                                </nav>                                   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Main Navigation Desktop-->
+            </div>
+            <!--End Header wrap-->
+
+            <!--Mobile Menu-->
+            <div class="mobile-nav-wrapper" role="navigation">
+                <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
+                <ul id="MobileNav" class="mobile-nav">
+                    <li class="lvl1 parent megamenu"><a href="index-demo18.html">Accueil <i class="an an-plus-l"></i></a>
+                        
+                    </li>
+                    <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-plus-l"></i></a>
+                        
+                    </li>
+                    
+                    <li class="lvl1 parent megamenu"><a href="#">Pages <i class="an an-plus-l"></i></a>
+                        <ul>
+                            <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-plus-l"></i></a>
+                                
+                            </li>
+                            <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-plus-l"></i></a>
+                                
+                            </li>
+                            <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-plus-l"></i></a>
+                                
+                            </li>
+                            <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-plus-l"></i></a>
+                                
+                            </li>
+                            
+                            <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-plus-l"></i></a>
+                                <ul class="dropdown">
+                                    <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
+                                    <li><a href="login.html" class="site-nav">Connexion</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    <li class="lvl1 parent megamenu"><a href="blog-left-sidebar.html">Blog <i class="an an-plus-l"></i></a>
+                        
+                    </li>
+                    
+                </ul>
+            </div>
+            <!--End Mobile Menu-->
+
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Home Slider-->
+                <section class="slideshow slideshow-wrapper">
+                    <div class="home-slideshow">
+                        <div class="slide slide1">
+                            <div class="slideshow--large bg-size">
+                                <img class="bg-img blur-up lazyload" data-src="assets/images/slideshow/img-banner01.png" src="assets/images/slideshow/img-banner01.png" alt="slideshow" title="" />
+                                
+                            </div>
+                        </div>
+                        <div class="slide slide2">
+                            <div class="slideshow--large bg-size">
+                                <img class="bg-img blur-up lazyload" data-src="assets/images/slideshow/img-banner02.png" src="assets/images/slideshow/img-banner02.png" alt="slideshow" title="" />
+                                
+                            </div>
+                        </div>
+                        <div class="slide slide3">
+                            <div class="slideshow--large bg-size">
+                                <img class="bg-img blur-up lazyload" data-src="assets/images/slideshow/img-banner03.png" src="assets/images/slideshow/img-banner03.png" alt="slideshow" title="" />
+                                
+                            </div>
+                        </div>
+                        <div class="slide slide4">
+                            <div class="slideshow--large bg-size">
+                                <img class="bg-img blur-up lazyload" data-src="assets/images/slideshow/img-banner04.png" src="assets/images/slideshow/img-banner04.png" alt="slideshow" title="" />
+                                
+                            </div>
+                        </div>
+                        
+                    </div>
+                </section>
+                <!--End Home Slider-->
+
+                <!--Collection Products-->
+                <section class="section product-grid-section">
+                    <div class="container">
+                        <div class="section-header">
+                            <h2>COLLECTION décembre 2025</h2>
+                            <p>Explorez la nouvelle collection pensée rien que pour vous</p>
+                        </div>
+
+                        <div class="grid-products">
+                            <div class="row">
+                                <!-- Debut affichage d'un produit -->
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product label-->
+                                        <div class="product-labels"><span class="lbl pr-label2 rounded-0">Hot</span></div>
+                                        <!--Product label-->
+
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-quickshop-popup" href="#pro-quickshop1" data-bs-toggle="offcanvas" data-bs-target="#pro-quickshop1" aria-controls="pro-quickshop1"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Acheter express</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+
+                                        <!-- Product Quickshop Form -->
+                                        <div class="quickshop-content d-flex-center" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="pro-quickshop1">
+                                            <button type="button" class="btn-close text-reset ms-auto position-absolute top-0 end-0 m-1" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                            <div class="offcanvas-body quickshop-variant h-100 d-flex align-items-start align-items-sm-center">
+                                                <form method="post" action="#" id="product_form_1052" class="product-form align-items-center text-center hidedropdown" accept-charset="UTF-8" enctype="multipart/form-data">
+                                                    <!-- Product Price -->
+                                                    <div class="product-single__price lh-1 mb-3 mt-0 mx-auto">
+                                                        <span class="visually-hidden">Regular price</span>
+                                                        <span class="product-price__sale--single">
+                                                            <span class="product-price-old-price d-none">$200.00</span><span class="product-price__price product-price__sale0">$199.00</span>   
+                                                        </span>
+                                                    </div>
+                                                    <!-- End Product Price -->
+                                                    <!-- Swatches Color -->
+                                                    <div class="swatches-image swatch clearfix mb-3 swatch-0 option1" data-option-index="0">
+                                                        <div class="product-form__item">
+                                                            <label class="label d-flex justify-content-center">Color:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">White</span></label>
+                                                            <ul class="swatches d-flex-justify-center list-unstyled m-0 clearfix">
+                                                                <li data-value="Green" class="swatch-element rounded-0 color white available active">
+                                                                    <label class="swatchLbl rounded-0 color small black" title="Black"></label>
+                                                                    <span class="tooltip-label top">Black</span>
+                                                                </li>
+                                                                <li data-value="Peach" class="swatch-element rounded-0 color peach available">
+                                                                    <label class="swatchLbl rounded-0 color small blue" title="Blue"></label>
+                                                                    <span class="tooltip-label top">Blue</span>
+                                                                </li>
+                                                                <li data-value="White" class="swatch-element rounded-0 color yellow available">
+                                                                    <label class="swatchLbl rounded-0 color small yellow" title="Yellow"></label>
+                                                                    <span class="tooltip-label top">Yellow</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Swatches Color -->
+                                                    <!-- Swatches Size -->
+                                                    <div class="swatch clearfix mb-3 swatch-1 option2" data-option-index="1">
+                                                        <div class="product-form__item">
+                                                            <label class="label d-flex justify-content-center">Size:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">S</span></label>
+                                                            <ul class="swatches-size d-flex-justify-center list-unstyled m-0 clearfix">
+                                                                <li data-value="S" class="swatch-element s available active">
+                                                                    <label class="swatchLbl rounded-0 medium" title="S">S</label><span class="tooltip-label">S</span>
+                                                                </li>
+                                                                <li data-value="M" class="swatch-element m available">
+                                                                    <label class="swatchLbl rounded-0 medium" title="M">M</label><span class="tooltip-label">M</span>
+                                                                </li>
+                                                                <li data-value="L" class="swatch-element l available">
+                                                                    <label class="swatchLbl rounded-0 medium" title="L">L</label><span class="tooltip-label">L</span>
+                                                                </li>
+                                                                <li data-value="XL" class="swatch-element xl available">
+                                                                    <label class="swatchLbl rounded-0 medium" title="XL">XL</label><span class="tooltip-label">XL</span>
+                                                                </li>
+                                                                <li data-value="XS" class="swatch-element xs soldout">
+                                                                    <label class="swatchLbl rounded-0 medium" title="XS">XS</label><span class="tooltip-label">XS</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Swatches Size -->
+                                                    <!-- Product Action -->
+                                                    <div class="product-form-submit mx-auto">
+                                                        <button type="submit" name="add" class="btn rounded product-form__cart-submit btn-small px-3"><span>Ajouter au panier</span></button>
+                                                        <button type="submit" name="add" class="btn rounded product-form__sold-out btn-small px-3 d-none" disabled="disabled">Épuisé</button>
+                                                        <button type="button" name="buy" class="btn rounded btn-outline-primary proceed-to-checkout btn-small px-3 d-none">Achetez</button>
+                                                    </div>
+                                                    <!-- End Product Action -->
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Quickshop Form -->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Solid Color Pleated Tote Bag</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$12.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <!--Notation produit-->
+                                        <div class="product-review" data-rating="2.5"></div>
+                                        <!--Fin Notation produit-->
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center" data-colors='[{"name":"Green","cssClass":"green"},{"name":"Orange","cssClass":"orange"},{"name":"Red","cssClass":"red"}]'>
+                                        </ul>
+
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <!-- Fin affichage d'un produit -->
+                                <!-- Début Partie affichage d'un produit à supprimer-->
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!--End Product Image-->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">AND Shoulder Bag</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$100.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></div>
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center">
+                                            <li class="medium radius teal"><span class="swacth-btn"></span><span class="tooltip-label">Teal</span></li>
+                                            <li class="medium radius navy"><span class="swacth-btn"></span><span class="tooltip-label">Navy</span></li>
+                                            <li class="medium radius maroon"><span class="swacth-btn"></span><span class="tooltip-label">Maroon</span></li>
+                                        </ul>
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Thick Chain Purses</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$25.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></div>
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center">
+                                            <li class="medium radius purple"><span class="swacth-btn"></span><span class="tooltip-label">Purple</span></li>
+                                            <li class="medium radius aqua"><span class="swacth-btn"></span><span class="tooltip-label">Aqua</span></li>
+                                            <li class="medium radius gray"><span class="swacth-btn"></span><span class="tooltip-label">Gray</span></li>
+                                        </ul>
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product label-->
+                                        <div class="product-labels"><span class="lbl on-sale rounded-0">Sale</span></div>
+                                        <!--End Product label-->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Women's Crossbody Bag</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="old-price">$15.00</span> <span class="price">$10.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></div>
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center">
+                                            <li class="medium radius green"><span class="swacth-btn"></span><span class="tooltip-label">Green</span></li>
+                                            <li class="medium radius orange"><span class="swacth-btn"></span><span class="tooltip-label">Orange</span></li>
+                                        </ul>
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">PU Leather Crossbody Bags</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$19.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></div>
+                                        <!--End Product Review-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product label-->
+                                        <div class="product-labels"><span class="lbl pr-label1 rounded-0">New</span></div>
+                                        <!--Product label-->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Drawstring Bucket Bag</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$29.08</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i></div>
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center">
+                                            <li class="medium radius green"><span class="swacth-btn"></span><span class="tooltip-label">Green</span></li>
+                                            <li class="medium radius orange"><span class="swacth-btn"></span><span class="tooltip-label">Orange</span></li>
+                                            <li class="medium radius red"><span class="swacth-btn"></span><span class="tooltip-label">Red</span></li>
+                                        </ul>
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!-- End Product Image -->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Box Bag Bucket Bag Wooden</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$35.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i></div>
+                                        <!--End Product Review-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                    <!--Start Product Image-->
+                                    <div class="product-image">
+                                        <!--Start Product Image-->
+                                        <a href="product-layout1.html" class="product-img">
+                                            <!--Image-->
+                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Image-->
+                                            <!--Hover Image-->
+                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <!--End Hover Image-->
+                                        </a>
+                                        <!--End Product Image-->
+                                        <!--Product Button-->
+                                        <div class="button-set style3 d-none d-md-block">
+                                            <ul>
+                                                <!--Cart Button-->
+                                                <li><a class="btn-icon btn cartIcon pro-addtocart-popup" href="#pro-addtocart-popup"><i class="icon an an-cart-l"></i> <span class="tooltip-label left">Ajouter au panier</span></a></li>
+                                                <!--End Cart Button-->
+                                                <!--Quick View Button-->
+                                                <li><a class="btn-icon quick-view-popup quick-view" href="javascript:void(0)" data-toggle="modal" data-target="#content_quickview"><i class="icon an an-search-l"></i> <span class="tooltip-label left">Vue rapide</span></a></li>
+                                                <!--End Quick View Button-->
+                                                <!--Wishlist Button-->
+                                                <li><a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html"><i class="icon an an-heart-l"></i> <span class="tooltip-label left">Ajouter à ma liste</span></a></li>
+                                                <!--End Wishlist Button-->
+                                                <!--Compare Button-->
+                                                <li><a class="btn-icon compare add-to-compare" href="compare-style2.html"><i class="icon an an-sync-ar"></i> <span class="tooltip-label left">Ajouter à mes comparaisons</span></a></li>
+                                                <!--End Compare Button-->
+                                            </ul>
+                                        </div>
+                                        <!--End Product Button-->
+                                    </div>
+                                    <!-- End Product Image -->
+                                    <!--Start Product Details-->
+                                    <div class="product-details text-center">
+                                        <!--Product Name-->
+                                        <div class="product-name">
+                                            <a class="fw-normal" href="product-layout1.html">Crossbody Bag</a>
+                                        </div>
+                                        <!--End Product Name-->
+                                        <!--Product Price-->
+                                        <div class="product-price">
+                                            <span class="price">$20.00</span>
+                                        </div>
+                                        <!-- End Product Price-->
+                                        <!--Product Review-->
+                                        <div class="product-review"><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i><i class="an an-star-o"></i></div>
+                                        <!--End Product Review-->
+                                        <!--Color Variant-->
+                                        <ul class="swatches d-flex-center justify-content-center">
+                                            <li class="medium radius red"><span class="swacth-btn"></span><span class="tooltip-label">Red</span></li>
+                                            <li class="medium radius green"><span class="swacth-btn"></span><span class="tooltip-label">Green</span></li>
+                                            <li class="medium radius orange"><span class="swacth-btn"></span><span class="tooltip-label">Orange</span></li>
+                                        </ul>
+                                        <!--End Color Variant-->
+                                    </div>
+                                    <!--End Product Details-->
+                                </div>
+                                <!-- Fin Partie affichage d'un produit à supprimer-->
+                            </div>
+                            <div class="row">
+                                <div class="col-12 text-center mt-3">
+                                    <a href="shop-listview-sidebar.html" class="btn btn-outline-primary btn-lg lh-base">VOIR TOUS LES STYLES</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--End Collection Products-->
+
+                <!--Collection Banner-->
+                <!--End Collection Banner-->
+
+                <!--Customize Services-->
+                <section class="section about-service">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 text-center mb-4 mb-md-0">
+                                <div class="service-info p-lg-3">
+                                    <i class="icon an an-worldwide mb-3"></i>
+                                    <div class="text">
+                                        <h4 class="fw-normal">Vous serez livré au plus près de chez-vous</h4>
+                                        <p>Nous nous occupons des démarches liées à l'expédition de votre commande.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 text-center mb-4 mb-sm-0">
+                                <div class="service-info p-lg-3">
+                                    <i class="icon an an-star-o mb-3"></i>
+                                    <div class="text">
+                                        <h4 class="fw-normal">Conception de classe mondiale</h4>
+                                        <p>Nos partenaires sont situés en Europe. Vous pouvez avoir la garantie sur la qualité de vos sacs, qui répondent aux normes de l'EU.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-4 text-center mb-3 mb-sm-0">
+                                <div class="service-info p-lg-3">
+                                    <i class="icon an an-chat mb-3"></i>
+                                    <div class="text">
+                                        <h4 class="fw-normal">Assistance assurée</h4>
+                                        <p>Nous sommes là pour vous aider tant dans vos choix que dans la démarche jusqu'à la réception de vos articles.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--End Customize Services-->
+            </div>
+            <!--End Body Container-->
+
+            <!--Footer-->
+            <div class="footer footer-7 border-0">
+                <div class="footer-top clearfix">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 footer-about">
+                                <div class="inner pe-lg-4 mb-3 mb-md-4 mb-lg-0">
+                                    <h4 class="h4 body-font fw-600">A propos de nous</h4>
+                                    <p>Notre vocation est de vous offrir le meilleur rapport qualité prix. Nous vous apporterons assitance dans la chaîne de bout en bout, afin de vous livrer vos articles le plus près de chez vous. <a href="aboutus-style1.html" class="d-inline-block"><u>En savoir plus</u></a></p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
+                                <h4 class="h4 body-font fw-600">INFORMATION</h4>
+                                <ul>
+                                    <li><a href="my-account.html">Mon compte</a></li>
+                                    <li><a href="aboutus-style1.html">A propos de nous</a></li>
+                                    <li><a href="login.html">Cpnnexion</a></li>
+                                    <li><a href="privacy-policy.html">Politique de confidentialité</a></li>
+                                    <li><a href="#">Conditions générales</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
+                                <h4 class="h4 body-font fw-600">SERVICE CLIENT</h4>
+                                <ul>
+                                    <li><a href="#">Center d'aide</a></li>
+                                    <li><a href="#">Conditions générales</a></li>
+                                    <li><a href="#">Echange</a></li>
+                                    <li><a href="#">Livraison</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-4 newsletter-col">
+                                <div class="display-table">
+                                    <div class="display-table-cell footer-newsletter">
+                                        <form action="#" method="post">
+                                            <label class="h4 body-font fw-600">BULLETIN</label>
+                                            <p>Abonnez-vous pour recevoir les dernières nouvelles de IA BAG, ainsi que des offres exclusives et bien plus encore.</p>
+                                            <div class="input-group">
+                                                <input type="email" class="input-group__field newsletter-input mb-0 rounded-0" name="EMAIL" value="" placeholder="Email" required="">
+                                                <span class="input-group__btn"><button type="submit" class="btn newsletter__submit rounded-0" name="commit" id="Subscribe"><i class="an an-envelope-l"></i></button></span>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <ul class="list-inline social-icons mt-3">
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="an an-facebook" aria-hidden="true"></i></a></li>
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="an an-pinterest-p" aria-hidden="true"></i></a></li>
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="an an-instagram" aria-hidden="true"></i></a></li>
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="TikTok"><i class="an an-tiktok" aria-hidden="true"></i></a></li>
+                                    <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Whatsapp"><i class="an an-whatsapp" aria-hidden="true"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>               
+                    </div>
+                </div>
+                <div class="footer-bottom clearfix">
+                    <div class="container">
+                        <div class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
+                            <img src="assets/images/payment.png" alt="Paypal Visa Payments"/>
+                            <div class="copytext text-transform-none">&copy; 2025 IA BAG. Tous droits réservés.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End Footer-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span> 
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div id="cart-drawer" class="block block-cart">
+                            <div class="minicart-header">
+                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
+                                <h4 class="fs-6 text-black">Your cart (2 Items)</h4>
+                            </div>
+                            <div class="minicart-content">
+                                <ul class="m-0 clearfix">
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">Solid Pleated Tote Bag</a>
+                                            <div class="variant-cart my-1">Black / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$59.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty rounded-0">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                    <li class="item d-flex justify-content-center align-items-center">
+                                        <a class="product-image" href="product-layout1.html">
+                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
+                                        </a>
+                                        <div class="product-details">
+                                            <a class="product-title" href="product-layout1.html">Bag Bucket Wooden</a>
+                                            <div class="variant-cart my-1">Blue / XL</div>
+                                            <div class="priceRow">
+                                                <div class="product-price">
+                                                    <span class="money">$199.00</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="qtyDetail text-center">
+                                            <div class="wrapQtyBtn">
+                                                <div class="qtyField">
+                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                                    <input type="text" name="quantity" value="1" class="qty rounded-0">
+                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
+                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="minicart-bottom text-black">
+                                <div class="shipinfo text-center mb-3 text-uppercase">
+                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i> Your order is eligible for <b>FREE Delivery</b>.</p>
+                                </div>
+                                <div class="subtotal">
+                                    <span>Total:</span>
+                                    <span class="product-price">$258.00</span>
+                                </div>
+                                <div class="agree-check customCheckbox clearfix">
+                                    <input id="prTearm" name="tearm" type="checkbox" value="tearm" required />
+                                    <label for="prTearm"> I agree with the terms and conditions</label>
+                                </div>
+                                <a href="checkout-style2.html" class="w-100 px-2 py-2 lh-base my-2 my-2 btn btn-outline-primary proceed-to-checkout">Proceed to Checkout</a>
+                                <a href="cart-style2.html" class="w-100 btn btn-primary py-2 lh-base cart-btn">View Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--End MiniCart Drawer-->
+            <div class="modalOverly"></div>
+
+            <!--Quickview Popup-->
+            <!-- Début Vu rapide des produit -->
+            <div class="loadingBox"><div class="an-spin"><i class="icon an an-spinner4"></i></div></div>
+            <div id="quickView-modal" class="mfp-with-anim mfp-hide">
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6 mb-3 mb-md-0">
+                        <!--Model thumbnail -->
+                        <div id="quickView" class="carousel slide">
+                            <!-- Image Slide carousel items -->
+                            <div class="carousel-inner">
+                                <div class="item carousel-item active" data-bs-slide-number="0">
+                                    <img class="blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="image" title="" />
+                                </div>
+                                <div class="item carousel-item" data-bs-slide-number="1">
+                                    <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                </div>
+                                <div class="item carousel-item" data-bs-slide-number="2">
+                                    <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                </div>
+                                <div class="item carousel-item" data-bs-slide-number="3">
+                                    <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                </div>
+                                <div class="item carousel-item" data-bs-slide-number="4">
+                                    <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                </div>
+                            </div>
+                            <!-- End Image Slide carousel items -->
+                            <!-- Thumbnail image -->
+                            <div class="model-thumbnail-img">
+                                <!-- Thumbnail slide -->
+                                <div class="carousel-indicators list-inline">
+                                    <div class="list-inline-item active" id="carousel-selector-0" data-bs-slide-to="0" data-bs-target="#quickView">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1.jpg" src="assets/images/products/product-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="list-inline-item" id="carousel-selector-1" data-bs-slide-to="1" data-bs-target="#quickView">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="list-inline-item" id="carousel-selector-2" data-bs-slide-to="2" data-bs-target="#quickView">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="list-inline-item" id="carousel-selector-3" data-bs-slide-to="3" data-bs-target="#quickView">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                    <div class="list-inline-item" id="carousel-selector-4" data-bs-slide-to="4" data-bs-target="#quickView">
+                                        <img class="blur-up lazyload" data-src="assets/images/products/product-1-1.jpg" src="assets/images/products/product-1-1.jpg" alt="image" title="" />
+                                    </div>
+                                </div>
+                                <!-- End Thumbnail slide -->
+                                <!-- Carousel arrow button -->
+                                <a class="carousel-control-prev carousel-arrow" href="#quickView" data-bs-target="#quickView" data-bs-slide="prev"><i class="icon an-3x an an-angle-left"></i><span class="visually-hidden">Précédent</span></a>
+                                <a class="carousel-control-next carousel-arrow" href="#quickView" data-bs-target="#quickView" data-bs-slide="next"><i class="icon an-3x an an-angle-right"></i><span class="visually-hidden">Suivant</span></a>
+                                <!-- End Carousel arrow button -->
+                            </div>
+                            <!-- End Thumbnail image -->
+                        </div>
+                        <!--End Model thumbnail -->
+                        <div class="text-center mt-3"><a href="product-layout1.html">VOIR PLUS DE DETAILS</a></div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-6">
+                        <h2 class="product-title fw-normal">Aperçu rapide du produit</h2>
+                        <div class="product-review d-flex-center mb-2">
+                            <div class="rating"><i class="icon an an-star"></i><i class="icon an an-star"></i><i class="icon an an-star"></i><i class="icon an an-star"></i><i class="icon an an-star-o"></i></div>
+                            <div class="reviews ms-2"><a href="#">5 Reviews</a></div>
+                        </div>
+                        <div class="product-info">
+                            <p class="product-vendor">Vendor:  <span class="fw-normal"><a href="#" class="fw-normal">Optimal</a></span></p>  
+                            <p class="product-type">Product Type: <span class="fw-normal">Tops</span></p> 
+                            <p class="product-sku">SKU:  <span class="fw-normal">50-ABC</span></p>
+                        </div>
+                        <div class="pro-stockLbl my-2">
+                            <span class="d-flex-center stockLbl instock"><i class="icon an an-check-cil"></i><span> In stock</span></span>
+                            <span class="d-flex-center stockLbl preorder d-none"><i class="icon an an-clock-r"></i><span> Pre-order Now</span></span>
+                            <span class="d-flex-center stockLbl outstock d-none"><i class="icon an an-times-cil"></i> <span>Épuisé</span></span>
+                            <span class="d-flex-center stockLbl lowstock d-none" data-qty="15"><i class="icon an an-exclamation-cir"></i><span> Order now, Only  <span class="items">10</span>  left!</span></span>
+                        </div>
+                        <div class="pricebox">
+                            <span class="price old-price">$400.00</span><span class="price product-price__sale">$300.00</span>
+                        </div>
+                        <!--<div class="sort-description">Optimal Multipurpose Bootstrap 5 Html Template that will give you and your customers a smooth shopping experience which can be used for various kinds of stores such as fashion.. </div>-->
+                        <form method="post" action="#" id="product_form--option" class="product-form">
+                            <div class="product-options d-flex-wrap">
+                                <div class="swatch clearfix swatch-0 option1">
+                                    <div class="product-form__item">
+                                        <label class="label d-flex">Color:<span class="required d-none">*</span> <span class="slVariant ms-1 fw-bold">Black</span></label>
+                                        <ul class="swatches-image swatches d-flex-wrap list-unstyled clearfix">
+                                            <li data-value="Black" class="swatch-element color available active">
+                                                <label class="rounded-0 swatchLbl small color black" title="Black"></label>
+                                                <span class="tooltip-label top">Black</span>
+                                            </li>
+                                            <li data-value="Green" class="swatch-element color available">
+                                                <label class="rounded-0 swatchLbl small color green" title="Green"></label>
+                                                <span class="tooltip-label top">Green</span>
+                                            </li>
+                                            <li data-value="Orange" class="swatch-element color available">
+                                                <label class="rounded-0 swatchLbl small color orange" title="Orange"></label>
+                                                <span class="tooltip-label top">Orange</span>
+                                            </li>
+                                            <li data-value="Blue" class="swatch-element color available">
+                                                <label class="rounded-0 swatchLbl small color blue" title="Blue"></label>
+                                                <span class="tooltip-label top">Blue</span>
+                                            </li>
+                                            <li data-value="Red" class="swatch-element color available">
+                                                <label class="rounded-0 swatchLbl small color red" title="Red"></label>
+                                                <span class="tooltip-label top">Red</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="swatch clearfix swatch-1 option2">
+                                    <div class="product-form__item">
+                                        <label class="label">Size:<span class="required d-none">*</span> <span class="slVariant ms-1 fw-bold">XS</span></label>
+                                        <ul class="swatches-size d-flex-center list-unstyled clearfix swatch-1 option2">
+                                            <li data-value="XS" class="swatch-element xs available active">
+                                                <label class="swatchLbl rounded-0 medium" title="XS">XS</label>
+                                                <span class="tooltip-label">XS</span>
+                                            </li>
+                                            <li data-value="S" class="swatch-element s available">
+                                                <label class="swatchLbl rounded-0 medium" title="S">S</label>
+                                                <span class="tooltip-label">S</span>
+                                            </li>
+                                            <li data-value="M" class="swatch-element m available">
+                                                <label class="swatchLbl rounded-0 medium" title="M">M</label>
+                                                <span class="tooltip-label">M</span>
+                                            </li>
+                                            <li data-value="L" class="swatch-element l available">
+                                                <label class="swatchLbl rounded-0 medium" title="L">L</label>
+                                                <span class="tooltip-label">L</span>
+                                            </li>
+                                            <li data-value="XL" class="swatch-element xl available">
+                                                <label class="swatchLbl rounded-0 medium" title="XL">XL</label>
+                                                <span class="tooltip-label">XL</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="product-action d-flex-wrap w-100 mb-3 clearfix">
+                                    <div class="quantity">
+                                        <div class="qtyField rounded">
+                                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
+                                            <input type="text" name="quantity" value="1" class="product-form__input qty rounded-0">
+                                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
+                                        </div>
+                                    </div>                                
+                                    <div class="add-to-cart ms-3 fl-1">
+                                        <button type="button" class="btn button-cart rounded-0"><span>Ajouter au panier</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="wishlist-btn d-flex-center">
+                            <a class="add-wishlist d-flex-center text-uppercase me-3" href="my-wishlist.html" title="Add to Wishlist"><i class="icon an an-heart-l me-1"></i> <span>Ajouter à ma liste</span></a>
+                            <a class="add-compare d-flex-center text-uppercase" href="compare-style1.html" title="Add to Compare"><i class="icon an an-random-r me-2"></i> <span>Ajouter à mes comparaisons</span></a>
+                        </div>
+                        <!-- Social Sharing -->
+                        <div class="social-sharing share-icon d-flex-center mx-0 mt-3">
+                            <span class="sharing-lbl me-2">Share :</span>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-facebook" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Facebook"><i class="icon an an-facebook mx-1"></i><span class="share-title d-none">Facebook</span></a>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-twitter" data-bs-toggle="tooltip" data-bs-placement="top" title="Tweet on Twitter"><i class="icon an an-twitter mx-1"></i><span class="share-title d-none">Tweet</span></a>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-pinterest" data-bs-toggle="tooltip" data-bs-placement="top" title="Pin on Pinterest"><i class="icon an an-pinterest-p mx-1"></i> <span class="share-title d-none">Pin it</span></a>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-linkedin" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Instagram"><i class="icon an an-instagram mx-1"></i><span class="share-title d-none">Instagram</span></a>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-whatsapp" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on WhatsApp"><i class="icon an an-whatsapp mx-1"></i><span class="share-title d-none">WhatsApp</span></a>
+                            <a href="#" class="d-flex-center btn btn-link btn--share share-email" data-bs-toggle="tooltip" data-bs-placement="top" title="Share by Email"><i class="icon an an-envelope-l mx-1"></i><span class="share-title d-none">Email</span></a>
+                        </div>
+                        <!-- End Social Sharing -->
+                    </div>
+                </div>
+            </div>
+            <!--End Quickview Popup-->
+            <!-- Fin Vu rapide des produit -->
+
+            <!--Addtocart Added Popup-->
+            <!--Debut Popup ajouter au panier-->
+            <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
+                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+                <div class="addtocart-inner text-center clearfix">
+                    <h4 class="title mb-3 text-success">Ajouté au panier avec succès.</h4>
+                    <div class="pro-img mb-3">
+                        <img class="img-fluid blur-up lazyload" src="assets/images/products/add-to-cart-popup.jpg" data-src="assets/images/products/add-to-cart-popup.jpg" alt="Ajouté au panier avec succès." title="Ajouté au panier avec succès." />
+                    </div>
+                    <div class="pro-details">   
+                        <h5 class="pro-name mb-0">Drawstring Bucket Bag</h5>
+                        <p class="sku my-2">Color: Gray</p>
+                        <p class="mb-0 qty-total">1 X $113.88</p>
+                        <div class="addcart-total bg-light mt-3 mb-3 p-2">
+                            Total: <b class="price">$113.88</b>
+                        </div>
+                        <div class="button-action">
+                            <a href="checkout-style1.html" class="btn btn-primary view-cart mx-1 py-2 rounded-0">Passer au paiement</a>
+                            <a href="index.html" class="btn btn-secondary py-2 rounded-0">Continuer les achats</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Addtocart Added Popup-->
+            <!--Fin Popup ajouter au panier-->
+
+
+            <!-- Including Jquery -->
+            <script src="assets/js/vendor/jquery-min.js"></script>
+            <script src="assets/js/vendor/js.cookie.js"></script>
+            <!--Including Javascript-->
+            <script src="assets/js/plugins.js"></script>
+            <script src="assets/js/main.js"></script>
+            <script src="assets/js/rating.js"></script>
+            <script src="assets/js/color.js"></script>
+
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>
