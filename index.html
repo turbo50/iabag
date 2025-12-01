@@ -292,21 +292,22 @@
                         <div class="grid-products">
                             <div class="row">
                                 <!-- Debut affichage d'un produit -->
-                                <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
+                                <section id="product-template">
+                                    <div class="col-6 col-sm-6 col-md-4 col-lg-3 item">
                                     <!--Start Product Image-->
                                     <div class="product-image">
                                         <!--Start Product Image-->
                                         <a href="product-layout1.html" class="product-img">
                                             <!--Image-->
-                                            <img class="primary blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <img class="primary blur-up lazyload" data-src="$image_produit" src="$image_produit" alt="product" title="">
                                             <!--End Image-->
                                             <!--Hover Image-->
-                                            <img class="hover blur-up lazyload" data-src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" src="https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/sac1.png" alt="product" title="">
+                                            <img class="hover blur-up lazyload" data-src="$image_produit" src="$image_produit" alt="product" title="">
                                             <!--End Hover Image-->
                                         </a>
                                         <!-- End Product Image -->
                                         <!--Product label-->
-                                        <div class="product-labels"><span class="lbl pr-label2 rounded-0">Hot</span></div>
+                                        <div class="product-labels"><span class="lbl pr-label2 rounded-0">$label</span></div>
                                         <!--Product label-->
 
                                         <!--Product Button-->
@@ -336,16 +337,16 @@
                                                 <form method="post" action="#" id="product_form_1052" class="product-form align-items-center text-center hidedropdown" accept-charset="UTF-8" enctype="multipart/form-data">
                                                     <!-- Product Price -->
                                                     <div class="product-single__price lh-1 mb-3 mt-0 mx-auto">
-                                                        <span class="visually-hidden">Regular price</span>
+                                                        <span class="visually-hidden">Prix ​​régulier</span>
                                                         <span class="product-price__sale--single">
-                                                            <span class="product-price-old-price d-none">$200.00</span><span class="product-price__price product-price__sale0">$199.00</span>   
+                                                            <span class="product-price-old-price d-none">$ancien_prix</span><span class="product-price__price product-price__sale0">$prix_actuel</span>   
                                                         </span>
                                                     </div>
                                                     <!-- End Product Price -->
                                                     <!-- Swatches Color -->
                                                     <div class="swatches-image swatch clearfix mb-3 swatch-0 option1" data-option-index="0">
                                                         <div class="product-form__item">
-                                                            <label class="label d-flex justify-content-center">Color:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">White</span></label>
+                                                            <label class="label d-flex justify-content-center">Couleur:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">White</span></label>
                                                             <ul class="swatches d-flex-justify-center list-unstyled m-0 clearfix">
                                                                 <li data-value="Green" class="swatch-element rounded-0 color white available active">
                                                                     <label class="swatchLbl rounded-0 color small black" title="Black"></label>
@@ -364,28 +365,6 @@
                                                     </div>
                                                     <!-- End Swatches Color -->
                                                     <!-- Swatches Size -->
-                                                    <div class="swatch clearfix mb-3 swatch-1 option2" data-option-index="1">
-                                                        <div class="product-form__item">
-                                                            <label class="label d-flex justify-content-center">Size:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">S</span></label>
-                                                            <ul class="swatches-size d-flex-justify-center list-unstyled m-0 clearfix">
-                                                                <li data-value="S" class="swatch-element s available active">
-                                                                    <label class="swatchLbl rounded-0 medium" title="S">S</label><span class="tooltip-label">S</span>
-                                                                </li>
-                                                                <li data-value="M" class="swatch-element m available">
-                                                                    <label class="swatchLbl rounded-0 medium" title="M">M</label><span class="tooltip-label">M</span>
-                                                                </li>
-                                                                <li data-value="L" class="swatch-element l available">
-                                                                    <label class="swatchLbl rounded-0 medium" title="L">L</label><span class="tooltip-label">L</span>
-                                                                </li>
-                                                                <li data-value="XL" class="swatch-element xl available">
-                                                                    <label class="swatchLbl rounded-0 medium" title="XL">XL</label><span class="tooltip-label">XL</span>
-                                                                </li>
-                                                                <li data-value="XS" class="swatch-element xs soldout">
-                                                                    <label class="swatchLbl rounded-0 medium" title="XS">XS</label><span class="tooltip-label">XS</span>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
                                                     <!-- End Swatches Size -->
                                                     <!-- Product Action -->
                                                     <div class="product-form-submit mx-auto">
@@ -404,27 +383,28 @@
                                     <div class="product-details text-center">
                                         <!--Product Name-->
                                         <div class="product-name">
-                                            <a class="fw-normal" href="product-layout1.html">Solid Color Pleated Tote Bag</a>
+                                            <a class="fw-normal" href="product-layout1.html">$nom_produit</a>
                                         </div>
                                         <!--End Product Name-->
                                         <!--Product Price-->
                                         <div class="product-price">
-                                            <span class="price">$12.00</span>
+                                            <span class="price">$prix_actuel</span>
                                         </div>
                                         <!-- End Product Price-->
                                         <!--Product Review-->
                                         <!--Notation produit-->
-                                        <div class="product-review" data-rating="2.5"></div>
+                                        <div class="product-review" data-rating="$notation"></div>
                                         <!--Fin Notation produit-->
                                         <!--End Product Review-->
                                         <!--Color Variant-->
-                                        <ul class="swatches d-flex-center justify-content-center" data-colors='[{"name":"Green","cssClass":"green"},{"name":"Orange","cssClass":"orange"},{"name":"Red","cssClass":"red"}]'>
+                                        <ul class="swatches d-flex-center justify-content-center" data-colors='$liste_couleur'>
                                         </ul>
 
                                         <!--End Color Variant-->
                                     </div>
                                     <!--End Product Details-->
-                                </div>
+                                    </div>
+                                </section>
                                 <!-- Fin affichage d'un produit -->
                                 <!-- Début Partie affichage d'un produit à supprimer-->
                                 <!-- Fin Partie affichage d'un produit à supprimer-->
@@ -841,6 +821,13 @@
             <script src="assets/js/main.js"></script>
             <script src="assets/js/rating.js"></script>
             <script src="assets/js/color.js"></script>
+            <script src="assets/js/load_product_grill.js"></script> 
+            <script> document.addEventListener("DOMContentLoaded", () => 
+                { loadProducts();
+
+                });
+            </script>
+           
 
         </div>
         <!--End Page Wrapper-->
