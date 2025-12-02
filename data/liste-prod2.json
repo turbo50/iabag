@@ -3,9 +3,9 @@
     {
       "PutRequest": {
         "Item": {
-          "code_produit": { "S": "P001" },
+          "code_produit": { "S": "P004" },
           "marque_produit": { "S": "Luxe Paris" },
-          "nom_produit": { "S": "Sac Élégance Cuir Premium" },
+          "nom_produit": { "S": "Sac Élégance Cuir Premium 2" },
           "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-800.png" },
           "ancien_prix": { "N": "249.99" },
           "prix_actuel": { "N": "199.99" },
@@ -25,9 +25,9 @@
     {
       "PutRequest": {
         "Item": {
-          "code_produit": { "S": "P002" },
+          "code_produit": { "S": "P005" },
           "marque_produit": { "S": "Urban Chic" },
-          "nom_produit": { "S": "Sac à Main CityLife" },
+          "nom_produit": { "S": "Sac à Main CityLife 2" },
           "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-800.png" },
           "ancien_prix": { "N": "129.00" },
           "prix_actuel": { "N": "99.00" },
@@ -46,9 +46,9 @@
     {
       "PutRequest": {
         "Item": {
-          "code_produit": { "S": "P003" },
+          "code_produit": { "S": "P006" },
           "marque_produit": { "S": "Luxe Paris" },
-          "nom_produit": { "S": "Sac à Main Prestige" },
+          "nom_produit": { "S": "Sac à Main Prestige 2" },
           "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-800.png" },
           "ancien_prix": { "N": "320.00" },
           "prix_actuel": { "N": "249.99" },
