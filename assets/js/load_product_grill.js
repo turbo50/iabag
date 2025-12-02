@@ -1,34 +1,68 @@
-function fillTemplate(template, data) {
+async function fetchProducts() {
+    const url = "https://api.iabag.fr/products"; // Ton endpoint API
+    const res = await fetch(url);
+    const data = await res.json();
+
+    window.PRODUCTS = data; // liste complète disponible partout
+
+    return data;
+}
+
+function fillTemplate(template, product) {
     return template.replace(/\$[a-zA-Z0-9_]+/g, match => {
-        const key = match.substring(1);
-        return data[key] !== undefined ? data[key] : "";
+        const key = match.substring(1); // enlève le $
+        return product[key] !== undefined ? product[key] : "";
     });
 }
 
-
-function renderProduct(product) {
+function buildProductHTML(product) {
     const template = document.getElementById("product-template").innerHTML;
 
-    // Remplacement des variables $...
+    // Remplace toutes les variables $xxx par leurs valeurs
     const filled = fillTemplate(template, product);
 
-    // Conversion en élément DOM
-    const div = document.createElement("div");
-    div.innerHTML = filled.trim();
-    return div.firstElementChild;
+    // Convertit le HTML rempli → un vrai DOM Element
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = filled.trim();
+
+    return wrapper.firstElementChild;
 }
 
-
-async function loadProducts() {
-    const url = "https://api.iabag.fr/products"; // ton endpoint API Gateway
-
-    const response = await fetch(url);
-    const products = await response.json(); // <--- liste de produits
-
-    const container = document.querySelector(".grid-products .row");
-
-    products.forEach(product => {
-        const card = renderProduct(product);
-        container.appendChild(card);
+function fillColorList(container, colors) {
+    container.innerHTML = "";
+    colors.forEach(color => {
+        const li = document.createElement("li");
+        li.textContent = color; // Tu peux améliorer plus tard (swatches)
+        container.appendChild(li);
     });
 }
+
+function applyDynamicLists(card, product) {
+    // Tous les éléments dans le bloc produit ayant l'attribut data-colors
+    const colorLists = card.querySelectorAll("[data-colors]");
+
+    colorLists.forEach(list => {
+        const key = list.getAttribute("data-colors").replace("$", "");
+        const colors = product[key] || [];
+        fillColorList(list, colors);
+    });
+}
+
+async function renderProductGrid() {
+    const products = await fetchProducts();
+    const grid = document.getElementById("product-grid");
+
+    products.forEach(product => {
+        // 1️⃣ construire le bloc HTML
+        const card = buildProductHTML(product);
+
+        // 2️⃣ intégrer les listes dynamiques (ex: liste_couleur)
+        applyDynamicLists(card, product);
+
+        // 3️⃣ ajouter dans la grille
+        grid.appendChild(card);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", renderProductGrid);
+
