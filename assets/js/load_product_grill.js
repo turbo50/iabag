@@ -1,12 +1,23 @@
-async function fetchProducts() {
-    const url = "https://2f0ihly4q7.execute-api.eu-west-3.amazonaws.com/products"; // Ton endpoint API
+import { MOCK_PRODUCTS } from "../../data/mock-products.js";
+console.log("Mock Fetch chargé");
+
+const USE_LOCAL = true; // passe à false pour retourner sur API Gateway
+
+export async function fetchProducts() {
+    if (USE_LOCAL) {
+        console.log("➡️ Mock activé : données locales utilisées");
+        window.PRODUCTS = MOCK_PRODUCTS;
+        return MOCK_PRODUCTS;
+    }
+
+    const url = "https://2f0ihly4q7.execute-api.eu-west-3.amazonaws.com/products";
     const res = await fetch(url);
     const data = await res.json();
 
-    window.PRODUCTS = data; // liste complète disponible partout
-
+    window.PRODUCTS = data;
     return data;
 }
+
 
 function fillTemplate(template, product) {
     return template.replace(/\$[a-zA-Z0-9_]+/g, match => {
@@ -79,7 +90,6 @@ function openQuickView(productId) {
     });
 }
 
-
 function fillQuickView(product) {
 
     // ---------------------------
@@ -137,7 +147,6 @@ function fillQuickView(product) {
     });
 }
 
-
 function setupQuickViewButtons() {
     document.querySelectorAll("[data-product-id]").forEach(btn => {
 
@@ -180,6 +189,7 @@ function applyRatingStars(card, product){
         }
     });
 }
+
 async function renderProductGrid() {
     const products = await fetchProducts();
     const grid = document.getElementById("product-grid");
@@ -199,4 +209,7 @@ async function renderProductGrid() {
 }
 
 document.addEventListener("DOMContentLoaded", renderProductGrid);
+fetchProducts().then(data => {
+    console.log("📦 Données retournées par fetchProducts :", data);
+});
 
