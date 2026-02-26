@@ -1,0 +1,12 @@
+{
+  "name": "ia-bag-static",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "posthtml": "^0.16.6",
+    "posthtml-include": "^1.7.4"
+  }
+}

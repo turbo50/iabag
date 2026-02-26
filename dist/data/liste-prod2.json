@@ -1,0 +1,136 @@
+{
+  "produit": [
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P001" },
+          "marque_produit": { "S": "Luxe Paris" },
+          "nom_produit": { "S": "Sac Élégance Cuir Premium" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-800.png" },
+          "ancien_prix": { "N": "249.99" },
+          "prix_actuel": { "N": "199.99" },
+          "notation": { "N": "4.7" },
+          "sku": { "S": "LX-P001" },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Green"},"cssClass":{"S":"green"}}},{"M":{"name":{"S":"Orange"},"cssClass":{"S":"orange"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}}]},
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P002" },
+          "marque_produit": { "S": "Urban Chic" },
+          "nom_produit": { "S": "Sac à Main CityLife" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-800.png" },
+          "ancien_prix": { "N": "129.00" },
+          "prix_actuel": { "N": "99.00" },
+          "notation": { "N": "4.3" },
+          "sku": { "S": "UC-P002" },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Yellow"},"cssClass":{"S":"yellow"}}},{"M":{"name":{"S":"Pink"},"cssClass":{"S":"pink"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}}]},
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-960.png" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P003" },
+          "marque_produit": { "S": "Luxe Paris" },
+          "nom_produit": { "S": "Sac à Main Prestige" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-800.png" },
+          "ancien_prix": { "N": "320.00" },
+          "prix_actuel": { "N": "249.99" },
+          "notation": { "N": "4.9" },
+          "sku": { "S": "LX-P003" },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Black"},"cssClass":{"S":"black"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Bleu"},"cssClass":{"S":"bleu"}}}]},
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P004" },
+          "marque_produit": { "S": "Luxe Paris" },
+          "nom_produit": { "S": "Sac Élégance Cuir Premium 2" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-800.png" },
+          "ancien_prix": { "N": "249.99" },
+          "prix_actuel": { "N": "199.99" },
+          "notation": { "N": "4.7" },
+          "sku": { "S": "LX-P001" },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Brown "},"cssClass":{"S":"brown "}}},{"M":{"name":{"S":"Orange"},"cssClass":{"S":"orange"}}},{"M":{"name":{"S":"Navy blue"},"cssClass":{"S":"navy blue"}}},{"M":{"name":{"S":"Aqua"},"cssClass":{"S":"aqua"}}}]},
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P001-800-960.png" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P005" },
+          "marque_produit": { "S": "Urban Chic" },
+          "nom_produit": { "S": "Sac à Main CityLife 2" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-800.png" },
+          "ancien_prix": { "N": "129.00" },
+          "prix_actuel": { "N": "99.00" },
+          "notation": { "N": "4.3" },
+          "sku": { "S": "UC-P002" },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Green"},"cssClass":{"S":"green"}}},{"M":{"name":{"S":"Orange"},"cssClass":{"S":"orange"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}}]},
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P002-800-960.png" }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "PutRequest": {
+        "Item": {
+          "code_produit": { "S": "P006" },
+          "marque_produit": { "S": "Luxe Paris" },
+          "nom_produit": { "S": "Sac à Main Prestige 2" },
+          "image_produit": { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-800.png" },
+          "ancien_prix": { "N": "320.00" },
+          "prix_actuel": { "N": "249.99" },
+          "notation": { "N": "4.9" },
+          "sku": { "S": "LX-P003" },
+          "liste_couleur": { "L": [ { "S": "beige" }, { "S": "noir" } ] },
+          "autres_images": {
+            "L": [
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
+              { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

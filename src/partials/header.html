@@ -1,0 +1,193 @@
+<!--Topbar-->
+<div class="top-info-bar style1">
+  <div class="topBar-slider-style2 alert fade show" role="alert">
+    <div class="item text-center d-flex-center justify-content-center">
+      Bienvenue dans la haute maroquinerie -
+      <a href="#" class="btn-link text-decoration-underline ms-1">Acheter</a>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <i class="an an-times-l"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<!--End Topbar-->
+
+<!--Header wrap-->
+<div class="header-main header-18">
+  <!--Header-->
+  <header id="header" class="header header-wrap d-flex align-items-center">
+    <div class="container">        
+      <div class="row">
+        <!--Logo / Menu Toggle-->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center justify-content-start d-flex">
+          <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none">
+            <i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i>
+          </button>
+
+          <div class="logo">
+            <a href="index.html">
+              <img class="logo-img mh-100" src="assets/images/logo-ia-bag.svg" alt="IA BAG" title="IA BAG" width="120" />
+              <span class="logo-txt d-none">IA BAG</span>
+            </a>
+          </div>
+        </div>
+
+        <!--Search Inline-->
+        <div class="col-1 col-sm-1 col-md-1 col-lg-8 d-none d-lg-block">
+          <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
+            <label class="label d-none"><span>Rechercher</span></label>
+            <div class="control">
+              <div class="searchField d-flex">
+                <div class="search-category">
+                  <select id="rgsearch-category1" name="rgsearch[category]" data-default="Toutes Categories" class="rounded-pill-start">
+                    <option value="00" label="All Categories" selected="selected">Toutes Categories</option>
+                    <optgroup id="rgsearch-shop1" label="Shop">
+                      <option value="0">- Tous</option>
+                      <option value="1">- Hommes</option>
+                      <option value="2">- Femmes</option>
+                      <option value="3">- Chaussures</option>
+                    </optgroup>
+                  </select>
+                </div>
+                <div class="input-box d-flex w-100">
+                  <input type="text" name="q" value="" placeholder="Rechercher les articles #" class="input-text rounded-0 border-start-0 border-end-0">
+                  <button type="submit" title="Rechercher" class="action search rounded-pill-end">
+                    <i class="icon an an-search-l"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!--Right Action-->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center icons-col text-right d-flex justify-content-end">
+          <div class="site-search iconset d-block d-lg-none"><i class="icon an an-search-l"></i><span class="tooltip-label">Rechercher</span></div>
+
+          <div class="user-link iconset"><i class="icon an an-user d-block d-lg-none"></i><span class="text d-none d-lg-flex">Connexion</span></div>
+          <div id="userLinks">
+            <ul class="user-links">
+              <li><a href="login.html">Connexion</a></li>
+              <li><a href="register.html">S'inscrire</a></li>
+              <li><a href="my-wishlist.html">Ma collection</a></li>
+            </ul>
+          </div>
+
+          <div class="header-cart iconset">
+            <a href="#" class="site-header__cart btn-minicart d-flex-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
+              <i class="icon an an-sq-bag d-block d-lg-none"></i>
+              <span class="text d-none d-lg-flex">Panier</span>
+              <span class="site-cart-count counter d-flex-center justify-content-center rounded-circle ms-1">0</span>
+            </a>
+          </div>
+
+          <div class="setting-link iconset pe-0"><i class="icon an an-right-bar-s"></i><span class="tooltip-label">Réglage</span></div>
+          <div id="settingsBox">
+            <div class="currency-picker">
+              <span class="ttl">Dévise</span>
+              <ul id="currencies" class="cnrLangList">
+                <li class="selected"><a href="#;" class="active">FCFA</a><li><a href="#;">EUR</a></li>
+              </ul>
+            </div>
+            <div class="language-picker">
+              <span class="ttl">LANGUE</span>
+              <ul id="language" class="cnrLangList">
+                <li><a href="#" class="active">FRANCAIS</a></li><li><a href="#">ENGLISH</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!--End Right Action-->
+      </div>
+    </div>
+
+    <!--Search Popup-->
+    <div id="search-popup" class="search-drawer">
+      <div class="container">
+        <span class="closeSearch an an-times-l"></span>
+        <form class="form minisearch" id="header-search" action="#" method="get">
+          <label class="label"><span>Rechercher</span></label>
+          <div class="control">
+            <div class="searchField">
+              <div class="search-category">
+                <select id="rgsearch-category" name="rgsearch[category]" data-default="All Categories">
+                  <option value="00" label="All Categories" selected="selected">Toutes Categories</option>
+                  <optgroup id="rgsearch-shop" label="">
+                    <option value="0">- Tout</option>
+                    <option value="1">- Hommes</option>
+                    <option value="2">- Femmes</option>
+                    <option value="3">- Chaussures</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-box">
+                <button type="submit" title="Search" class="action search"><i class="icon an an-search-l"></i></button>
+                <input type="text" name="q" value="" placeholder="Rechercher par mot clé #" class="input-text">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--End Search Popup-->
+  </header>
+  <!--End Header-->
+
+  <!--Main Navigation Desktop-->
+  <div class="menu-outer d-none d-lg-block pb-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
+          <nav class="grid__item" id="AccessibleNav">
+            <ul id="siteNav" class="site-nav medium center hidearrow">
+              <li class="lvl1 parent megamenu"><a href="index.html">Accueil <i class="an an-angle-down-l"></i></a></li>
+              <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-angle-down-l"></i></a></li>
+              <li class="lvl1 parent dropdown"><a href="#;">Pages <i class="an an-angle-down-l"></i></a>
+                <ul class="dropdown">
+                  <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-angle-right-l"></i></a>
+                    <ul class="dropdown">
+                      <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
+                      <li><a href="login-sliding-style.html" class="site-nav">Connexion</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="lvl1 parent dropdown"><a href="blog-left-sidebar.html">Blog <i class="an an-angle-down-l"></i></a></li>
+            </ul>
+          </nav>                                   
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Main Navigation Desktop-->
+</div>
+<!--End Header wrap-->
+
+<!--Mobile Menu-->
+<div class="mobile-nav-wrapper" role="navigation">
+  <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
+  <ul id="MobileNav" class="mobile-nav">
+    <li class="lvl1 parent megamenu"><a href="index-demo18.html">Accueil <i class="an an-plus-l"></i></a></li>
+    <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-plus-l"></i></a></li>
+    <li class="lvl1 parent megamenu"><a href="#">Pages <i class="an an-plus-l"></i></a>
+      <ul>
+        <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-plus-l"></i></a></li>
+        <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-plus-l"></i></a></li>
+        <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-plus-l"></i></a></li>
+        <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-plus-l"></i></a></li>
+        <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-plus-l"></i></a>
+          <ul class="dropdown">
+            <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
+            <li><a href="login.html" class="site-nav">Connexion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="lvl1 parent megamenu"><a href="blog-left-sidebar.html">Blog <i class="an an-plus-l"></i></a></li>
+  </ul>
+</div>
+<!--End Mobile Menu-->
