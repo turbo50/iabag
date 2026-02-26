@@ -1,0 +1,23 @@
+[
+  {
+    "marque_produit": "Luxe Paris",
+    "image_produit": "assets/images/products/P003-800-800.png",
+    "code_produit": "P006",
+    "prix_actuel": 249.99,
+    "ancien_prix": 320,
+    "nom_produit": "Sac à Main Prestige 2",
+    "notation": 4.9,
+    "liste_couleur": [
+      { "name": "Gray", "cssClass": "gray" },
+      { "name": "Orange", "cssClass": "orange" },
+      { "name": "Red", "cssClass": "red" }
+    ],
+    "autres_images": [
+      "assets/images/products/P003-800-960.png",
+      "assets/images/products/P003-800-960.png",
+      "assets/images/products/P003-800-960.png",
+      "assets/images/products/P003-800-960.png"
+    ],
+    "sku": "LX-P003"
+  }
+]

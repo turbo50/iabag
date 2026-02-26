@@ -244,24 +244,24 @@
                                 <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
                                     <div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned active">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
+                                            <!--<a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned active">
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
                                             </a>
                                             <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
                                             </a>
                                             <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
                                             </a>
                                             <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
                                             </a>
                                             <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
                                             </a>
                                             <a data-image="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" class="slick-slide slick-cloned">
-                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product">
-                                            </a>
+                                                <img class="blur-up lazyload" data-src="assets/images/products/product-detail1.jpg" src="assets/images/products/product-detail1.jpg" alt="product" />
+                                            </a>-->
                                         </div>
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right">
@@ -273,13 +273,13 @@
                                             <a href="#" class="btn rounded prlightbox"><i class="icon an an-expand-l-arrows"></i><span class="tooltip-label">Zoom Image</span></a>
                                         </div>
                                     </div>
-                                    <div class="lightboximages">
+                                    <div class="lightboximages" id="p-lightbox">
+                                        <!--<a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
                                         <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
                                         <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
                                         <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
                                         <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
-                                        <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
-                                        <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>
+                                        <a href="assets/images/products/product-detail1.jpg" data-size="1000x1280"></a>-->
                                     </div>
                                 </div>
                             </div>
@@ -287,24 +287,24 @@
                             <div class="col-lg-5 col-md-6 col-sm-12 col-12">
                                 <!-- Product Info -->
                                 <div class="product-single__meta">
-                                    <h1 class="product-single__title">Fiche détaillée du produit</h1>
+                                    <h1 class="product-single__title" id="p-title">Fiche détaillée du produit</h1>
                                     <div class="product-single__subtitle">$From</div>
                                     <!-- Product Reviews -->
                                     <div class="product-review mb-2"><a class="reviewLink d-flex-center" href="#reviews"><i class="an an-star"></i><i class="an an-star mx-1"></i><i class="an an-star"></i><i class="an an-star mx-1"></i><i class="an an-star-o"></i><span class="spr-badge-caption ms-2">16 Reviews</span></a></div>
                                     <!-- End Product Reviews -->
                                     <!-- Product Info -->
                                     <div class="product-info">
-                                        <p class="product-type">Marque: <span>$marque_produit</span></p>  
-                                        <p class="product-type">Désignation: <span>$nom_produit</span></p>  
-                                        <p class="product-sku">SKU: <span class="variant-sku">$sku</span></p>
+                                        <p class="product-type">Marque: <span id="p-brand">$marque_produit</span></p>  
+                                        <p class="product-type">Désignation: <span id="p-name">$nom_produit</span></p>  
+                                        <p class="product-sku">SKU: <span class="variant-sku" id="p-sku">$sku</span></p>
                                     </div>
                                     <!-- End Product Info -->
                                     <!-- Product Price -->
                                     <div class="product-single__price pb-1">
                                         <span class="visually-hidden">Prix nominal</span>
                                         <span class="product-price__sale--single">
-                                            <span class="product-price-old-price">$ancien_prix</span><span class="product-price__price product-price__sale">$prix_actuel</span>   
-                                            <span class="discount-badge"><span class="devider me-2">|</span><span>Remise: </span><span class="product-single__save-amount"><span class="money">$remise</span></span><span class="off ms-1">(<span>$taux_remise</span>%)</span></span> 
+                                            <span class="product-price-old-price" id="p-oldprice">$ancien_prix</span><span class="product-price__price product-price__sale" id="p-price">$prix_actuel</span>   
+                                            <span class="discount-badge" id="p-discount"><span class="devider me-2">|</span><span>Remise: </span><span class="product-single__save-amount"><span class="money" id="p-save">$remise</span></span><span class="off ms-1">(<span id="p-save-rate">$taux_remise</span>%)</span></span> 
                                         </span>
                                         
                                     </div>
@@ -332,8 +332,8 @@
                                     <div class="swatches-image swatch clearfix swatch-0 option1" data-option-index="0">
                                         <div class="product-form__item">
                                             <label class="label d-flex">Couleur:<span class="required d-none">*</span><span class="slVariant ms-1 fw-bold">Red</span></label>
-                                            <ul class="swatches d-flex-wrap list-unstyled clearfix">
-                                                <li data-value="Green" class="swatch-element color green available active">
+                                            <ul class="swatches d-flex-wrap list-unstyled clearfix" id="p-colors">
+                                                <!--<li data-value="Green" class="swatch-element color green available active">
                                                     <label class="swatchLbl rounded color xlarge green" title="Green"></label>
                                                     <span class="tooltip-label top">Green</span>
                                                 </li>
@@ -348,7 +348,7 @@
                                                 <li data-value="Yellow" class="swatch-element color yellow soldout">
                                                     <label class="swatchLbl rounded color xlarge yellow" title="Yellow"></label>
                                                     <span class="tooltip-label top">Yellow</span>
-                                                </li>
+                                                </li>-->
                                             </ul>
                                         </div>
                                     </div>
@@ -757,11 +757,16 @@
 
 
             <!-- Including Jquery -->
-            <script src="assets/js/vendor/jquery-min.js"></script>
-            <script src="assets/js/vendor/js.cookie.js"></script>
             <!--Including Javascript-->
-            <script src="assets/js/plugins.js"></script>
-            <script src="assets/js/main.js"></script>
+            <!-- Including Jquery -->
+<script src="assets/js/vendor/jquery-min.js"></script>
+<script src="assets/js/vendor/js.cookie.js"></script>
+
+<!--Including Javascript-->
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+
+            <script type="module" src="assets/js/product_page.js"></script>
             <!-- Photoswipe Gallery -->
             <script src="assets/js/vendor/photoswipe.min.js"></script>
             <script>
