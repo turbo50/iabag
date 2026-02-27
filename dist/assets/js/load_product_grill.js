@@ -1,3 +1,6 @@
+console.log("✅ load_product_grill.js chargé", { href: location.href });
+window.__GRILL_LOADED__ = true;
+
 import { MOCK_PRODUCTS } from "../../data/mock-products.js";
 console.log("Mock Fetch chargé");
 
@@ -18,6 +21,71 @@ export async function fetchProducts() {
     return data;
 }
 
+function applyLabel(card, product) {
+  const el = card.querySelector(".product-labels");
+  if (!el) return;
+
+  const label = (product.label || "").trim();
+  if (!label) {
+    el.remove(); // ou el.style.display = "none";
+  }
+}
+
+function applyProductLink(card, product) {
+  const url = `product-layout1.html?code=${encodeURIComponent(product.code_produit)}`;
+
+  // 1) image
+  card.querySelectorAll("a.product-img").forEach((a) => {
+    a.setAttribute("href", url);
+    a.href = url;
+  });
+
+  // 2) nom produit (si tu veux aussi)
+  card.querySelectorAll(".product-name a").forEach((a) => {
+    a.setAttribute("href", url);
+    a.href = url;
+  });
+}
+
+function enforceNavigationWithCode() {
+  const grid = document.getElementById("product-grid");
+  if (!grid) {
+    console.error("enforceNavigationWithCode: #product-grid introuvable");
+    return;
+  }
+
+  // Capture=true => avant les scripts du thème
+  grid.addEventListener(
+    "click",
+    (e) => {
+      const card = e.target.closest(".item"); // ta card a la classe "item"
+      if (!card) return;
+
+      // Ne pas intercepter si clic sur un bouton quickview/compare/etc.
+      if (e.target.closest("[data-product-id], .quick-view, .add-to-wishlist, .add-to-compare, .cartIcon")) {
+        return;
+      }
+
+      const code = card.dataset.code;
+      if (!code) {
+        console.warn("Navigation: card sans data-code", card);
+        return;
+      }
+
+      const url = `product-layout1.html?code=${encodeURIComponent(code)}`;
+
+      e.preventDefault();
+      e.stopPropagation();
+      if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+
+      window.location.assign(url);
+    },
+    true
+  );
+
+  console.log("✅ Navigation produit (capture) activée sur #product-grid");
+}
+
 
 function fillTemplate(template, product) {
     return template.replace(/\$[a-zA-Z0-9_]+/g, match => {
@@ -27,16 +95,21 @@ function fillTemplate(template, product) {
 }
 
 function buildProductHTML(product) {
-    const template = document.getElementById("product-template").innerHTML;
+  const template = document.getElementById("product-template").innerHTML;
 
-    // Remplace toutes les variables $xxx par leurs valeurs
-    const filled = fillTemplate(template, product);
+  const filled = fillTemplate(template, product);
 
-    // Convertit le HTML rempli → un vrai DOM Element
-    const wrapper = document.createElement("div");
-    wrapper.innerHTML = filled.trim();
+  const wrapper = document.createElement("div");
+  wrapper.innerHTML = filled.trim();
 
-    return wrapper.firstElementChild;
+  const card = wrapper.firstElementChild;
+
+  // Ajout pour navigation fiable
+  if (card && product?.code_produit) {
+    card.dataset.code = product.code_produit;
+  }
+
+  return card;
 }
 
 function fillColorList(container, colors) {
@@ -200,16 +273,18 @@ async function renderProductGrid() {
         applyDynamicLists(card, product);
         //  rating
         applyRatingStars(card, product);
+        applyLabel(card, product);
+        applyProductLink(card, product);
         // 3️⃣ ajouter dans la grille
         grid.appendChild(card);
     });
 
     // Active les boutons QuickView maintenant que la grille est générée
      setupQuickViewButtons();
+     enforceNavigationWithCode(grid);
 }
 
-document.addEventListener("DOMContentLoaded", renderProductGrid);
-fetchProducts().then(data => {
-    console.log("📦 Données retournées par fetchProducts :", data);
+document.addEventListener("DOMContentLoaded", async () => {
+  await renderProductGrid();
 });
 

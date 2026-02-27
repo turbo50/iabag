@@ -1,5 +1,8 @@
 import { CONFIG } from "./config.js";
 import { getProductByCode, getProductCodeFromUrl } from "./product_service.js";
+import { rebindProductTabs } from "./product_tabs_fix.js";
+
+console.log("🧭 product_page loaded", { href: location.href, search: location.search });
 
 function formatMoney(value) {
   if (value == null || Number.isNaN(Number(value))) return "";
@@ -136,6 +139,7 @@ async function init() {
   }
 
   injectProduct(product);
+  rebindProductTabs();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -1,6 +1,7 @@
 export const MOCK_PRODUCTS = [
   {
     "marque_produit": "Luxe Paris",
+    "label": "Hot",
     "image_produit": "assets/images/products/P003-800-800.png",
     "code_produit": "P006",
     "prix_actuel": 249.99,
@@ -31,6 +32,7 @@ export const MOCK_PRODUCTS = [
   },
   {
     "marque_produit": "Luxe Paris",
+    "label": "Nouveau",
     "image_produit": "assets/images/products/P001-800-800.png",
     "code_produit": "P001",
     "prix_actuel": 199.99,
@@ -60,6 +62,7 @@ export const MOCK_PRODUCTS = [
   },
   {
     "marque_produit": "Urban Chic",
+    "label": "Hot",
     "image_produit": "assets/images/products/P002-800-800.png",
     "code_produit": "P002",
     "prix_actuel": 99,
