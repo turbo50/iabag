@@ -4,6 +4,30 @@ import { rebindProductTabs } from "./product_tabs_fix.js";
 
 console.log("🧭 product_page loaded", { href: location.href, search: location.search });
 
+/**
+ * Récupère le code produit de façon robuste:
+ * - 1) ?code=... (ou ?code_produit=...) via getProductCodeFromUrl()
+ * - 2) sessionStorage("selected_product_code") (posé par nav_product_force.js)
+ *
+ * IMPORTANT:
+ * - On NE fait PLUS de location.replace(...) (ça te créait une boucle avec le thème).
+ */
+function getSelectedProductCode() {
+  // 1) URL (querystring)
+  const fromUrl = getProductCodeFromUrl();
+  if (fromUrl) return fromUrl;
+
+  // 2) sessionStorage
+  try {
+    const fromSession = sessionStorage.getItem("selected_product_code");
+    if (fromSession) return fromSession;
+  } catch {
+    // ignore
+  }
+
+  return null;
+}
+
 function formatMoney(value) {
   if (value == null || Number.isNaN(Number(value))) return "";
   return new Intl.NumberFormat(CONFIG.LOCALE, { style: "currency", currency: CONFIG.CURRENCY }).format(Number(value));
@@ -125,12 +149,17 @@ export function injectProduct(p) {
 }
 
 async function init() {
-  const code = getProductCodeFromUrl();
+  const code = getSelectedProductCode();
+
   if (!code) {
-    console.warn("Paramètre manquant: ?code=P006");
+    console.warn("Paramètre manquant: ?code=P006 (et aucun selected_product_code en sessionStorage)");
     setText("p-title", "Produit introuvable");
     return;
   }
+
+  // Optionnel: une fois consommé, on peut nettoyer pour éviter les effets de bord au refresh
+  // (décommente si tu veux)
+  // try { sessionStorage.removeItem("selected_product_code"); } catch {}
 
   const product = await getProductByCode(code);
   if (!product) {

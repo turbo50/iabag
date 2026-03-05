@@ -1,20 +1,17 @@
 /**
- * Force la navigation vers product-layout1.html?code=XXX en contournant les handlers du thème
- * (quickview, overlays, preventDefault, etc.)
+ * nav_product_force.js
  *
- * Pré-requis recommandé:
- * - Chaque carte produit (.item) doit avoir dataset.code = product.code_produit
- *   (voir buildProductHTML dans load_product_grill.js)
+ * Objectif:
+ * - Permettre d'ouvrir la page produit correspondante depuis l'index
+ *   même si le thème "nettoie" l'URL (supprime .html, querystring, hash, etc.).
  *
- * Ce script:
- * - écoute les clics en "capture" (donc avant plugins.js/main.js)
- * - ignore les boutons d'action (quickview, wishlist, compare, cart)
- * - récupère le code produit depuis:
- *    1) un élément cliqué avec [data-code]
- *    2) la card .item via data-code
- *    3) un bouton [data-product-id] dans la card
- * - stocke le dernier code dans sessionStorage (fallback)
- * - navigue en HARD vers /product-layout1.html?code=...
+ * Stratégie:
+ * - On NE dépend PLUS de l'URL pour transporter le code produit.
+ * - On stocke le code dans sessionStorage (clé: selected_product_code)
+ * - On navigue vers l'URL que ton thème force de toute façon: /product-layout1
+ *
+ * Côté page produit (product_page.js), il faudra lire sessionStorage
+ * si le paramètre ?code=... est absent.
  */
 
 console.log("✅ nav_product_force.js chargé", { href: location.href });
@@ -27,7 +24,7 @@ function isActionClick(target) {
   // Ne pas casser les actions du thème (quickview, add to cart, etc.)
   return !!target?.closest?.(
     [
-      "[data-product-id]", // quickview button
+      "[data-product-id]", // quickview
       ".quick-view",
       ".quick-view-popup",
       ".pro-quickshop-popup",
@@ -56,7 +53,7 @@ function getCodeFromTargetOrCard(target, card) {
   const fromQv = qv?.getAttribute?.("data-product-id");
   if (fromQv) return fromQv;
 
-  // 4) (optionnel) lire ?code= d’un href existant dans la card
+  // 4) (optionnel) lire ?code= d’un href existant dans la card (si tu en as encore)
   const a = card?.querySelector?.('a[href*="product-layout1"]');
   if (a) {
     try {
@@ -70,22 +67,16 @@ function getCodeFromTargetOrCard(target, card) {
   return null;
 }
 
-function buildProductUrl(code) {
-  // IMPORTANT: on force .html (car tu constates une navigation vers /product-layout1)
-  return `${location.origin}/product-layout1.html?code=${encodeURIComponent(code)}`;
-}
-
 document.addEventListener(
   "click",
   (e) => {
-    // Ne traiter que les clics "normaux"
-    // (tu peux enlever ce garde si besoin)
+    // clic gauche seulement
     if (e.button !== 0) return;
 
     const card = findCard(e.target);
     if (!card) return;
 
-    // Laisse vivre les actions (quickview / wishlist / compare / cart)
+    // Laisse vivre les actions du thème
     if (isActionClick(e.target)) return;
 
     const code = getCodeFromTargetOrCard(e.target, card);
@@ -94,23 +85,23 @@ document.addEventListener(
       return;
     }
 
-    // Fallback utile si un script enlève le querystring plus tard
-    try {
-      sessionStorage.setItem("last_product_code", String(code));
-    } catch {
-      // ignore
-    }
-
-    const url = buildProductUrl(code);
-    console.log("➡️ NAV FORCÉE:", url);
-
-    // On bloque le thème
+    // Bloque les handlers du thème
     e.preventDefault();
     e.stopPropagation();
     if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
 
+    // Stocke le code produit pour la page produit
+    try {
+      sessionStorage.setItem("selected_product_code", String(code));
+    } catch {
+      // ignore
+    }
+
+    const targetUrl = `${location.origin}/product-layout1`;
+    console.log("➡️ NAV (sessionStorage) vers:", targetUrl, "avec code =", code);
+
     // Navigation "hard"
-    location.href = url;
+    location.href = targetUrl;
   },
   true // capture
 );
