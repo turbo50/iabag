@@ -1,0 +1,64 @@
+<!--MiniCart Drawer-->
+<div class="minicart-right-drawer modal right fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="cart-drawer" class="block block-cart">
+
+        <div class="minicart-header">
+          <button type="button" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
+            <i class="an an-times-r" aria-hidden="true"></i>
+          </button>
+
+          <h4 class="fs-6">
+            Panier (<span id="minicart-count">0</span>)
+          </h4>
+        </div>
+
+        <div class="minicart-content">
+          <ul id="minicart-items" class="clearfix" aria-live="polite" aria-busy="false"></ul>
+
+          <template id="minicart-item-tpl">
+            <li class="item d-flex justify-content-center align-items-center" data-line-id="">
+              <a class="product-image" href="">
+                <img class="blur-up lazyload" src="" data-src="" alt="">
+              </a>
+
+              <div class="product-details">
+                <a class="product-title" href=""></a>
+                <div class="variant-cart"></div>
+                <div class="priceRow">
+                  <div class="product-price"><span class="money"></span></div>
+                </div>
+              </div>
+
+              <div class="qtyDetail text-center">
+                <div class="wrapQtyBtn">
+                  <div class="qtyField">
+                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">-</button>
+                    <input type="number" class="qty" min="1" value="1">
+                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">+</button>
+                  </div>
+                  <button type="button" class="remove" data-action="remove">Supprimer</button>
+                </div>
+              </div>
+            </li>
+          </template>
+
+          <div id="minicart-empty" style="display:none;" class="py-4 text-center">
+            <p class="mb-3">Votre panier est vide.</p>
+            <a href="index.html" class="btn btn-outline-dark">Continuer mes achats</a>
+          </div>
+        </div>
+
+        <div class="minicart-footer">
+          <div class="d-flex justify-content-between">
+            <span>Sous-total </span>
+            <strong id="minicart-subtotal">0,00 €</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--End MiniCart Drawer-->
