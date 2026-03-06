@@ -43,20 +43,12 @@ export function renderMiniCart(cart = getCart()) {
     const money = li.querySelector(".money");
     const qtyInput = li.querySelector("input.qty");
 
-const finalImg = resolveImageUrl(it.image);
-
-if (img) {
-  img.alt = it.title || "product";
-
-  // 1) src direct (pour affichage immédiat)
-  img.src = finalImg || "";
-
-  // 2) data-src (pour ton système lazyload)
-  img.setAttribute("data-src", finalImg || "");
-
-  // 3) certains plugins regardent data-original / data-lazy etc.
-  img.setAttribute("data-original", finalImg || "");
-}
+    if (aImg) aImg.href = it.url || "#";
+    if (img) {
+      img.src = it.image || "";
+      img.setAttribute("data-src", it.image || "");
+      img.alt = it.title || "product";
+    }
     if (aTitle) {
       aTitle.textContent = it.title || "";
       aTitle.href = it.url || "#";
