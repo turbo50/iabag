@@ -8,7 +8,7 @@
  * Stratégie:
  * - On NE dépend PLUS de l'URL pour transporter le code produit.
  * - On stocke le code dans sessionStorage (clé: selected_product_code)
- * - On navigue vers l'URL que ton thème force de toute façon: /product-layout1
+ * - On navigue vers l'URL que ton thème force de toute façon: /product-detail
  *
  * Côté page produit (product_page.js), il faudra lire sessionStorage
  * si le paramètre ?code=... est absent.
@@ -54,7 +54,7 @@ function getCodeFromTargetOrCard(target, card) {
   if (fromQv) return fromQv;
 
   // 4) (optionnel) lire ?code= d’un href existant dans la card (si tu en as encore)
-  const a = card?.querySelector?.('a[href*="product-layout1"]');
+  const a = card?.querySelector?.('a[href*="product-detail"]');
   if (a) {
     try {
       const u = new URL(a.getAttribute("href"), location.href);
@@ -97,7 +97,7 @@ document.addEventListener(
       // ignore
     }
 
-    const targetUrl = `${location.origin}/product-layout1`;
+    const targetUrl = `${location.origin}/product-detail.html`;
     console.log("➡️ NAV (sessionStorage) vers:", targetUrl, "avec code =", code);
 
     // Navigation "hard"

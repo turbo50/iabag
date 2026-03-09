@@ -36,7 +36,7 @@ async function onSubmit(e) {
     price: product.prix_actuel || 0,
     qty: 1,
     image,
-    url: "product-layout1.html", // pas de ?code= chez toi
+    url: "product-detail.html", // pas de ?code= chez toi
   });
 
   // Ouvrir le mini-cart automatiquement (optionnel)
