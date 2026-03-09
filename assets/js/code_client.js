@@ -1,0 +1,1 @@
+const customerId = sessionStorage.getItem("iabag_customer_id_v1");
