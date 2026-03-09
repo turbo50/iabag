@@ -1,7 +1,7 @@
 export const COGNITO_OAUTH = {
   // Ex: https://iabag-prod.auth.eu-west-3.amazoncognito.com
   domain: "https://eu-west-3on7woguxg.auth.eu-west-3.amazoncognito.com",
-  clientId: "2sv652ril5717ih5oddkpeohd2",
+  clientId: "637p10ibkt5a7k2l238d686akf",
 
   // fonctionne sur iabag.fr et iabag.com (tu configures les 2 dans Cognito)
   redirectUri: `${window.location.origin}/auth-callback.html`,
