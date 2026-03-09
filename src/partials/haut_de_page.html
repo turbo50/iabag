@@ -67,9 +67,11 @@
           <div class="user-link iconset"><i class="icon an an-user d-block d-lg-none"></i><span class="text d-none d-lg-flex">Connexion</span></div>
           
           <!-- ✅ AJOUT: zone bienvenue (cachée par défaut) -->
-          <div id="auth-welcome" class="d-none d-lg-flex align-items-center me-2" style="white-space:nowrap;">
+          <div id="auth-welcome"
+              class="d-none d-lg-flex align-items-center me-2"
+              style="white-space:nowrap; display:none;">
             <span class="small">
-              Bienvenue <strong id="auth-welcome-name"></strong>
+              <strong id="auth-welcome-name"></strong>
             </span>
           </div>
 
@@ -78,6 +80,11 @@
               <li><a href="login.html">Connexion</a></li>
               <li><a href="register.html">S'inscrire</a></li>
               <li><a href="my-wishlist.html">Ma collection</a></li>
+
+              <!-- ✅ AJOUT: visible seulement si connecté -->
+              <li id="nav-logout-item" style="display:none;">
+                <a href="#" id="nav-logout-link">Déconnexion</a>
+              </li>
             </ul>
           </div>
 
