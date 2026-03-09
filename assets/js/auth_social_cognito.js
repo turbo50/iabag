@@ -95,3 +95,72 @@ export async function startSocialLogin(providerKey) {
 
   window.location.assign(u.toString());
 }
+
+
+function safeJsonParse(raw) {
+  try {
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+function base64UrlToString(b64url) {
+  const pad = "=".repeat((4 - (b64url.length % 4)) % 4);
+  const b64 = (b64url + pad).replace(/-/g, "+").replace(/_/g, "/");
+  return atob(b64);
+}
+
+function decodeJwtPayload(jwt) {
+  if (!jwt || typeof jwt !== "string") return null;
+  const parts = jwt.split(".");
+  if (parts.length !== 3) return null;
+  try {
+    return JSON.parse(base64UrlToString(parts[1]));
+  } catch {
+    return null;
+  }
+}
+
+function getTokens() {
+  const raw = localStorage.getItem(K.tokens);
+  return raw ? safeJsonParse(raw) : null;
+}
+
+export function getUserFromIdToken() {
+  const t = getTokens();
+  return decodeJwtPayload(t?.id_token);
+}
+
+export function isAuthenticated() {
+  const payload = getUserFromIdToken();
+  if (!payload) return false;
+
+  // exp est en secondes (JWT), Date.now() en ms
+  const expMs = Number(payload.exp || 0) * 1000;
+  if (!expMs) return true; // si pas d'exp, on considère connecté (rare)
+  return Date.now() < expMs;
+}
+
+export function logout() {
+  // purge local state
+  localStorage.removeItem(K.tokens);
+  localStorage.removeItem(K.next);
+  localStorage.removeItem(K.pkceVerifier);
+  localStorage.removeItem(K.oauthState);
+
+  // notifie l'UI (login_social_page écoute auth:changed)
+  window.dispatchEvent(new Event("auth:changed"));
+
+  // logout Cognito Hosted UI (important pour nettoyer la session Cognito)
+  try {
+    const domain = COGNITO_OAUTH.domain.replace(/\/$/, "");
+    const u = new URL(`${domain}/logout`);
+    u.searchParams.set("client_id", COGNITO_OAUTH.clientId);
+    u.searchParams.set("logout_uri", COGNITO_OAUTH.logoutUri);
+    window.location.assign(u.toString());
+  } catch {
+    // fallback
+    window.location.assign(COGNITO_OAUTH.logoutUri);
+  }
+}
