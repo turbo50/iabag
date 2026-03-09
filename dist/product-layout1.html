@@ -49,7 +49,7 @@
 <div class="header-main header-18">
   <!--Header-->
   <header id="header" class="header header-wrap d-flex align-items-center">
-    <div class="container">        
+    <div class="container">
       <div class="row">
         <!--Logo / Menu Toggle-->
         <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center justify-content-start d-flex">
@@ -66,7 +66,8 @@
         </div>
 
         <!--Search Inline-->
-        <div class="col-1 col-sm-1 col-md-1 col-lg-8 d-none d-lg-block">
+        <!-- ✅ CHANGEMENT: col-lg-8 -> col-lg-7 pour libérer de la place à droite -->
+        <div class="col-1 col-sm-1 col-md-1 col-lg-7 d-none d-lg-block">
           <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
             <label class="label d-none"><span>Rechercher</span></label>
             <div class="control">
@@ -94,14 +95,19 @@
         </div>
 
         <!--Right Action-->
-        <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center icons-col text-right d-flex justify-content-end">
+        <!-- ✅ CHANGEMENT: col-lg-2 -> col-lg-3 pour plus d'espace "Bonjour email" -->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-3 align-self-center icons-col text-right d-flex justify-content-end">
           <div class="site-search iconset d-block d-lg-none"><i class="icon an an-search-l"></i><span class="tooltip-label">Rechercher</span></div>
 
-          <div class="user-link iconset"><i class="icon an an-user d-block d-lg-none"></i><span class="text d-none d-lg-flex">Connexion</span></div>
-          
-          <!-- ✅ AJOUT: zone bienvenue (cachée par défaut) -->
-          <div id="auth-welcome" class="d-none d-lg-flex align-items-center me-2" style="white-space:nowrap; display:none;">
-            <span class="small">
+          <!-- Icône utilisateur (sur desktop, le texte "Connexion" peut gêner, on le garde mais tu peux le retirer si besoin) -->
+          <div class="user-link iconset">
+            <i class="icon an an-user d-block d-lg-none"></i>
+            <span class="text d-none d-lg-flex">Mon compte</span>
+          </div>
+
+          <!-- ✅ AJOUT/AMELIORATION: zone bonjour (cachée par défaut) + ellipsis -->
+          <div id="auth-welcome" class="d-none d-lg-flex align-items-center me-2" style="white-space:nowrap; display:none; max-width: 220px; overflow:hidden;">
+            <span class="small" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">
               <strong id="auth-welcome-name"></strong>
             </span>
           </div>
@@ -183,7 +189,7 @@
   <div class="menu-outer d-none d-lg-block pb-1">
     <div class="container">
       <div class="row">
-        <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">                            
+        <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">
           <nav class="grid__item" id="AccessibleNav">
             <ul id="siteNav" class="site-nav medium center hidearrow">
               <li class="lvl1 parent megamenu"><a href="index.html">Accueil <i class="an an-angle-down-l"></i></a></li>
@@ -204,7 +210,7 @@
               </li>
               <li class="lvl1 parent dropdown"><a href="blog-left-sidebar.html">Blog <i class="an an-angle-down-l"></i></a></li>
             </ul>
-          </nav>                                   
+          </nav>
         </div>
       </div>
     </div>
@@ -237,7 +243,6 @@
   </ul>
 </div>
 <!--End Mobile Menu-->
-
 
             <!--Body Container-->
             <div id="page-content">   
