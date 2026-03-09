@@ -1,0 +1,16 @@
+{
+  "name": "iabag-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend AWS SAM pour iabag — produits, avis, commandes",
+  "scripts": {
+    "build": "sam build",
+    "deploy": "sam deploy --guided"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0",
+    "@aws-sdk/util-dynamodb": "^3.600.0"
+  }
+}
