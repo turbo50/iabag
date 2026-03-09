@@ -3372,13 +3372,13 @@ ul.checkmarkList li:before { content:"\e954";font-family:'annimex-icons'; positi
 .site-footer__social-icons .icon { width:16px; }
 
 /* FAQ's Style 1 */
-.faqs-style1 .accordion .accordion-item { border:0; margin:0; }
-.faqs-style1 .accordion .accordion-header:before { display:none; }
-.faqs-style1 .accordion .accordion-header .accordion-button:after { content:"\eafb"; font-family:'annimex-icons'; position:absolute; top:50%; right:0px; background: transparent; width: auto; height: auto; transform:translateY(-50%); font-size: 13px; font-weight: normal; }
-.faqs-style1 .accordion .accordion-header .accordion-button[aria-expanded="true"]:after { content:"\ead8"; }
-.faqs-style1 .accordion .accordion-header .accordion-button { background: transparent; color:#444444; position:relative; font-size: 16px; font-weight: 600; padding: 18px 40px 18px 0; border: none; border-bottom: 1px solid #eeeeee; box-shadow: none; outline: none; }
-.faqs-style1 .accordion .accordion-body { padding: 1rem 0 0; }
-.faqs-style1 .accordion .collapse.show { margin:0; } 
+.faqs .accordion .accordion-item { border:0; margin:0; }
+.faqs .accordion .accordion-header:before { display:none; }
+.faqs .accordion .accordion-header .accordion-button:after { content:"\eafb"; font-family:'annimex-icons'; position:absolute; top:50%; right:0px; background: transparent; width: auto; height: auto; transform:translateY(-50%); font-size: 13px; font-weight: normal; }
+.faqs .accordion .accordion-header .accordion-button[aria-expanded="true"]:after { content:"\ead8"; }
+.faqs .accordion .accordion-header .accordion-button { background: transparent; color:#444444; position:relative; font-size: 16px; font-weight: 600; padding: 18px 40px 18px 0; border: none; border-bottom: 1px solid #eeeeee; box-shadow: none; outline: none; }
+.faqs .accordion .accordion-body { padding: 1rem 0 0; }
+.faqs .accordion .collapse.show { margin:0; } 
 
 /* FAQ's Style 2 */
 .faq-page .faqttl { background: #333333; color: #eeeeee; font-weight: 500; padding: 9px 20px; margin: 15px 0 5px; border-radius: 5px; }

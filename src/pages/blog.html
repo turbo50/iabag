@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <include src="../src/partials/header.html"></include>
+    </head>
+
+    <body class="blog-page blog-sidebar-page">
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
+        <!-- End Page Loader -->
+
+        <!--Page Wrapper-->
+        <div class="page-wrapper">
+            
+            <include src="../src/partials/haut_de_page.html"></include>
+
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">Blog</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Accueil</a><span>|</span><span class="fw-bold">Blog</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <div class="container">
+                    <div class="row">
+                        <!--Sidebar-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 blog-sidebar sidebar sidebar-noborder">
+                            <!--Search-->
+                            <div class="sidebar_widget clearfix">
+                                <div class="widget-title"><h2>Search</h2></div>
+                                <div class="custom-search mt-3 mb-2 my-lg-0">
+                                    <form action="/search" method="get" class="input-group flex-nowrap search-header search" role="search">
+                                        <input class="search-header__input search__input input-group__field" type="search" name="q" placeholder="Blog Search..." aria-label="Search" autocomplete="off">
+                                        <span class="input-group__btn"><button class="btn rounded-end px-3 btnSearch" type="submit"> <i class="icon an an-search-l"></i> </button></span>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--End Search-->
+                            <!--Sidebar tags-->
+                            <div class="sidebar_tags clearfix">
+                                <!--Category-->
+                                <div class="sidebar_widget clearfix categories no-border">
+                                    <div class="widget-title"><h2>Category</h2></div>
+                                    <div class="widget-content">
+                                        <ul class="sidebar_categories">
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Beauty</a></li>
+                                            <li class="lvl-1 active"><a href="#" class="site-nav lvl-1">Fashion</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Summer</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Trending</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Winter</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Category-->
+                                <!--Recent Posts-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Recent Posts</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Unique Designs, Unique You</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2021-01-28">January 28, 2021</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">27 Days of Spring Fashion Recap</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2020-02-12">February 12, 2020</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Creative, flexible and affordable</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2021-03-08">March 08, 2021</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Recent Posts-->
+                                <!--Recent Comments-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Recent Comments</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Belle</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Avone</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Diva</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Recent Comments-->
+                                <!--Popular Tags-->
+                                <div class="sidebar_widget clearfix tags-clouds">
+                                    <div class="widget-title"><h2>Popular Tags</h2></div>
+                                    <div class="widget-content">
+                                        <ul class="d-flex-wrap m-0">
+                                            <li><a href="#">Fashion</a></li>
+                                            <li><a href="#">Clothes</a></li>
+                                            <li><a href="#">Shoes</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Furniture</a></li>
+                                            <li><a href="#">Sun Glasses</a></li>
+                                            <li><a href="#">Winter</a></li>
+                                            <li><a href="#">Beauty</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Popular Tags-->
+                                <!--Trending Now-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Trending Now</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Floral Crop Top</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="old-price">$199.00</span><span class="price">$219.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i>
+                                                                <span class="caption hidden ms-2">3 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Martha Knit Top</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="price">$149.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i>
+                                                                <span class="caption hidden ms-2">9 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product" /></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Cool Short Sleev T-Shirt</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="price">$59.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                                                <span class="caption hidden ms-2">30 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Trending Now-->
+                                <!--Banner-->
+                                <div class="sidebar_widget clearfix static-banner d-none d-lg-block">
+                                    <a href="shop-left-sidebar.html"><img src="assets/images/new-sale-banner.jpg" alt="image"></a>
+                                </div>
+                                <!--End Banner-->
+                                <!--About Blog-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>About Blog</h2></div>
+                                    <div class="widget-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</p>
+                                    </div>
+                                </div>
+                                <!--End About Blog-->
+                            </div>
+                            <!--End Sidebar tags-->
+                        </div>
+                        <!--End Sidebar-->
+
+                        <!--Main Content-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                            <div class="blog--list-view blog-list-view blog--grid-load-more">
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="Unique Designs, Unique You"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">Unique Designs, Unique You</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-01-28">January 28, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article">
+                                    <!-- Article Video -->
+                                    <div class="ratio ratio-16x9 article_featured-image"><iframe src="https://www.youtube.com/embed/NpEaa2P7qZI" title="YouTube video" allowfullscreen></iframe></div> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">It's all about how you wear</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2020-02-12">February 12, 2020</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Hot</a>,<a class="link-underline ms-1" href="#">Tops</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">12 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. There are many variations of passages of Lorem Ipsum available, but the majority...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Video -->
+                                    <div class="ratio ratio-16x9 article_featured-image">
+                                        <iframe src="https://www.youtube.com/embed/NpEaa2P7qZI" title="Vimeo video" allowfullscreen></iframe>
+                                    </div> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">There are blog Vimeo video</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                     
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-05-12">May 12, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="27 Days of Spring Fashion Recap"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">27 Days of Spring Fashion Recap</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2020-02-12">February 12, 2020</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">0 comments</a></li>
+                                    </ul>
+                                    <div class="rte">
+                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage going through...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="Creative, flexible and affordable"></a>
+                                    <!-- Article Content --> 
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">Creative, flexible and affordable</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-03-08">March 08, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image -->
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="We like to make things look pretty!"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">We like to make things look pretty!</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                     
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-03-08">March 08, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+
+                                <!--Load More Button-->
+                                <div class="loadmore-post">	
+                                    <a href="#;" class="btn btn-lg loadMorepost rounded">Load More</a>
+                                </div>
+                                <!--End Load More Button-->
+                            </div>
+                        </div>
+                        <!--End Main Content-->
+                    </div>
+                </div>
+            </div>
+            <!--End Body Container-->
+
+            <!--Footer-->
+               <include src="../src/partials/footer.html"></include>
+            <!--End Footer-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+               <include src="../src/partials/minicart-drawer.html"></include>
+            <!--End MiniCart Drawer-->
+            <div class="modalOverly"></div>
+
+
+            <!-- Including Jquery -->
+            <!--Including Javascript-->
+            <include src="../src/partials/scripts.html"></include>
+
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>

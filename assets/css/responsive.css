@@ -1073,7 +1073,7 @@
 
     .brandList .list, .brandList .ttl { padding: 10px 10px; }
     .brandList .ttl { width: 50px; }
-    .faqs-style1 .accordion .accordion-header .accordion-button { font-size: 14px; padding: 14px 40px 14px 0; }
+    .faqs .accordion .accordion-header .accordion-button { font-size: 14px; padding: 14px 40px 14px 0; }
 
     .password-header .clr-header { flex-direction: column; padding: 15px; }
     .password-header .password-content { margin: 15px 0; }

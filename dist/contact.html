@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <!--Required Meta Tags-->
+    <head>
+        <!--Required Meta Tags-->
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,13 +21,17 @@
 <link rel="stylesheet" href="assets/css/responsive.css">
 <link rel="stylesheet" href="assets/css/social-auth.css">
 
-  </head>
+    </head>
 
-  <body class="login-page">
-    <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..."></div>
+    <body class="contactus-page">
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..."></div>
+        <!-- End Page Loader -->
 
-    <div class="page-wrapper">
-      <!--Topbar-->
+        <!--Page Wrapper-->
+        <div class="page-wrapper">
+
+            <!--Topbar-->
 <div class="top-info-bar style1">
   <div class="topBar-slider-style2 alert fade show" role="alert">
     <div class="item text-center d-flex-center justify-content-center">
@@ -218,56 +222,104 @@
 </div>
 <!--End Mobile Menu-->
 
-      <div id="page-content">
-        <div class="collection-header">
-          <div class="collection-hero">
-            <div class="collection-hero__image"></div>
-            <div class="collection-hero__title-wrapper container">
-              <h1 class="collection-hero__title">Connexion</h1>
-              <div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
-                <a href="index.html" title="Back to the home page">Accueil</a><span>|</span><span class="fw-bold">Connexion</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="container">
-          <div class="login-register pt-2 pt-lg-5">
-            <div class="row">
-
-              <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-4 mb-md-0">
-                <div class="inner">
-                  <h3 class="h4 text-uppercase">SE CONNECTER</h3>
-                  <p>Connexion via réseau social.</p>
-
-                  <!--Boutons générés selon l'activation de la méthode d'authetification-->
-                  <div class="d-grid gap-2" id="social-auth-buttons"></div>
-
-
-                  <div id="logged-box" class="mt-4" style="display:none;">
-                    <p class="mb-2">Connecté en tant que :</p>
-                    <pre id="user-info" style="white-space:pre-wrap;"></pre>
-                    <button type="button" class="btn btn-outline-dark rounded" id="logout-btn">Se déconnecter</button>
-                  </div>
-
-                  <p id="auth-msg" class="mt-3"></p>
+            <!--Body Container-->
+            <div id="page-content">   
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero mb-0">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">Contact</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Accueil</a><span>|</span><span class="fw-bold">Contact</span></div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <!--End Collection Banner-->
 
-              <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="inner">
-                  <h3 class="h4 text-uppercase">NOUVEAU CLIENT ?</h3>
-                  <p>Créez un compte en 1 clic via un réseau social.</p>
-                  <a href="register.html" class="btn rounded">Créer un compte</a>
+                <!--Main Content-->
+                <div class="container-fluid px-0 contact-pstyle1">
+                    <div class="row g-0 flex-column-reverse flex-lg-row">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            <!-- Contact Map -->
+                            <div class="map-section ratio ratio-16x9 h-100">
+                                <iframe src="https://www.google.com/maps/embed?pb=" allowfullscreen="" height="650"></iframe>                             
+                            </div>
+                            <!-- End Contact Map -->
+                        </div>
+
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="contact-inner">
+                                <!-- Contact Form -->
+                                <div class="formFeilds contact-form form-vertical">
+                                    <h1 class="text-center text-capitalize mb-4">Écrivez-nous</h1>
+                                    <form action="php/ajax_sendmail.php" name="contactus" method="post" id="contact-form" class="contact-form">	
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="ContactFormName" name="name" class="form-control" placeholder="Nom">
+                                                    <span class="error_msg" id="name_error"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">                               
+                                                <div class="form-group">
+                                                    <input type="email" id="ContactFormEmail" name="email" class="form-control" placeholder="Email">
+                                                    <span class="error_msg" id="email_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <input class="form-control" type="tel" id="ContactFormPhone" name="phone" pattern="[0-9\-]*" placeholder="Numéro de téléphone">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <input type="text" id="ContactSubject" name="subject" class="form-control" placeholder="Objet">
+                                                    <span class="error_msg" id="subject_error"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group">
+                                                    <textarea id="ContactFormMessage" name="message" class="form-control" rows="4" placeholder="Corps du message"></textarea>
+                                                    <span class="error_msg" id="message_error"></span>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                                                <div class="form-group mailsendbtn mb-0 w-100">	
+                                                    <input class="btn w-100 rounded" type="submit" name="contactus" value="Envoyer">
+                                                    <div class="loading"><img class="img-fluid" src="assets/images/ajax-loader.gif" alt="loading"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="response-msg"></div>
+                                </div>
+                                <!-- End Contact Form -->
+                                <!-- Contact Details -->
+                                <div class="contact-details mt-4 pt-2">
+                                    <ul class="list-unstyled">
+                                        <li class="mb-3 address"><strong class="d-block mb-2">ADDRESSE :</strong><p class="m-0"><i class="icon an an-map-marker-al me-2 d-none"></i> 56 Rue XXX, Paris 75008</p></li>
+                                        <li class="mb-3 phone"><strong>TÉLÉPHONE : </strong><i class="icon an an-phone me-2 d-none"></i> (+33) 000 000 0000</li>
+                                        <li class="email"><strong>COURRIEL:</strong><i class="icon an an-envelope-l me-2 d-none"></i> info@iabag.fr</li>
+                                    </ul>
+                                    
+                                </div>
+                                <!-- End Contact Details -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-
+                <!--End Main Content-->
             </div>
-          </div>
-        </div>
-      </div>
+            <!--End Body Container-->
 
-      <!--Footer-->
+            <!--Footer-->
+               <!--Footer-->
 <div class="footer footer-7 border-0">
   <div class="footer-top clearfix">
     <div class="container">
@@ -349,8 +401,14 @@
 <!--Scoll Top-->
 <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
 <!--End Scoll Top-->
-      <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
-      <!--MiniCart Drawer-->
+            <!--End Footer-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+               <!--MiniCart Drawer-->
 <div class="minicart-right-drawer modal right fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -416,8 +474,14 @@
   </div>
 </div>
 <!--End MiniCart Drawer-->
+            <!--End MiniCart Drawer-->
 
-      <!-- Including Jquery -->
+            <div class="modalOverly"></div>
+
+
+            <!-- Including Jquery -->
+            <!--Including Javascript-->
+            <!-- Including Jquery -->
 <script src="assets/js/vendor/jquery-min.js"></script>
 <script src="assets/js/vendor/js.cookie.js"></script>
 
@@ -428,7 +492,8 @@
 <script type="module" src="assets/js/cart_ui.js"></script>
 <script type="module" src="assets/js/header_auth_ui.js"></script>
 
-      <script type="module" src="assets/js/login_social_page.js"></script>
-    </div>
-  </body>
+
+        </div>
+        <!--End Page Wrapper-->
+    </body>
 </html>

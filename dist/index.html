@@ -67,22 +67,22 @@
 
         <!--Search Inline-->
         <!-- ✅ CHANGEMENT: col-lg-8 -> col-lg-7 pour libérer de la place à droite -->
-        <div class="col-1 col-sm-1 col-md-1 col-lg-7 d-none d-lg-block">
+        <div class="col-1 col-sm-1 col-md-1 col-lg-5 d-none d-lg-block">
           <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
             <label class="label d-none"><span>Rechercher</span></label>
             <div class="control">
               <div class="searchField d-flex">
-                <div class="search-category">
+                <!--<div class="search-category">
                   <select id="rgsearch-category1" name="rgsearch[category]" data-default="Toutes Categories" class="rounded-pill-start">
                     <option value="00" label="Toutes Categories" selected="selected">Toutes Categories</option>
                     <optgroup id="rgsearch-shop1" label="Shop">
                       <option value="0">- Tous</option>
-                      <option value="1">- Hommes</option>
-                      <option value="2">- Femmes</option>
+                      <option value="1">- Sacs</option>
+                      <option value="2">- Accessoires</option>
                       <option value="3">- Chaussures</option>
                     </optgroup>
                   </select>
-                </div>
+                </div>-->
                 <div class="input-box d-flex w-100">
                   <input type="text" name="q" value="" placeholder="Rechercher les articles #" class="input-text rounded-0 border-start-0 border-end-0">
                   <button type="submit" title="Rechercher" class="action search rounded-pill-end">
@@ -133,21 +133,7 @@
             </a>
           </div>
 
-          <div class="setting-link iconset pe-0"><i class="icon an an-right-bar-s"></i><span class="tooltip-label">Réglage</span></div>
-          <div id="settingsBox">
-            <div class="currency-picker">
-              <span class="ttl">Dévise</span>
-              <ul id="currencies" class="cnrLangList">
-                <li class="selected"><a href="#;" class="active">FCFA</a></li><li><a href="#;">EUR</a></li>
-              </ul>
-            </div>
-            <div class="language-picker">
-              <span class="ttl">LANGUE</span>
-              <ul id="language" class="cnrLangList">
-                <li><a href="#" class="active">FRANCAIS</a></li><li><a href="#">ENGLISH</a></li>
-              </ul>
-            </div>
-          </div>
+          
         </div>
         <!--End Right Action-->
       </div>
@@ -193,22 +179,14 @@
           <nav class="grid__item" id="AccessibleNav">
             <ul id="siteNav" class="site-nav medium center hidearrow">
               <li class="lvl1 parent megamenu"><a href="index.html">Accueil <i class="an an-angle-down-l"></i></a></li>
-              <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-angle-down-l"></i></a></li>
               <li class="lvl1 parent dropdown"><a href="#;">Pages <i class="an an-angle-down-l"></i></a>
                 <ul class="dropdown">
-                  <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-angle-right-l"></i></a></li>
-                  <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-angle-right-l"></i></a></li>
-                  <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-angle-right-l"></i></a></li>
-                  <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a></li>
-                  <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-angle-right-l"></i></a>
-                    <ul class="dropdown">
-                      <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
-                      <li><a href="login-sliding-style.html" class="site-nav">Connexion</a></li>
-                    </ul>
-                  </li>
+                  <li><a href="aboutus.html" class="site-nav">Qui sommes-nous <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="contact.html" class="site-nav">Nous contacter <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="faqs.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a></li>
                 </ul>
               </li>
-              <li class="lvl1 parent dropdown"><a href="blog-left-sidebar.html">Blog <i class="an an-angle-down-l"></i></a></li>
+              <li class="lvl1 parent dropdown"><a href="blog.html">Blog <i class="an an-angle-down-l"></i></a></li>
             </ul>
           </nav>
         </div>
@@ -227,10 +205,10 @@
     <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-plus-l"></i></a></li>
     <li class="lvl1 parent megamenu"><a href="#">Pages <i class="an an-plus-l"></i></a>
       <ul>
-        <li><a href="aboutus-style1.html" class="site-nav">Qui sommes-nous <i class="an an-plus-l"></i></a></li>
-        <li><a href="contact-style1.html" class="site-nav">Nous contacter <i class="an an-plus-l"></i></a></li>
+        <li><a href="aboutus.html" class="site-nav">Qui sommes-nous <i class="an an-plus-l"></i></a></li>
+        <li><a href="contact.html" class="site-nav">Nous contacter <i class="an an-plus-l"></i></a></li>
         <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-plus-l"></i></a></li>
-        <li><a href="faqs-style1.html" class="site-nav">FAQs <i class="an an-plus-l"></i></a></li>
+        <li><a href="faqs.html" class="site-nav">FAQs <i class="an an-plus-l"></i></a></li>
         <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-plus-l"></i></a>
           <ul class="dropdown">
             <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
@@ -239,7 +217,7 @@
         </li>
       </ul>
     </li>
-    <li class="lvl1 parent megamenu"><a href="blog-left-sidebar.html">Blog <i class="an an-plus-l"></i></a></li>
+    <li class="lvl1 parent megamenu"><a href="blog.html">Blog <i class="an an-plus-l"></i></a></li>
   </ul>
 </div>
 <!--End Mobile Menu-->
@@ -351,7 +329,7 @@
             <p>
               Notre vocation est de vous offrir le meilleur rapport qualité prix. Nous vous apporterons assitance dans la
               chaîne de bout en bout, afin de vous livrer vos articles le plus près de chez vous.
-              <a href="aboutus-style1.html" class="d-inline-block"><u>En savoir plus</u></a>
+              <a href="aboutus.html" class="d-inline-block"><u>En savoir plus</u></a>
             </p>
           </div>
         </div>
@@ -359,9 +337,7 @@
         <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
           <h4 class="h4 body-font fw-600">INFORMATION</h4>
           <ul>
-            <li><a href="my-account.html">Mon compte</a></li>
-            <li><a href="aboutus-style1.html">A propos de nous</a></li>
-            <li><a href="login.html">Cpnnexion</a></li>
+            <li><a href="aboutus.html">A propos de nous</a></li>
             <li><a href="privacy-policy.html">Politique de confidentialité</a></li>
             <li><a href="#">Conditions générales</a></li>
           </ul>
@@ -431,88 +407,74 @@
             <!--End Scoll Top-->
 
             <!--MiniCart Drawer-->
-            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div id="cart-drawer" class="block block-cart">
-                            <div class="minicart-header">
-                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
-                                <h4 class="fs-6 text-black">Your cart (2 Items)</h4>
-                            </div>
-                            <div class="minicart-content">
-                                <ul class="m-0 clearfix">
-                                    <li class="item d-flex justify-content-center align-items-center">
-                                        <a class="product-image" href="product-detail.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
-                                        </a>
-                                        <div class="product-details">
-                                            <a class="product-title" href="product-detail.html">Solid Pleated Tote Bag</a>
-                                            <div class="variant-cart my-1">Black / XL</div>
-                                            <div class="priceRow">
-                                                <div class="product-price">
-                                                    <span class="money">$59.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="qtyDetail text-center">
-                                            <div class="wrapQtyBtn">
-                                                <div class="qtyField">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="qty rounded-0">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
-                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="item d-flex justify-content-center align-items-center">
-                                        <a class="product-image" href="product-detail.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
-                                        </a>
-                                        <div class="product-details">
-                                            <a class="product-title" href="product-detail.html">Bag Bucket Wooden</a>
-                                            <div class="variant-cart my-1">Blue / XL</div>
-                                            <div class="priceRow">
-                                                <div class="product-price">
-                                                    <span class="money">$199.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="qtyDetail text-center">
-                                            <div class="wrapQtyBtn">
-                                                <div class="qtyField">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="qty rounded-0">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
-                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="minicart-bottom text-black">
-                                <div class="shipinfo text-center mb-3 text-uppercase">
-                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i> Your order is eligible for <b>FREE Delivery</b>.</p>
-                                </div>
-                                <div class="subtotal">
-                                    <span>Total:</span>
-                                    <span class="product-price">$258.00</span>
-                                </div>
-                                <div class="agree-check customCheckbox clearfix">
-                                    <input id="prTearm" name="tearm" type="checkbox" value="tearm" required="">
-                                    <label for="prTearm"> I agree with the terms and conditions</label>
-                                </div>
-                                <a href="checkout-style2.html" class="w-100 px-2 py-2 lh-base my-2 my-2 btn btn-outline-primary proceed-to-checkout">Proceed to Checkout</a>
-                                <a href="cart-style2.html" class="w-100 btn btn-primary py-2 lh-base cart-btn">View Cart</a>
-                            </div>
-                        </div>
-                    </div>
+                <!--MiniCart Drawer-->
+<div class="minicart-right-drawer modal right fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="cart-drawer" class="block block-cart">
+
+        <div class="minicart-header">
+          <button type="button" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
+            <i class="an an-times-r" aria-hidden="true"></i>
+          </button>
+
+          <h4 class="fs-6">
+            Panier (<span id="minicart-count">0</span>)
+          </h4>
+        </div>
+
+        <div class="minicart-content">
+          <ul id="minicart-items" class="clearfix" aria-live="polite" aria-busy="false"></ul>
+
+          <template id="minicart-item-tpl">
+            <li class="item d-flex justify-content-center align-items-center" data-line-id="">
+              <a class="product-image" href="">
+                <img class="blur-up lazyload" src="" data-src="" alt="">
+              </a>
+
+              <div class="product-details">
+                <a class="product-title" href=""></a>
+                <div class="variant-cart"></div>
+                <div class="priceRow">
+                  <div class="product-price"><span class="money"></span></div>
                 </div>
-            </div>
+              </div>
+
+              <div class="qtyDetail text-center">
+                <div class="wrapQtyBtn">
+                  <div class="qtyField">
+                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">-</button>
+                    <input type="number" class="qty" min="1" value="1">
+                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">+</button>
+                  </div>
+                  <button type="button" class="remove" data-action="remove">Supprimer</button>
+                </div>
+              </div>
+            </li>
+          </template>
+          <div class="product-form__item--buyit clearfix">
+              <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">Commander</button>
+          </div>
+          <div id="minicart-empty" style="display:none;" class="py-4 text-center">
+            <p class="mb-3">Votre panier est vide.</p>
+            <a href="index.html" class="btn btn-outline-dark">Continuer mes achats</a>
+          </div>
+        </div>
+
+        <div class="minicart-footer">
+          <div class="d-flex justify-content-between">
+            <span>Sous-total </span>
+            <strong id="minicart-subtotal">0,00 €</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--End MiniCart Drawer-->
             <!--End MiniCart Drawer-->
+            
             <div class="modalOverly"></div>
 
             <!--Quickview Popup-->
@@ -592,27 +554,7 @@
 
             <!--Addtocart Added Popup-->
             <!--Debut Popup ajouter au panier-->
-            <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
-                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-                <div class="addtocart-inner text-center clearfix">
-                    <h4 class="title mb-3 text-success">Ajouté au panier avec succès.</h4>
-                    <div class="pro-img mb-3">
-                        <img class="img-fluid blur-up lazyload" src="assets/images/products/add-to-cart-popup.jpg" data-src="assets/images/products/add-to-cart-popup.jpg" alt="Ajouté au panier avec succès." title="Ajouté au panier avec succès.">
-                    </div>
-                    <div class="pro-details">   
-                        <h5 class="pro-name mb-0">Drawstring Bucket Bag</h5>
-                        <p class="sku my-2">Color: Gray</p>
-                        <p class="mb-0 qty-total">1 X $113.88</p>
-                        <div class="addcart-total bg-light mt-3 mb-3 p-2">
-                            Total: <b class="price">$113.88</b>
-                        </div>
-                        <div class="button-action">
-                            <a href="checkout-style1.html" class="btn btn-primary view-cart mx-1 py-2 rounded-0">Passer au paiement</a>
-                            <a href="index.html" class="btn btn-secondary py-2 rounded-0">Continuer les achats</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!-- End Addtocart Added Popup-->
             <!--Fin Popup ajouter au panier-->
 

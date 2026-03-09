@@ -49,6 +49,63 @@ function show(id, visible) {
   el.style.display = visible ? "" : "none";
 }
 
+function showEl(el, visible) {
+  if (!el) return;
+  el.style.display = visible ? "" : "none";
+}
+
+function hasValue(v) {
+  // true si non null/undefined et non vide (pour string)
+  if (v == null) return false;
+  if (typeof v === "string") return v.trim().length > 0;
+  return true;
+}
+
+function renderOptionalFields(p) {
+  // 1) Label (dans l'image)
+  const labelWrap = document.querySelector(".product-labels");
+  const labelSpan = document.querySelector(".product-labels .pr-label1");
+  const labelValue = p?.label; // <= adapte ici si ta clé a un autre nom
+
+  if (hasValue(labelValue)) {
+    if (labelSpan) labelSpan.textContent = String(labelValue);
+    showEl(labelWrap, true);
+  } else {
+    // masque tout le bloc pour ne rien afficher
+    showEl(labelWrap, false);
+    if (labelSpan) labelSpan.textContent = "";
+  }
+
+  // 2) From (subtitle)
+  const fromEl = document.querySelector(".product-single__subtitle");
+  const fromValue = p?.from ?? p?.From; // tolère "From" si jamais
+
+  if (hasValue(fromValue)) {
+    if (fromEl) fromEl.textContent = String(fromValue);
+    showEl(fromEl, true);
+  } else {
+    showEl(fromEl, false);
+    if (fromEl) fromEl.textContent = "";
+  }
+
+  // 3) Quantité (message)
+  const qtyMsg = document.getElementById("quantity_message");
+  const qtySpan = qtyMsg?.querySelector(".items");
+  const qtyValue = p?.quantite ?? p?.quantité ?? p?.qty; // tolérant
+
+  // Choix: afficher seulement si quantite est un nombre > 0
+  const qtyNumber = qtyValue == null ? NaN : Number(qtyValue);
+  const showQty = Number.isFinite(qtyNumber) && qtyNumber > 0;
+
+  if (showQty) {
+    if (qtySpan) qtySpan.textContent = String(qtyNumber);
+    showEl(qtyMsg, true);
+  } else {
+    showEl(qtyMsg, false);
+    if (qtySpan) qtySpan.textContent = "";
+  }
+}
+
 function renderColors(colors) {
   const ul = document.getElementById("p-colors");
   if (!ul) return;
@@ -140,6 +197,9 @@ export function injectProduct(p) {
   setText("p-name", p.nom_produit);
   setText("p-sku", p.sku);
 
+  // champs optionnels (label/from/quantite)
+  renderOptionalFields(p);
+
   // prix
   renderPrices(p);
 
@@ -156,10 +216,6 @@ async function init() {
     setText("p-title", "Produit introuvable");
     return;
   }
-
-  // Optionnel: une fois consommé, on peut nettoyer pour éviter les effets de bord au refresh
-  // (décommente si tu veux)
-  // try { sessionStorage.removeItem("selected_product_code"); } catch {}
 
   const product = await getProductByCode(code);
   if (!product) {

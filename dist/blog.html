@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!--Required Meta Tags-->
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="description">
+
+<!-- Title Of Site -->
+<title>IA BAG</title>
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.png">
+
+<!-- Plugins CSS -->
+<link rel="stylesheet" href="assets/css/plugins.css">
+
+<!-- Main Style CSS -->
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/social-auth.css">
+
+    </head>
+
+    <body class="blog-page blog-sidebar-page">
+        <!-- Page Loader -->
+        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..."></div>
+        <!-- End Page Loader -->
+
+        <!--Page Wrapper-->
+        <div class="page-wrapper">
+            
+            <!--Topbar-->
+<div class="top-info-bar style1">
+  <div class="topBar-slider-style2 alert fade show" role="alert">
+    <div class="item text-center d-flex-center justify-content-center">
+      Bienvenue dans la haute maroquinerie -
+      <a href="#" class="btn-link text-decoration-underline ms-1">Acheter</a>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <i class="an an-times-l"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<!--End Topbar-->
+
+<!--Header wrap-->
+<div class="header-main header-18">
+  <!--Header-->
+  <header id="header" class="header header-wrap d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <!--Logo / Menu Toggle-->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-2 align-self-center justify-content-start d-flex">
+          <button type="button" class="btn--link site-header__menu js-mobile-nav-toggle mobile-nav--open me-3 d-lg-none">
+            <i class="icon an an-times-l"></i><i class="icon an an-bars-l"></i>
+          </button>
+
+          <div class="logo">
+            <a href="index.html">
+              <img class="logo-img mh-100" src="assets/images/logo-ia-bag.svg" alt="IA BAG" title="IA BAG" width="120">
+              <span class="logo-txt d-none">IA BAG</span>
+            </a>
+          </div>
+        </div>
+
+        <!--Search Inline-->
+        <!-- ✅ CHANGEMENT: col-lg-8 -> col-lg-7 pour libérer de la place à droite -->
+        <div class="col-1 col-sm-1 col-md-1 col-lg-5 d-none d-lg-block">
+          <form class="form minisearch search-inline px-5" id="header-search1" action="#" method="get">
+            <label class="label d-none"><span>Rechercher</span></label>
+            <div class="control">
+              <div class="searchField d-flex">
+                <!--<div class="search-category">
+                  <select id="rgsearch-category1" name="rgsearch[category]" data-default="Toutes Categories" class="rounded-pill-start">
+                    <option value="00" label="Toutes Categories" selected="selected">Toutes Categories</option>
+                    <optgroup id="rgsearch-shop1" label="Shop">
+                      <option value="0">- Tous</option>
+                      <option value="1">- Sacs</option>
+                      <option value="2">- Accessoires</option>
+                      <option value="3">- Chaussures</option>
+                    </optgroup>
+                  </select>
+                </div>-->
+                <div class="input-box d-flex w-100">
+                  <input type="text" name="q" value="" placeholder="Rechercher les articles #" class="input-text rounded-0 border-start-0 border-end-0">
+                  <button type="submit" title="Rechercher" class="action search rounded-pill-end">
+                    <i class="icon an an-search-l"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!--Right Action-->
+        <!-- ✅ CHANGEMENT: col-lg-2 -> col-lg-3 pour plus d'espace "Bonjour email" -->
+        <div class="col-6 col-sm-6 col-md-6 col-lg-3 align-self-center icons-col text-right d-flex justify-content-end">
+          <div class="site-search iconset d-block d-lg-none"><i class="icon an an-search-l"></i><span class="tooltip-label">Rechercher</span></div>
+
+          <!-- Icône utilisateur (sur desktop, le texte "Connexion" peut gêner, on le garde mais tu peux le retirer si besoin) -->
+          <div class="user-link iconset">
+            <i class="icon an an-user d-block d-lg-none"></i>
+            <span class="text d-none d-lg-flex">Mon compte</span>
+          </div>
+
+          <!-- ✅ AJOUT/AMELIORATION: zone bonjour (cachée par défaut) + ellipsis -->
+          <div id="auth-welcome" class="d-none d-lg-flex align-items-center me-2" style="white-space:nowrap; display:none; max-width: 220px; overflow:hidden;">
+            <span class="small" style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;">
+              <strong id="auth-welcome-name"></strong>
+            </span>
+          </div>
+
+          <div id="userLinks">
+            <ul class="user-links">
+              <li><a href="login.html">Connexion</a></li>
+              <li><a href="register.html">S'inscrire</a></li>
+              <li><a href="my-wishlist.html">Ma collection</a></li>
+
+              <!-- ✅ AJOUT: visible seulement si connecté -->
+              <li id="nav-logout-item" style="display:none;">
+                <a href="#" id="nav-logout-link">Déconnexion</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="header-cart iconset">
+            <a href="#" class="site-header__cart btn-minicart d-flex-center" data-bs-toggle="modal" data-bs-target="#minicart-drawer">
+              <i class="icon an an-sq-bag d-block d-lg-none"></i>
+              <span class="text d-none d-lg-flex">Panier</span>
+              <span class="site-cart-count counter d-flex-center justify-content-center rounded-circle ms-1">0</span>
+            </a>
+          </div>
+
+          
+        </div>
+        <!--End Right Action-->
+      </div>
+    </div>
+
+    <!--Search Popup-->
+    <div id="search-popup" class="search-drawer">
+      <div class="container">
+        <span class="closeSearch an an-times-l"></span>
+        <form class="form minisearch" id="header-search" action="#" method="get">
+          <label class="label"><span>Rechercher</span></label>
+          <div class="control">
+            <div class="searchField">
+              <div class="search-category">
+                <select id="rgsearch-category" name="rgsearch[category]" data-default="All Categories">
+                  <option value="00" label="All Categories" selected="selected">Toutes Categories</option>
+                  <optgroup id="rgsearch-shop" label="">
+                    <option value="0">- Tout</option>
+                    <option value="1">- Hommes</option>
+                    <option value="2">- Femmes</option>
+                    <option value="3">- Chaussures</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="input-box">
+                <button type="submit" title="Search" class="action search"><i class="icon an an-search-l"></i></button>
+                <input type="text" name="q" value="" placeholder="Rechercher par mot clé #" class="input-text">
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--End Search Popup-->
+  </header>
+  <!--End Header-->
+
+  <!--Main Navigation Desktop-->
+  <div class="menu-outer d-none d-lg-block pb-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-1 col-sm-1 col-md-1 col-lg-12 align-self-center d-menu-col">
+          <nav class="grid__item" id="AccessibleNav">
+            <ul id="siteNav" class="site-nav medium center hidearrow">
+              <li class="lvl1 parent megamenu"><a href="index.html">Accueil <i class="an an-angle-down-l"></i></a></li>
+              <li class="lvl1 parent dropdown"><a href="#;">Pages <i class="an an-angle-down-l"></i></a>
+                <ul class="dropdown">
+                  <li><a href="aboutus.html" class="site-nav">Qui sommes-nous <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="contact.html" class="site-nav">Nous contacter <i class="an an-angle-right-l"></i></a></li>
+                  <li><a href="faqs.html" class="site-nav">FAQs <i class="an an-angle-right-l"></i></a></li>
+                </ul>
+              </li>
+              <li class="lvl1 parent dropdown"><a href="blog.html">Blog <i class="an an-angle-down-l"></i></a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Main Navigation Desktop-->
+</div>
+<!--End Header wrap-->
+
+<!--Mobile Menu-->
+<div class="mobile-nav-wrapper" role="navigation">
+  <div class="closemobileMenu"><i class="icon an an-times-l pull-right"></i> Close Menu</div>
+  <ul id="MobileNav" class="mobile-nav">
+    <li class="lvl1 parent megamenu"><a href="index-demo18.html">Accueil <i class="an an-plus-l"></i></a></li>
+    <li class="lvl1 parent megamenu"><a href="shop-left-sidebar.html">Boutique <i class="an an-plus-l"></i></a></li>
+    <li class="lvl1 parent megamenu"><a href="#">Pages <i class="an an-plus-l"></i></a>
+      <ul>
+        <li><a href="aboutus.html" class="site-nav">Qui sommes-nous <i class="an an-plus-l"></i></a></li>
+        <li><a href="contact.html" class="site-nav">Nous contacter <i class="an an-plus-l"></i></a></li>
+        <li><a href="lookbook-2columns.html" class="site-nav">Lookbook <i class="an an-plus-l"></i></a></li>
+        <li><a href="faqs.html" class="site-nav">FAQs <i class="an an-plus-l"></i></a></li>
+        <li><a href="my-account.html" class="site-nav">Mon compte <i class="an an-plus-l"></i></a>
+          <ul class="dropdown">
+            <li><a href="my-account.html" class="site-nav">Mon compte</a></li>
+            <li><a href="login.html" class="site-nav">Connexion</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li class="lvl1 parent megamenu"><a href="blog.html">Blog <i class="an an-plus-l"></i></a></li>
+  </ul>
+</div>
+<!--End Mobile Menu-->
+
+            <!--Body Container-->
+            <div id="page-content">
+                <!--Collection Banner-->
+                <div class="collection-header">
+                    <div class="collection-hero">
+                        <div class="collection-hero__image"></div>
+                        <div class="collection-hero__title-wrapper container">
+                            <h1 class="collection-hero__title">Blog</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Accueil</a><span>|</span><span class="fw-bold">Blog</span></div>
+                        </div>
+                    </div>
+                </div>
+                <!--End Collection Banner-->
+
+                <div class="container">
+                    <div class="row">
+                        <!--Sidebar-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-3 blog-sidebar sidebar sidebar-noborder">
+                            <!--Search-->
+                            <div class="sidebar_widget clearfix">
+                                <div class="widget-title"><h2>Search</h2></div>
+                                <div class="custom-search mt-3 mb-2 my-lg-0">
+                                    <form action="/search" method="get" class="input-group flex-nowrap search-header search" role="search">
+                                        <input class="search-header__input search__input input-group__field" type="search" name="q" placeholder="Blog Search..." aria-label="Search" autocomplete="off">
+                                        <span class="input-group__btn"><button class="btn rounded-end px-3 btnSearch" type="submit"> <i class="icon an an-search-l"></i> </button></span>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--End Search-->
+                            <!--Sidebar tags-->
+                            <div class="sidebar_tags clearfix">
+                                <!--Category-->
+                                <div class="sidebar_widget clearfix categories no-border">
+                                    <div class="widget-title"><h2>Category</h2></div>
+                                    <div class="widget-content">
+                                        <ul class="sidebar_categories">
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Beauty</a></li>
+                                            <li class="lvl-1 active"><a href="#" class="site-nav lvl-1">Fashion</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Summer</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Trending</a></li>
+                                            <li class="lvl-1"><a href="#" class="site-nav lvl-1">Winter</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Category-->
+                                <!--Recent Posts-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Recent Posts</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Unique Designs, Unique You</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2021-01-28">January 28, 2021</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">27 Days of Spring Fashion Recap</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2020-02-12">February 12, 2020</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/post-small-1.jpg" src="assets/images/blog/post-small-1.jpg" alt="blog"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Creative, flexible and affordable</a>
+                                                            <div class="grid-view-item__meta clr-555"><time datetime="2021-03-08">March 08, 2021</time></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Recent Posts-->
+                                <!--Recent Comments-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Recent Comments</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Belle</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Avone</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="blog-single-post.html"><img class="grid-view-item__image blur-up lazyload" data-src="assets/images/blog/recent-commnet.jpg" src="assets/images/blog/recent-commnet.jpg" alt="Image"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <div class="grid-view-item__meta"><strong>Diva</strong> On <a href="blog-single-post.html">Lorem Ipsum</a></div>
+                                                            <a class="grid-view-item__title" href="blog-single-post.html">Lorem Ipsum is simply dummy text of the printing</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Recent Comments-->
+                                <!--Popular Tags-->
+                                <div class="sidebar_widget clearfix tags-clouds">
+                                    <div class="widget-title"><h2>Popular Tags</h2></div>
+                                    <div class="widget-content">
+                                        <ul class="d-flex-wrap m-0">
+                                            <li><a href="#">Fashion</a></li>
+                                            <li><a href="#">Clothes</a></li>
+                                            <li><a href="#">Shoes</a></li>
+                                            <li><a href="#">Jeans</a></li>
+                                            <li><a href="#">Furniture</a></li>
+                                            <li><a href="#">Sun Glasses</a></li>
+                                            <li><a href="#">Winter</a></li>
+                                            <li><a href="#">Beauty</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!--End Popular Tags-->
+                                <!--Trending Now-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>Trending Now</h2></div>
+                                    <div class="widget-content">
+                                        <div class="list list-sidebar-products">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Floral Crop Top</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="old-price">$199.00</span><span class="price">$219.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i><i class="an an-star-o"></i>
+                                                                <span class="caption hidden ms-2">3 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex mb-10 clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Martha Knit Top</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="price">$149.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i>
+                                                                <span class="caption hidden ms-2">9 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="mini-list-item d-flex clearfix">
+                                                        <div class="mini-view_image"><a class="grid-view-item__link" href="product-layout1.html"><img class="primary blur-up lazyload" data-src="assets/images/products/100x120.jpg" src="assets/images/products/100x120.jpg" alt="image" title="product"></a></div>
+                                                        <div class="ms-3 details">
+                                                            <a class="grid-view-item__title" href="product-layout1.html">Cool Short Sleev T-Shirt</a>
+                                                            <div class="grid-view-item__meta"><div class="product-price"><span class="price">$59.00</span></div></div>
+                                                            <div class="product-review d-flex align-items-center justify-content-start">
+                                                                <i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star"></i><i class="an an-star-o"></i>
+                                                                <span class="caption hidden ms-2">30 reviews</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--End Trending Now-->
+                                <!--Banner-->
+                                <div class="sidebar_widget clearfix static-banner d-none d-lg-block">
+                                    <a href="shop-left-sidebar.html"><img src="assets/images/new-sale-banner.jpg" alt="image"></a>
+                                </div>
+                                <!--End Banner-->
+                                <!--About Blog-->
+                                <div class="sidebar_widget clearfix">
+                                    <div class="widget-title"><h2>About Blog</h2></div>
+                                    <div class="widget-content">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt, erat in malesuada aliquam, est erat faucibus purus, eget viverra nulla sem vitae neque. Quisque id sodales libero.</p>
+                                    </div>
+                                </div>
+                                <!--End About Blog-->
+                            </div>
+                            <!--End Sidebar tags-->
+                        </div>
+                        <!--End Sidebar-->
+
+                        <!--Main Content-->
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-9 main-col">
+                            <div class="blog--list-view blog-list-view blog--grid-load-more">
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="Unique Designs, Unique You"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">Unique Designs, Unique You</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-01-28">January 28, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article">
+                                    <!-- Article Video -->
+                                    <div class="ratio ratio-16x9 article_featured-image"><iframe src="https://www.youtube.com/embed/NpEaa2P7qZI" title="YouTube video" allowfullscreen=""></iframe></div> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">It's all about how you wear</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2020-02-12">February 12, 2020</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Hot</a>,<a class="link-underline ms-1" href="#">Tops</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">12 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. There are many variations of passages of Lorem Ipsum available, but the majority...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Video -->
+                                    <div class="ratio ratio-16x9 article_featured-image">
+                                        <iframe src="https://www.youtube.com/embed/NpEaa2P7qZI" title="Vimeo video" allowfullscreen=""></iframe>
+                                    </div> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">There are blog Vimeo video</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                     
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-05-12">May 12, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="27 Days of Spring Fashion Recap"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">27 Days of Spring Fashion Recap</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2020-02-12">February 12, 2020</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">0 comments</a></li>
+                                    </ul>
+                                    <div class="rte">
+                                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage going through...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image --> 
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="Creative, flexible and affordable"></a>
+                                    <!-- Article Content --> 
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">Creative, flexible and affordable</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                      
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-03-08">March 08, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+                                <div class="article"> 
+                                    <!-- Article Image -->
+                                    <a class="article_featured-image zoom-scal" href="blog-single-post.html"><img class="blur-up lazyload" data-src="assets/images/blog/post-1.jpg" src="assets/images/blog/post-1.jpg" alt="We like to make things look pretty!"></a> 
+                                    <!-- Article Content -->
+                                    <h2 class="h3 text-transform-none"><a href="blog-single-post.html">We like to make things look pretty!</a></h2>
+                                    <ul class="publish-detail d-flex-wrap">                     
+                                        <li><i class="icon an an-clock-r d-none"></i><time datetime="2021-03-08">March 08, 2021</time></li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted by:</span>User</li>
+                                        <li><i class="icon an an-user-al d-none"></i><span class="clr-555 me-1">Posted in</span><a class="link-underline" href="#">Beauty</a>,<a class="link-underline ms-1" href="#">Fashion</a>,<a class="link-underline ms-1" href="#">Spring</a></li>
+                                        <li><i class="icon an an-comments-l d-none"></i><a href="blog-single-post.html">5 comments</a></li>
+                                    </ul>
+                                    <div class="rte"> 
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets...</p>
+                                    </div>
+                                    <p><a href="blog-single-post.html" class="btn rounded">Read more</a></p>
+                                </div>
+
+                                <!--Load More Button-->
+                                <div class="loadmore-post">	
+                                    <a href="#;" class="btn btn-lg loadMorepost rounded">Load More</a>
+                                </div>
+                                <!--End Load More Button-->
+                            </div>
+                        </div>
+                        <!--End Main Content-->
+                    </div>
+                </div>
+            </div>
+            <!--End Body Container-->
+
+            <!--Footer-->
+               <!--Footer-->
+<div class="footer footer-7 border-0">
+  <div class="footer-top clearfix">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4 footer-about">
+          <div class="inner pe-lg-4 mb-3 mb-md-4 mb-lg-0">
+            <h4 class="h4 body-font fw-600">A propos de nous</h4>
+            <p>
+              Notre vocation est de vous offrir le meilleur rapport qualité prix. Nous vous apporterons assitance dans la
+              chaîne de bout en bout, afin de vous livrer vos articles le plus près de chez vous.
+              <a href="aboutus.html" class="d-inline-block"><u>En savoir plus</u></a>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
+          <h4 class="h4 body-font fw-600">INFORMATION</h4>
+          <ul>
+            <li><a href="aboutus.html">A propos de nous</a></li>
+            <li><a href="privacy-policy.html">Politique de confidentialité</a></li>
+            <li><a href="#">Conditions générales</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-3 col-lg-2 footer-links">
+          <h4 class="h4 body-font fw-600">SERVICE CLIENT</h4>
+          <ul>
+            <li><a href="#">Center d'aide</a></li>
+            <li><a href="#">Conditions générales</a></li>
+            <li><a href="#">Echange</a></li>
+            <li><a href="#">Livraison</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4 newsletter-col">
+          <div class="display-table">
+            <div class="display-table-cell footer-newsletter">
+              <form action="#" method="post">
+                <label class="h4 body-font fw-600">BULLETIN</label>
+                <p>
+                  Abonnez-vous pour recevoir les dernières nouvelles de IA BAG, ainsi que des offres exclusives et bien plus encore.
+                </p>
+                <div class="input-group">
+                  <input type="email" class="input-group__field newsletter-input mb-0 rounded-0" name="EMAIL" value="" placeholder="Email" required="">
+                  <span class="input-group__btn">
+                    <button type="submit" class="btn newsletter__submit rounded-0" name="commit" id="Subscribe">
+                      <i class="an an-envelope-l"></i>
+                    </button>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <ul class="list-inline social-icons mt-3">
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook"><i class="an an-facebook" aria-hidden="true"></i></a></li>
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter"><i class="an an-twitter" aria-hidden="true"></i></a></li>
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Pinterest"><i class="an an-pinterest-p" aria-hidden="true"></i></a></li>
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Instagram"><i class="an an-instagram" aria-hidden="true"></i></a></li>
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="TikTok"><i class="an an-tiktok" aria-hidden="true"></i></a></li>
+            <li class="list-inline-item"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Whatsapp"><i class="an an-whatsapp" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom clearfix">
+    <div class="container">
+      <div class="d-flex-center flex-column justify-content-md-between flex-md-row-reverse">
+        <img src="assets/images/payment.png" alt="Paypal Visa Payments">
+        <div class="copytext text-transform-none">&copy; 2025 IA BAG. Tous droits réservés.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--End Footer-->
+
+<!--Scoll Top-->
+<span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+<!--End Scoll Top-->
+            <!--End Footer-->
+
+            <!--Scoll Top-->
+            <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+            <!--End Scoll Top-->
+
+            <!--MiniCart Drawer-->
+               <!--MiniCart Drawer-->
+<div class="minicart-right-drawer modal right fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="cart-drawer" class="block block-cart">
+
+        <div class="minicart-header">
+          <button type="button" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
+            <i class="an an-times-r" aria-hidden="true"></i>
+          </button>
+
+          <h4 class="fs-6">
+            Panier (<span id="minicart-count">0</span>)
+          </h4>
+        </div>
+
+        <div class="minicart-content">
+          <ul id="minicart-items" class="clearfix" aria-live="polite" aria-busy="false"></ul>
+
+          <template id="minicart-item-tpl">
+            <li class="item d-flex justify-content-center align-items-center" data-line-id="">
+              <a class="product-image" href="">
+                <img class="blur-up lazyload" src="" data-src="" alt="">
+              </a>
+
+              <div class="product-details">
+                <a class="product-title" href=""></a>
+                <div class="variant-cart"></div>
+                <div class="priceRow">
+                  <div class="product-price"><span class="money"></span></div>
+                </div>
+              </div>
+
+              <div class="qtyDetail text-center">
+                <div class="wrapQtyBtn">
+                  <div class="qtyField">
+                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">-</button>
+                    <input type="number" class="qty" min="1" value="1">
+                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">+</button>
+                  </div>
+                  <button type="button" class="remove" data-action="remove">Supprimer</button>
+                </div>
+              </div>
+            </li>
+          </template>
+          <div class="product-form__item--buyit clearfix">
+              <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">Commander</button>
+          </div>
+          <div id="minicart-empty" style="display:none;" class="py-4 text-center">
+            <p class="mb-3">Votre panier est vide.</p>
+            <a href="index.html" class="btn btn-outline-dark">Continuer mes achats</a>
+          </div>
+        </div>
+
+        <div class="minicart-footer">
+          <div class="d-flex justify-content-between">
+            <span>Sous-total </span>
+            <strong id="minicart-subtotal">0,00 €</strong>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--End MiniCart Drawer-->
+            <!--End MiniCart Drawer-->
+            <div class="modalOverly"></div>
+
+
+            <!-- Including Jquery -->
+            <!--Including Javascript-->
+            <!-- Including Jquery -->
+<script src="assets/js/vendor/jquery-min.js"></script>
+<script src="assets/js/vendor/js.cookie.js"></script>
+
+<!--Including Javascript-->
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script type="module" src="assets/js/cart_ui.js"></script>
+<script type="module" src="assets/js/header_auth_ui.js"></script>
+
+
+        </div>
+        <!--End Page Wrapper-->
+    </body>
+</html>
