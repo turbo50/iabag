@@ -1,5 +1,12 @@
 import { COGNITO_OAUTH } from "./cognito_oauth_config.js";
-import { startSocialLogin } from "./auth_social_cognito.js";
+import { startSocialLogin, setNextUrl } from "./auth_social_cognito.js";
+
+/**
+ * But:
+ * - Ne pas dupliquer la logique "où rediriger après login"
+ * - Utiliser la clé officielle AUTH_STORAGE_KEYS.next via setNextUrl()
+ * - Ne PAS écraser une redirection déjà posée (ex: clic "Commander" minicart)
+ */
 
 function providerClass(key) {
   if (key === "google") return "social-btn--google";
@@ -42,7 +49,17 @@ function providerIconSvg(key) {
   return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>`;
 }
 
-export function renderSocialButtons(containerSelector, { nextUrl = "index.html" } = {}) {
+function getRedirectFromQuery() {
+  // Support optionnel: login.html?redirect=...
+  try {
+    const u = new URL(window.location.href);
+    return u.searchParams.get("redirect");
+  } catch {
+    return null;
+  }
+}
+
+export function renderSocialButtons(containerSelector, { nextUrl = "index.html", preserveExistingNext = true } = {}) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
@@ -64,15 +81,36 @@ export function renderSocialButtons(containerSelector, { nextUrl = "index.html" 
     btn.type = "button";
     btn.className = `btn rounded social-btn ${providerClass(key)}`.trim();
 
-    // facebook/apple utilisent currentColor (blanc sur fond bleu/noir)
-    // google a son SVG multicolore directement
     btn.innerHTML = `
       <span class="social-btn__icon" aria-hidden="true">${providerIconSvg(key)}</span>
       <span>${p.label || `Continuer avec ${key}`}</span>
     `;
 
     btn.addEventListener("click", async () => {
-      sessionStorage.setItem("auth_next", nextUrl);
+      /**
+       * Priorité de redirection:
+       * 1) login.html?redirect=... (si tu l’utilises)
+       * 2) nextUrl passé en param
+       *
+       * Et surtout: si preserveExistingNext=true, on n’écrase pas une valeur
+       * déjà posée par minicart checkout (setNextUrl(window.location.href)).
+       */
+      const desiredNext = getRedirectFromQuery() || nextUrl || "index.html";
+
+      if (preserveExistingNext) {
+        // setNextUrl() écrase toujours; donc on ne l'appelle que si on n'a pas déjà posé une valeur.
+        // Comme on ne veut pas dépendre de la structure interne, on refait une lecture simple :
+        // (si tu veux 0 duplication totale, on peut aussi exposer getNextUrl() dans auth_social_cognito.js)
+        try {
+          const existing = localStorage.getItem("iabag_auth_next_v1");
+          if (!existing) setNextUrl(desiredNext);
+        } catch {
+          setNextUrl(desiredNext);
+        }
+      } else {
+        setNextUrl(desiredNext);
+      }
+
       await startSocialLogin(key);
     });
 

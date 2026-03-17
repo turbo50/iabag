@@ -1,24 +1,59 @@
 console.log("✅ load_product_grill.js chargé", { href: location.href });
 window.__GRILL_LOADED__ = true;
 
-import { MOCK_PRODUCTS } from "../../data/mock-products.js";
-console.log("Mock Fetch chargé");
+// Config globale (mock + API Gateway base URL)
+import { CONFIG } from "./config.js";
 
-const USE_LOCAL = true; // passe à false pour retourner sur API Gateway
+function joinUrl(base, path) {
+  return `${String(base).replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
+}
+
+async function fetchJson(url) {
+  const res = await fetch(url, { cache: "no-store" });
+
+  // Erreurs HTTP (404/500/etc.)
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error(`GET ${url} failed: ${res.status} ${res.statusText} ${body}`);
+  }
+
+  return await res.json();
+}
 
 export async function fetchProducts() {
-    if (USE_LOCAL) {
-        console.log("➡️ Mock activé : données locales utilisées");
-        window.PRODUCTS = MOCK_PRODUCTS;
-        return MOCK_PRODUCTS;
+  // 1) Mode mock = lit CONFIG.MOCK_PRODUCTS_URL (ex: data/product.json)
+  if (CONFIG?.USE_MOCK) {
+    if (!CONFIG?.MOCK_PRODUCTS_URL) {
+      throw new Error("CONFIG.MOCK_PRODUCTS_URL est vide (assets/js/config.js).");
     }
 
-    const url = "https://2f0ihly4q7.execute-api.eu-west-3.amazonaws.com/products";
-    const res = await fetch(url);
-    const data = await res.json();
+    const mockUrl = CONFIG.MOCK_PRODUCTS_URL;
+    console.log("➡️ Mock activé : lecture JSON", { url: mockUrl });
 
-    window.PRODUCTS = data;
-    return data;
+    const data = await fetchJson(mockUrl);
+
+    // mock JSON attendu: tableau de produits
+    const products = Array.isArray(data) ? data : (data?.items ?? []);
+    window.PRODUCTS = products;
+    return products;
+  }
+
+  // 2) Mode API = appelle API Gateway
+  if (!CONFIG?.API_BASE_URL || CONFIG.API_BASE_URL.includes("REPLACE_ME")) {
+    throw new Error(
+      "CONFIG.API_BASE_URL n'est pas configurée (assets/js/config.js). Remplace REPLACE_ME par l'URL de ton API Gateway."
+    );
+  }
+
+  const url = joinUrl(CONFIG.API_BASE_URL, "/products");
+  console.log("➡️ Mock désactivé : appel API Gateway", { url });
+
+  const data = await fetchJson(url);
+
+  // API peut renvoyer [] ou { items: [] }
+  const products = Array.isArray(data) ? data : (data?.items ?? []);
+  window.PRODUCTS = products;
+  return products;
 }
 
 function applyLabel(card, product) {
@@ -31,12 +66,11 @@ function applyLabel(card, product) {
   }
 }
 
-
 function fillTemplate(template, product) {
-    return template.replace(/\$[a-zA-Z0-9_]+/g, match => {
-        const key = match.substring(1); // enlève le $
-        return product[key] !== undefined ? product[key] : "";
-    });
+  return template.replace(/\$[a-zA-Z0-9_]+/g, (match) => {
+    const key = match.substring(1); // enlève le $
+    return product[key] !== undefined ? product[key] : "";
+  });
 }
 
 function buildProductHTML(product) {
@@ -58,173 +92,169 @@ function buildProductHTML(product) {
 }
 
 function fillColorList(container, colors) {
-    container.innerHTML = "";
-   /* colors.forEach(color => {
-        const li = document.createElement("li");
-        li.textContent = color; // Tu peux améliorer plus tard (swatches)
-        container.appendChild(li);
-    });*/
-    colors.forEach(color => {
-           // Selon le format reçu :
-           const name = typeof color === "string" ? color : color.name;
-           const cssClass = typeof color === "string" ? color.toLowerCase() : color.cssClass;
+  container.innerHTML = "";
+  colors.forEach((color) => {
+    // Selon le format reçu :
+    const name = typeof color === "string" ? color : color.name;
+    const cssClass = typeof color === "string" ? color.toLowerCase() : color.cssClass;
 
-           const li = document.createElement("li");
-           li.className = `medium radius ${cssClass}`;
+    const li = document.createElement("li");
+    li.className = `medium radius ${cssClass}`;
 
-           li.innerHTML = `
-               <span class="swacth-btn"></span>
-               <span class="tooltip-label">${name}</span>
-           `;
+    li.innerHTML = `
+      <span class="swacth-btn"></span>
+      <span class="tooltip-label">${name}</span>
+    `;
 
-           container.appendChild(li);
-       });
+    container.appendChild(li);
+  });
 }
 
 function applyDynamicLists(card, product) {
-    // Tous les éléments dans le bloc produit ayant l'attribut data-colors
-    const colorLists = card.querySelectorAll("[data-colors]");
+  // Tous les éléments dans le bloc produit ayant l'attribut data-colors
+  const colorLists = card.querySelectorAll("[data-colors]");
 
-    colorLists.forEach(list => {
-        const key = list.getAttribute("data-colors");
-        const colors = product[key] || [];
-        fillColorList(list, colors);
-    });
+  colorLists.forEach((list) => {
+    const key = list.getAttribute("data-colors");
+    const colors = product[key] || [];
+    fillColorList(list, colors);
+  });
 }
 
 function openQuickView(productId) {
-    const product = window.PRODUCTS.find(p => p.code_produit === productId);
+  const product = window.PRODUCTS.find((p) => p.code_produit === productId);
 
-    if (!product) {
-        console.error("Produit introuvable pour QuickView");
-        return;
-    }
+  if (!product) {
+    console.error("Produit introuvable pour QuickView");
+    return;
+  }
 
-    fillQuickView(product);
+  fillQuickView(product);
 
-    $.magnificPopup.open({
-        items: { src: '#quickView-modal' },
-        type: 'inline'
-    });
+  $.magnificPopup.open({
+    items: { src: "#quickView-modal" },
+    type: "inline",
+  });
 }
 
 function fillQuickView(product) {
+  // ---------------------------
+  // TITRE, SKU, PRIX
+  // ---------------------------
+  document.getElementById("qv-title").textContent = product.nom_produit;
+  document.getElementById("qv-sku").textContent = product.sku;
+  document.getElementById("qv-marque").textContent = product.marque_produit;
+  document.getElementById("qv-oldprice").textContent = product.ancien_prix + " €";
+  document.getElementById("qv-price").textContent = product.prix_actuel + " €";
 
-    // ---------------------------
-    // TITRE, SKU, PRIX
-    // ---------------------------
-    document.getElementById("qv-title").textContent = product.nom_produit;
-    document.getElementById("qv-sku").textContent = product.sku;
-    document.getElementById("qv-marque").textContent = product.marque_produit;
-    document.getElementById("qv-oldprice").textContent = product.ancien_prix + " €";
-    document.getElementById("qv-price").textContent = product.prix_actuel + " €";
+  // ---------------------------
+  // IMAGES DU CAROUSSEL
+  // ---------------------------
+  const carousel = document.getElementById("qv-carousel");
+  const thumbs = document.getElementById("qv-thumbs");
 
-    // ---------------------------
-    // IMAGES DU CAROUSSEL
-    // ---------------------------
-    const carousel = document.getElementById("qv-carousel");
-    const thumbs = document.getElementById("qv-thumbs");
+  carousel.innerHTML = "";
+  thumbs.innerHTML = "";
 
-    carousel.innerHTML = "";
-    thumbs.innerHTML = "";
+  // Image principale
+  const allImages = [product.image_produit, ...(product.autres_images || [])];
 
-    // Image principale
-    const allImages = [product.image_produit, ...(product.autres_images || [])];
+  allImages.forEach((imgUrl, index) => {
+    // Slide principal
+    carousel.innerHTML += `
+      <div class="carousel-item ${index === 0 ? "active" : ""}">
+        <img class="blur-up lazyload" src="${imgUrl}" alt="">
+      </div>
+    `;
 
-    allImages.forEach((imgUrl, index) => {
+    // Miniature
+    thumbs.innerHTML += `
+      <div class="list-inline-item ${index === 0 ? "active" : ""}"
+           data-bs-slide-to="${index}" data-bs-target="#quickView">
+        <img class="blur-up lazyload" src="${imgUrl}" alt="">
+      </div>
+    `;
+  });
 
-        // Slide principal
-        carousel.innerHTML += `
-            <div class="carousel-item ${index === 0 ? 'active' : ''}">
-                <img class="blur-up lazyload" src="${imgUrl}" alt="">
-            </div>
-        `;
+  // ---------------------------
+  // COULEURS
+  // ---------------------------
+  const colorBox = document.getElementById("qv-colors");
+  colorBox.innerHTML = "";
 
-        // Miniature
-        thumbs.innerHTML += `
-            <div class="list-inline-item ${index === 0 ? 'active' : ''}"
-                 data-bs-slide-to="${index}" data-bs-target="#quickView">
-                <img class="blur-up lazyload" src="${imgUrl}" alt="">
-            </div>
-        `;
-    });
+  (product.liste_couleur || []).forEach((color) => {
+    // Si mock/API fournit un objet {name, cssClass}, on supporte aussi
+    const name = typeof color === "string" ? color : color.name;
+    const cssClass = typeof color === "string" ? color : color.cssClass;
 
-    // ---------------------------
-    // COULEURS
-    // ---------------------------
-    const colorBox = document.getElementById("qv-colors");
-    colorBox.innerHTML = "";
-
-    (product.liste_couleur || []).forEach(color => {
-        colorBox.innerHTML += `
-            <li class="swatch-element color available">
-                <label class="rounded-0 swatchLbl small color ${color}" title="${color}"></label>
-                <span class="tooltip-label top">${color}</span>
-            </li>
-        `;
-    });
+    colorBox.innerHTML += `
+      <li class="swatch-element color available">
+        <label class="rounded-0 swatchLbl small color ${cssClass}" title="${name}"></label>
+        <span class="tooltip-label top">${name}</span>
+      </li>
+    `;
+  });
 }
 
 function setupQuickViewButtons() {
-    document.querySelectorAll("[data-product-id]").forEach(btn => {
-
-        btn.addEventListener("click", () => {
-            const productId = btn.getAttribute("data-product-id");
-            openQuickView(productId);
-        });
+  document.querySelectorAll("[data-product-id]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const productId = btn.getAttribute("data-product-id");
+      openQuickView(productId);
     });
+  });
 }
 
 function renderRatingStars(container, rating) {
-    container.innerHTML = ""; // nettoie le contenu
+  container.innerHTML = ""; // nettoie le contenu
 
-    const fullStars = Math.floor(rating);
-    const halfStar = (rating % 1) >= 0.5;
-    const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+  const fullStars = Math.floor(rating);
+  const halfStar = (rating % 1) >= 0.5;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
 
-    // Étoiles pleines
-    for (let i = 0; i < fullStars; i++) {
-        container.innerHTML += '<i class="an an-star"></i>';
-    }
+  // Étoiles pleines
+  for (let i = 0; i < fullStars; i++) {
+    container.innerHTML += '<i class="an an-star"></i>';
+  }
 
-    // Demi-étoile
-    if (halfStar) {
-        container.innerHTML += '<i class="an an-star-half-o"></i>';
-    }
+  // Demi-étoile
+  if (halfStar) {
+    container.innerHTML += '<i class="an an-star-half-o"></i>';
+  }
 
-    // Étoiles vides
-    for (let i = 0; i < emptyStars; i++) {
-        container.innerHTML += '<i class="an an-star-o"></i>';
-    }
-
+  // Étoiles vides
+  for (let i = 0; i < emptyStars; i++) {
+    container.innerHTML += '<i class="an an-star-o"></i>';
+  }
 }
 
-function applyRatingStars(card, product){
-    card.querySelectorAll('.product-review').forEach(el => {
-        const rating = parseFloat(el.getAttribute("data-rating"));
-        if (!isNaN(rating)) {
-            renderRatingStars(el, rating);
-        }
-    });
+function applyRatingStars(card, product) {
+  card.querySelectorAll(".product-review").forEach((el) => {
+    const rating = parseFloat(el.getAttribute("data-rating"));
+    if (!isNaN(rating)) {
+      renderRatingStars(el, rating);
+    }
+  });
 }
 
 async function renderProductGrid() {
-    const products = await fetchProducts();
-    const grid = document.getElementById("product-grid");
-    products.forEach(product => {
-        // 1️⃣ construire le bloc HTML
-        const card = buildProductHTML(product);
-        // 2️⃣ intégrer les listes dynamiques (ex: liste_couleur)
-        applyDynamicLists(card, product);
-        //  rating
-        applyRatingStars(card, product);
-        applyLabel(card, product);
-        // 3️⃣ ajouter dans la grille
-        grid.appendChild(card);
-    });
+  const products = await fetchProducts();
+  const grid = document.getElementById("product-grid");
 
-    // Active les boutons QuickView maintenant que la grille est générée
-     setupQuickViewButtons();
+  products.forEach((product) => {
+    // 1️⃣ construire le bloc HTML
+    const card = buildProductHTML(product);
+    // 2️⃣ intégrer les listes dynamiques (ex: liste_couleur)
+    applyDynamicLists(card, product);
+    // rating
+    applyRatingStars(card, product);
+    applyLabel(card, product);
+    // 3️⃣ ajouter dans la grille
+    grid.appendChild(card);
+  });
+
+  // Active les boutons QuickView maintenant que la grille est générée
+    setupQuickViewButtons();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {

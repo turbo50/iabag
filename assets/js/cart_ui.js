@@ -1,4 +1,6 @@
 import { getCart, getCartCount, getCartSubtotal, formatMoney, saveCart } from "./cart_service.js";
+import { createOrderFromCart } from "./orders_service.js";
+import { isAuthenticated, setNextUrl } from "./auth_social_cognito.js";
 
 /** Met à jour le badge compteur dans le header */
 export function renderHeaderCartCount(cart = getCart()) {
@@ -63,16 +65,6 @@ export function renderMiniCart(cart = getCart()) {
   renderHeaderCartCount(cart);
 }
 
-function resolveImageUrl(src) {
-  if (!src) return "";
-  try {
-    // transforme "assets/..." ou "images/..." en URL utilisable
-    return new URL(src, window.location.href).toString();
-  } catch {
-    return src;
-  }
-}
-
 /** Délégation d’événements + / - / remove dans le drawer */
 function bindMiniCartActions() {
   document.addEventListener("click", (e) => {
@@ -119,6 +111,84 @@ function bindMiniCartOpenRefresh() {
   });
 }
 
+function closeMiniCartDrawerIfOpen() {
+  const drawerEl = document.getElementById("minicart-drawer");
+  if (!drawerEl) return;
+
+  // Bootstrap 5
+  if (window.bootstrap?.Modal) {
+    try {
+      window.bootstrap.Modal.getOrCreateInstance(drawerEl).hide();
+    } catch {
+      // ignore
+    }
+  }
+}
+
+/**
+ * ✅ Bind du bouton "Commander"
+ *
+ * HTML recommandé:
+ *   <button data-minicart-checkout class="... proceed-to-checkout">Commander</button>
+ *
+ * Fallback si tu n'as pas encore ajouté data-minicart-checkout:
+ *   on tente aussi .proceed-to-checkout dans #minicart-drawer
+ */
+function bindMiniCartCheckout() {
+  const btn =
+    document.querySelector("#minicart-drawer [data-minicart-checkout]") ||
+    document.querySelector("#minicart-drawer .proceed-to-checkout");
+
+  if (!btn || btn.dataset.bound) return;
+  btn.dataset.bound = "1";
+
+  btn.addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const cart = getCart();
+    if (!cart.items?.length) {
+      alert("Votre panier est vide.");
+      return;
+    }
+
+    // si pas connecté: mémorise où revenir après login
+    if (!isAuthenticated()) {
+      setNextUrl(window.location.href);
+      window.location.href = "login.html";
+      return;
+    }
+
+    try {
+      btn.disabled = true;
+
+      const order = await createOrderFromCart(cart);
+
+      // vider le panier après succès
+      saveCart({ items: [] });
+
+      // fermer le drawer
+      closeMiniCartDrawerIfOpen();
+
+      // redirection page succès (à adapter si besoin)
+      const code = order?.code_commande ? encodeURIComponent(order.code_commande) : "";
+      window.location.href = code ? `checkout-success.html?code=${code}` : "checkout-success.html";
+    } catch (err) {
+      console.error("Minicart checkout error:", err);
+
+      // si 401 => re-login
+      if (err?.status === 401 || err?.code === "NOT_AUTHENTICATED") {
+        setNextUrl(window.location.href);
+        window.location.href = "login.html";
+        return;
+      }
+
+      alert(`Impossible de passer la commande : ${err?.message || err}`);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+}
+
 export function initCartUI() {
   // 1) rendu initial (badge header) au chargement
   renderHeaderCartCount(getCart());
@@ -129,11 +199,13 @@ export function initCartUI() {
   // 3) refresh à l’ouverture du modal
   bindMiniCartOpenRefresh();
 
-  // 4) refresh quand le panier change (CustomEvent depuis cart_service.js)
+  // 4) bind checkout
+  bindMiniCartCheckout();
+
+  // 5) refresh quand le panier change (CustomEvent depuis cart_service.js)
   window.addEventListener("cart:changed", (ev) => {
     const cart = ev?.detail?.cart || getCart();
     renderHeaderCartCount(cart);
-    // si le drawer est présent, on peut aussi le rerender (utile si le drawer est ouvert)
     renderMiniCart(cart);
   });
 }

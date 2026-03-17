@@ -96,7 +96,6 @@ export async function startSocialLogin(providerKey) {
   window.location.assign(u.toString());
 }
 
-
 function safeJsonParse(raw) {
   try {
     return JSON.parse(raw);
@@ -125,6 +124,30 @@ function decodeJwtPayload(jwt) {
 function getTokens() {
   const raw = localStorage.getItem(K.tokens);
   return raw ? safeJsonParse(raw) : null;
+}
+
+/**
+ * ✅ AJOUT: récupérer le token brut pour appeler l'API
+ */
+export function getIdToken() {
+  const t = getTokens();
+  return t?.id_token || "";
+}
+
+/**
+ * ✅ AJOUT: utile si ton API Gateway authorizer attend access_token au lieu de id_token
+ */
+export function getAccessToken() {
+  const t = getTokens();
+  return t?.access_token || "";
+}
+
+/**
+ * ✅ AJOUT: mémorise où revenir après login (utilisé par auth_callback_page.js)
+ */
+export function setNextUrl(nextUrl) {
+  if (!nextUrl) return;
+  localStorage.setItem(K.next, String(nextUrl));
 }
 
 export function getUserFromIdToken() {
