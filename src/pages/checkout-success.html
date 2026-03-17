@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <include src="../src/partials/header.html"></include>
+  </head>
+
+  <body class="my-wishlist-page">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="assets/images/loader.gif" alt="Chargement..." /></div>
+    <!-- End Page Loader -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+      <include src="../src/partials/haut_de_page.html"></include>
+
+      <!--Body Container-->
+      <div id="page-content">
+        <!--Collection Banner-->
+        <div class="collection-header">
+          <div class="collection-hero">
+            <div class="collection-hero__image"></div>
+            <div class="collection-hero__title-wrapper container">
+              <h1 class="collection-hero__title">Commande confirmée</h1>
+              <div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
+                <a href="index.html" title="Retour à l’accueil">Accueil</a><span>|</span><span class="fw-bold">Commande confirmée</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Collection Banner-->
+
+        <!--Main Content-->
+        <div class="container">
+          <div class="checkout-success-content py-2">
+            <!--Order Card-->
+            <div class="row">
+              <div class="col-12">
+                <div class="checkout-scard card border-0 rounded">
+                  <div class="card-body text-center">
+                    <p class="card-icon"><i class="icon an an-shield-check fs-1"></i></p>
+
+                    <h4 class="card-title" id="success-title">Merci pour votre commande !</h4>
+
+                    <p class="card-text mb-1" id="success-subtitle">
+                      Votre commande a bien été enregistrée.
+                    </p>
+
+                    <p class="card-text mb-1" id="success-detail">
+                      Vous pouvez consulter le récapitulatif ci-dessous.
+                    </p>
+
+                    <p class="card-text text-order badge bg-success my-3" id="order-code-badge" style="display:none;">
+                      Numéro de commande : <b id="order-code">—</b>
+                    </p>
+
+                    <p class="card-text mb-0" id="order-date-line" style="display:none;">
+                      Date de commande : <span id="order-date">—</span>
+                    </p>
+
+                    <!-- Etat dynamique -->
+                    <div class="mt-3" id="order-state">
+                      <div id="order-loading" class="text-muted" style="display:none;">Chargement du détail de la commande…</div>
+
+                      <div id="order-error" class="alert alert-warning d-inline-block text-start" style="display:none;">
+                        <div class="fw-bold mb-1">Impossible d’afficher le détail de la commande.</div>
+                        <div id="order-error-msg" class="small"></div>
+                        <div class="mt-2">
+                          <a class="btn btn-outline-primary btn-sm rounded" href="login.html" id="login-link">Se connecter</a>
+                          <a class="btn btn-outline-dark btn-sm rounded" href="index.html">Retour à l’accueil</a>
+                        </div>
+                      </div>
+
+                      <div id="order-generic-ok" class="text-muted small" style="display:none;">
+                        Si vous ne voyez pas le détail, assurez-vous d’être connecté avec le même compte utilisé pour commander.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--End Order Card-->
+
+            <!--Order Summary (dynamique)-->
+            <div class="row">
+              <div class="col-12 col-lg-8">
+                <div class="checkout-item-ordered">
+                  <h2 class="fs-6 mb-3">Récapitulatif de la commande</h2>
+
+                  <div class="table-content table-responsive order-table mb-4">
+                    <table class="table table-bordered align-middle table-hover text-center mb-0">
+                      <thead>
+                        <tr>
+                          <th class="text-start fw-600">Produit</th>
+                          <th class="fw-600">Qté</th>
+                          <th class="fw-600">Prix unitaire</th>
+                          <th class="fw-600">Sous-total</th>
+                        </tr>
+                      </thead>
+
+                      <tbody id="order-lines">
+                        <tr>
+                          <td class="text-start" colspan="4" style="opacity:.7;">
+                            Le détail des articles sera affiché ici.
+                          </td>
+                        </tr>
+                      </tbody>
+
+                      <tfoot>
+                        <tr>
+                          <td colspan="3" class="item total text-end fw-bolder">Total :</td>
+                          <td class="fw-500 last" id="order-total">—</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-lg-4">
+                <div class="card border-0 rounded">
+                  <div class="card-body">
+                    <h3 class="fs-6 mb-3">Prochaines étapes</h3>
+                    <ul class="mb-0">
+                      <li>Vous pouvez fermer cette page et continuer vos achats.</li>
+                      <li>Si vous avez un problème, contactez le support avec le numéro de commande.</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="d-flex-wrap w-100 mt-4 text-center">
+                  <a href="index.html" class="d-inline-flex align-items-center btn btn-outline-primary rounded me-2 mb-2 me-sm-3">
+                    <i class="me-2 icon an an-angle-left-r"></i>Continuer mes achats
+                  </a>
+
+                  <button type="button" class="d-inline-flex align-items-center btn rounded me-2 mb-2 me-sm-3" id="btn-print">
+                    <i class="me-2 icon an an-print"></i>Imprimer
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!--End Order Summary-->
+          </div>
+        </div>
+        <!--End Main Content-->
+      </div>
+      <!--End Body Container-->
+
+      <!--Footer-->
+      <include src="../src/partials/footer.html"></include>
+      <!--End Footer-->
+
+      <!--Scoll Top-->
+      <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+      <!--End Scoll Top-->
+
+      <!--MiniCart Drawer-->
+      <include src="../src/partials/minicart-drawer.html"></include>
+      <!--End MiniCart Drawer-->
+      <div class="modalOverly"></div>
+
+      <!-- Including Jquery -->
+      <!--Including Javascript-->
+      <include src="../src/partials/scripts.html"></include>
+
+      <!-- Page script (ES module) -->
+      <script type="module">
+        import { CONFIG } from "./assets/js/config.js";
+        import { isAuthenticated, getIdToken, setNextUrl } from "./assets/js/auth_social_cognito.js";
+
+        function joinUrl(base, path) {
+          return `${String(base).replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
+        }
+
+        function getOrderCodeFromUrl() {
+          try {
+            const u = new URL(window.location.href);
+            return u.searchParams.get("code") || "";
+          } catch {
+            return "";
+          }
+        }
+
+        function formatMoneyEUR(value) {
+          if (value == null || Number.isNaN(Number(value))) return "—";
+          return new Intl.NumberFormat(CONFIG.LOCALE || "fr-FR", {
+            style: "currency",
+            currency: CONFIG.CURRENCY || "EUR",
+          }).format(Number(value));
+        }
+
+        function formatDateFr(iso) {
+          if (!iso) return "—";
+          const d = new Date(iso);
+          if (Number.isNaN(d.getTime())) return iso;
+          return d.toLocaleString(CONFIG.LOCALE || "fr-FR");
+        }
+
+        async function getJson(url, token) {
+          const res = await fetch(url, {
+            method: "GET",
+            headers: {
+              ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            },
+          });
+
+          const text = await res.text().catch(() => "");
+          let json = null;
+          try {
+            json = text ? JSON.parse(text) : null;
+          } catch {
+            json = null;
+          }
+
+          if (!res.ok) {
+            const msg = json?.error || json?.message || text || `${res.status} ${res.statusText}`;
+            const err = new Error(msg);
+            err.status = res.status;
+            err.body = json || text;
+            throw err;
+          }
+
+          return json;
+        }
+
+        function show(el, visible) {
+          if (!el) return;
+          el.style.display = visible ? "" : "none";
+        }
+
+        function setText(id, value) {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value ?? "";
+        }
+
+        function setHtml(el, html) {
+          if (!el) return;
+          el.innerHTML = html;
+        }
+
+        function renderLines(lines) {
+          const tbody = document.getElementById("order-lines");
+          if (!tbody) return;
+
+          if (!Array.isArray(lines) || lines.length === 0) {
+            setHtml(
+              tbody,
+              `<tr><td class="text-start" colspan="4" style="opacity:.7;">Aucun article trouvé dans cette commande.</td></tr>`
+            );
+            return;
+          }
+
+          const rows = lines
+            .map((l) => {
+              const name = l.nom_produit || l.code_produit || "Produit";
+              const qty = Number(l.quantite) || 1;
+              const pu = Number(l.prix_unitaire) || 0;
+              const st = Number(l.montant_ligne) || pu * qty;
+
+              return `
+                <tr>
+                  <td class="text-start">
+                    <div class="fw-600">${name}</div>
+                    <div class="small text-muted">Réf: ${l.code_produit || "—"}</div>
+                  </td>
+                  <td>${qty}</td>
+                  <td>${formatMoneyEUR(pu)}</td>
+                  <td class="fw-500">${formatMoneyEUR(st)}</td>
+                </tr>
+              `;
+            })
+            .join("");
+
+          setHtml(tbody, rows);
+        }
+
+        function showError(message) {
+          show(document.getElementById("order-loading"), false);
+          show(document.getElementById("order-error"), true);
+          show(document.getElementById("order-generic-ok"), true);
+          setText("order-error-msg", message || "Erreur inconnue.");
+
+          // Préparer le bouton login pour revenir ici ensuite
+          const code = getOrderCodeFromUrl();
+          const loginLink = document.getElementById("login-link");
+          if (loginLink) {
+            // après login, Cognito callback redirige vers K.next
+            setNextUrl(window.location.href);
+            loginLink.href = "login.html";
+          }
+
+          // Si on a quand même un code, on l'affiche dans le badge
+          if (code) {
+            setText("order-code", code);
+            show(document.getElementById("order-code-badge"), true);
+          }
+        }
+
+        async function main() {
+          const code = getOrderCodeFromUrl();
+
+          // Bouton imprimer
+          const btnPrint = document.getElementById("btn-print");
+          if (btnPrint && !btnPrint.dataset.bound) {
+            btnPrint.dataset.bound = "1";
+            btnPrint.addEventListener("click", () => window.print());
+          }
+
+          if (!code) {
+            // Pas de code => page générique
+            showError("Aucun numéro de commande trouvé dans l’URL. (Paramètre attendu: ?code=...)");
+            return;
+          }
+
+          // Afficher au moins le code
+          setText("order-code", code);
+          show(document.getElementById("order-code-badge"), true);
+
+          // Si non connecté => on explique (car l’endpoint GET /orders/{code} est protégé)
+          if (!isAuthenticated()) {
+            showError("Connectez-vous pour afficher le détail de votre commande.");
+            return;
+          }
+
+          // Charger la commande
+          show(document.getElementById("order-error"), false);
+          show(document.getElementById("order-generic-ok"), false);
+          show(document.getElementById("order-loading"), true);
+
+          try {
+            const token = getIdToken();
+            const url = joinUrl(CONFIG.API_BASE_URL, `/orders/${encodeURIComponent(code)}`);
+
+            const order = await getJson(url, token);
+
+            show(document.getElementById("order-loading"), false);
+
+            // En-tête
+            show(document.getElementById("order-date-line"), true);
+            setText("order-date", formatDateFr(order?.date_commande));
+            setText("order-total", formatMoneyEUR(order?.total));
+
+            // Lignes
+            renderLines(order?.lignes || []);
+
+            // Messages
+            setText("success-subtitle", "Votre commande a bien été enregistrée.");
+            setText("success-detail", "Merci ! Vous pouvez retrouver le détail ci-dessous.");
+
+          } catch (err) {
+            console.error(err);
+            showError(err?.message || "Impossible de récupérer la commande.");
+          }
+        }
+
+        main();
+      </script>
+    </div>
+    <!--End Page Wrapper-->
+  </body>
+</html>
