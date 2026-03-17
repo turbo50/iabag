@@ -1,0 +1,312 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: iabag backend — produits, avis, commandes
+
+# ─────────────────────────────────────────────
+# Parameters
+# ─────────────────────────────────────────────
+Parameters:
+  CognitoUserPoolId:
+    Type: String
+    Description: ID du User Pool Cognito (ex. eu-west-3_XXXXXXXXX)
+  CognitoUserPoolClientId:
+    Type: String
+    Description: ID du Client Cognito (App Client ID)
+  StageName:
+    Type: String
+    Default: prod
+    Description: Nom du stage API Gateway
+
+# ─────────────────────────────────────────────
+# Globals
+# ─────────────────────────────────────────────
+Globals:
+  Function:
+    Runtime: nodejs20.x
+    Architectures: [arm64]
+    MemorySize: 256
+    Timeout: 10
+    Environment:
+      Variables:
+        TABLE_PRODUIT: iabag_produit
+        TABLE_CLIENT: iabag_client
+        TABLE_AVIS: iabag_avis
+        TABLE_COMMANDE: iabag_commande
+        REGION: !Ref AWS::Region
+
+# ─────────────────────────────────────────────
+# Resources
+# ─────────────────────────────────────────────
+Resources:
+
+  # ── HTTP API ──────────────────────────────
+  IabagHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref StageName
+      CorsConfiguration:
+        AllowMethods: ["GET", "POST", "OPTIONS"]
+        AllowHeaders: ["Content-Type", "Authorization"]
+        AllowOrigins: ["*"]
+        MaxAge: 300
+      Auth:
+        Authorizers:
+          CognitoJwtAuthorizer:
+            JwtConfiguration:
+              issuer: !Sub "https://cognito-idp.${AWS::Region}.amazonaws.com/${CognitoUserPoolId}"
+              audience:
+                - !Ref CognitoUserPoolClientId
+            IdentitySource: "$request.header.Authorization"
+        DefaultAuthorizer: NONE
+
+  # ── DynamoDB Tables ───────────────────────
+  ProduitTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_produit
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: code_produit
+          AttributeType: S
+        - AttributeName: sku
+          AttributeType: S
+      KeySchema:
+        - AttributeName: code_produit
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: sku-index
+          KeySchema:
+            - AttributeName: sku
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+
+  ClientTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_client
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: code_client
+          AttributeType: S
+      KeySchema:
+        - AttributeName: code_client
+          KeyType: HASH
+
+  AvisTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_avis
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: code_produit
+          AttributeType: S
+        - AttributeName: review_key
+          AttributeType: S
+      KeySchema:
+        - AttributeName: code_produit
+          KeyType: HASH
+        - AttributeName: review_key
+          KeyType: RANGE
+
+  CommandeTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_commande
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: code_commande
+          AttributeType: S
+        - AttributeName: code_client
+          AttributeType: S
+        - AttributeName: date_commande
+          AttributeType: S
+      KeySchema:
+        - AttributeName: code_commande
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: client-date-index
+          KeySchema:
+            - AttributeName: code_client
+              KeyType: HASH
+            - AttributeName: date_commande
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+
+  # ── IAM Policy (shared) ──────────────────
+  DynamoPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - dynamodb:GetItem
+              - dynamodb:PutItem
+              - dynamodb:UpdateItem
+              - dynamodb:DeleteItem
+              - dynamodb:Query
+              - dynamodb:Scan
+            Resource:
+              - !GetAtt ProduitTable.Arn
+              - !Sub "${ProduitTable.Arn}/index/*"
+              - !GetAtt ClientTable.Arn
+              - !GetAtt AvisTable.Arn
+              - !GetAtt CommandeTable.Arn
+              - !Sub "${CommandeTable.Arn}/index/*"
+
+  # ── Lambda Functions ──────────────────────
+
+  # GET /products
+  GetListProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-list-product
+      CodeUri: src/functions/
+      Handler: products_get_list.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /products
+
+  # GET /products/{code}
+  GetProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-product
+      CodeUri: src/functions/
+      Handler: products_get_one.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /products/{code}
+
+  # GET /products/sku/{sku}
+  GetProductBySkuFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-product-by-sku
+      CodeUri: src/functions/
+      Handler: products_get_by_sku.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /products/sku/{sku}
+
+  # GET /products/{code}/reviews
+  GetReviewsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-reviews
+      CodeUri: src/functions/
+      Handler: reviews_get_list.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /products/{code}/reviews
+
+  # POST /products/{code}/reviews  (protected)
+  PutReviewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-put-review
+      CodeUri: src/functions/
+      Handler: reviews_put.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: POST
+            Path: /products/{code}/reviews
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+
+  # POST /orders  (protected)
+  CreateOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-create-order
+      CodeUri: src/functions/
+      Handler: orders_create.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: POST
+            Path: /orders
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+
+  # GET /clients/me/orders  (protected)
+  ListMyOrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-list-my-orders
+      CodeUri: src/functions/
+      Handler: orders_list_my.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /clients/me/orders
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+
+  # GET /orders/{code}  (protected)
+  GetOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-order
+      CodeUri: src/functions/
+      Handler: orders_get_one.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /orders/{code}
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+
+# ─────────────────────────────────────────────
+# Outputs
+# ─────────────────────────────────────────────
+Outputs:
+  ApiBaseUrl:
+    Description: "URL de base de l'API (à mettre dans assets/js/config.js)"
+    Value: !Sub "https://${IabagHttpApi}.execute-api.${AWS::Region}.amazonaws.com/${StageName}"
