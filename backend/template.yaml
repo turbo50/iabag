@@ -57,7 +57,7 @@ Resources:
               audience:
                 - !Ref CognitoUserPoolClientId
             IdentitySource: "$request.header.Authorization"
-        DefaultAuthorizer: NONE
+        
 
   # ── DynamoDB Tables ───────────────────────
   ProduitTable:

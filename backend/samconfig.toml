@@ -1,0 +1,12 @@
+version = 0.1
+
+[dev.deploy.parameters]
+stack_name = "iabag-app"
+resolve_s3 = true
+s3_prefix = "iabag-app"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "CognitoUserPoolId=\"eu-west-3_AJUivW7KE\" CognitoUserPoolClientId=\"5r39n9eqr2qj3j9sqqkku7tl7c\" StageName=\"dev\""
+image_repositories = []
+
+[dev.global.parameters]
+region = "eu-west-3"
