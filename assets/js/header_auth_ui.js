@@ -24,6 +24,9 @@ export function updateHeaderAuthUI() {
 
   // ✅ AJOUT: item "Mes commandes"
   const ordersItem = document.getElementById("nav-orders-item");
+  // ✅ AJOUT: item "Mes favoris"
+  const wishListItem = document.getElementById("nav-wishlist-item");
+  
 
   // header pas présent sur toutes pages ? => on sort sans erreur
   if (!welcomeBox || !welcomeName) return;
@@ -35,6 +38,8 @@ export function updateHeaderAuthUI() {
 
   // ✅ AJOUT: cacher "Mes commandes" par défaut (évite flash)
   if (ordersItem) ordersItem.style.display = "none";
+  // ✅ AJOUT: cacher "Mes favoris" par défaut (évite flash)
+  if (wishListItem) wishListItem.style.display = "none";
 
   // bind logout (une seule fois)
   if (logoutLink && !logoutLink.dataset.bound) {
@@ -61,6 +66,8 @@ export function updateHeaderAuthUI() {
 
     // ✅ AJOUT: cacher Mes commandes
     if (ordersItem) ordersItem.style.display = "none";
+    // ✅ AJOUT: cacher Mes favoris
+    if (wishListItem) wishListItem.style.display = "none";
 
     return;
   }
@@ -90,6 +97,7 @@ export function updateHeaderAuthUI() {
 
   // ✅ AJOUT: afficher Mes commandes
   if (ordersItem) ordersItem.style.display = "";
+  if (wishListItem) wishListItem.style.display = "";
 
   // stocker l'identifiant utilisateur pour lier les commandes
   if (user?.sub) sessionStorage.setItem(SESSION_CUSTOMER_ID_KEY, String(user.sub));

@@ -23,11 +23,18 @@
 <link rel="stylesheet" href="assets/css/minicart-fix.css">
 
 
+
+        <!-- Aides UX (optionnel) -->
+        <style>
+            .wishlist-empty { padding: 2rem 0; text-align: center; }
+            .wishlist-empty .btn { margin-top: .75rem; }
+            .wishlist-loading { padding: 1.5rem 0; text-align:center; opacity:.8; }
+        </style>
     </head>
 
     <body class="my-wishlist-page">
         <!-- Page Loader -->
-        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..."></div>
+        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Chargement..."></div>
         <!-- End Page Loader -->
 
         <!--Page Wrapper-->
@@ -227,14 +234,16 @@
 <!--End Mobile Menu-->
 
             <!--Body Container-->
-            <div id="page-content">   
+            <div id="page-content">
                 <!--Collection Banner-->
                 <div class="collection-header">
                     <div class="collection-hero">
                         <div class="collection-hero__image"></div>
                         <div class="collection-hero__title-wrapper container">
-                            <h1 class="collection-hero__title">Ma liste</h1>
-                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2"><a href="index.html" title="Back to the home page">Accueil</a><span>|</span><span class="fw-bold">Ma liste</span></div>
+                            <h1 class="collection-hero__title">Mes favoris</h1>
+                            <div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
+                                <a href="index.html" title="Retour à l’accueil">Accueil</a><span>|</span><span class="fw-bold">Mes favoris</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -242,66 +251,40 @@
 
                 <!--Main Content-->
                 <div class="container">
-                    <!--Wishlist-->
-                    <form action="#" method="post">
+                    <!--Favoris-->
+                    <form action="#" method="post" onsubmit="return false;">
                         <div class="wishlist-table table-content text-nowrap table-responsive py-2">
                             <table class="table table-bordered align-middle">
                                 <thead class="bg-light thead-bg">
                                     <tr>
-                                        <th class="product-name text-center alt-font">Remove</th>
-                                        <th class="product-price text-center alt-font">Images</th>
-                                        <th class="product-name alt-font">Product</th>
-                                        <th class="product-price text-center alt-font">Unit Price</th>
-                                        <th class="stock-status text-center alt-font">Stock Status</th>
-                                        <th class="product-subtotal text-center alt-font">Add to Cart</th>
+                                        <th class="product-name text-center alt-font">Supprimer</th>
+                                        <th class="product-price text-center alt-font">Image</th>
+                                        <th class="product-name alt-font">Produit</th>
+                                        <th class="product-price text-center alt-font">Prix unitaire</th>
+                                        <th class="stock-status text-center alt-font">Stock</th>
+                                        <th class="product-subtotal text-center alt-font">Ajouter au panier</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+
+                                <!-- Rempli dynamiquement -->
+                                <tbody id="wishlist-tbody">
                                     <tr>
-                                        <td class="product-remove text-center"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon icon an an-times-l"></i></a></td>
-                                        <td class="product-thumbnail text-center">
-                                            <a href="product-detail.html"><img src="assets/images/products/100x120.jpg" width="100" alt="" title=""></a>
+                                        <td colspan="6" class="text-center py-4">
+                                            Veuillez activer JavaScript pour afficher vos favoris.
                                         </td>
-                                        <td class="product-name"><h6 class="mb-0"><a href="product-detail.html">Minerva Dress black</a></h6></td>
-                                        <td class="product-price text-center"><span class="amount fw-500">$165.00</span></td>
-                                        <td class="stock text-center"><span class="text-in-stock">in stock</span></td>
-                                        <td class="product-subtotal text-center"><a href="cart-style1.html" class="btn btn-small rounded-1 text-nowrap">Add To Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-remove text-center"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon icon an an-times-l"></i></a></td>
-                                        <td class="product-thumbnail text-center">
-                                            <a href="product-detail.html"><img src="assets/images/products/100x120.jpg" width="100" alt="" title=""></a>
-                                        </td>
-                                        <td class="product-name"><h6 class="mb-0"><a href="product-detail.html">Sueded Cotton Pant in Khaki</a></h6></td>
-                                        <td class="product-price text-center"><span class="amount fw-500">$150.00</span></td>
-                                        <td class="stock text-center"><span class="text-out-stock">Out Of stock</span></td>
-                                        <td class="product-subtotal text-center"><a href="cart-style1.html" class="btn btn-small rounded-1 text-nowrap soldOutBtn disabled">Out Of stock</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-remove text-center"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon icon an an-times-l"></i></a></td>
-                                        <td class="product-thumbnail text-center">
-                                            <a href="product-detail.html"><img src="assets/images/products/100x120.jpg" width="100" alt="" title=""></a>
-                                        </td>
-                                        <td class="product-name"><h6 class="mb-0"><a href="product-detail.html">Woven Solid Midi Shirt Dress</a></h6></td>
-                                        <td class="product-price text-center"><span class="amount fw-500">$150.00</span></td>
-                                        <td class="stock text-center"><span class="text-in-stock">in stock</span></td>
-                                        <td class="product-subtotal text-center"><a href="cart-style1.html" class="btn btn-small rounded-1 text-nowrap">Add To Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product-remove text-center"><a href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"><i class="icon icon an an-times-l"></i></a></td>
-                                        <td class="product-thumbnail text-center">
-                                            <a href="product-detail.html"><img src="assets/images/products/100x120.jpg" width="100" alt="" title=""></a>
-                                        </td>
-                                        <td class="product-name"><h6 class="mb-0"><a href="product-detail.html">Woven Solid Midi Shirt Dress</a></h6></td>
-                                        <td class="product-price text-center"><span class="amount fw-500">$99.00</span></td>
-                                        <td class="stock text-center"><span class="text-in-stock">in stock</span></td>
-                                        <td class="product-subtotal text-center"><a href="cart-style1.html" class="btn btn-small rounded-1 text-nowrap">Add To Cart</a></td>
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <!-- états -->
+                            <div id="wishlist-loading" class="wishlist-loading d-none">Chargement de vos favoris…</div>
+                            <div id="wishlist-empty" class="wishlist-empty d-none">
+                                <div class="h6 mb-2">Vous n’avez aucun favori pour le moment.</div>
+                                <a href="index.html" class="btn btn-primary btn-sm rounded-1">Découvrir les produits</a>
+                            </div>
                         </div>
-                    </form> 
-                    <!--End Wishlist-->
+                    </form>
+                    <!--End Favoris-->
                 </div>
                 <!--End Main Content-->
             </div>
@@ -397,88 +380,110 @@
             <!--End Scoll Top-->
 
             <!--MiniCart Drawer-->
-            <div class="minicart-right-drawer modal right fade" id="minicart-drawer">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div id="cart-drawer" class="block block-cart">
-                            <div class="minicart-header">
-                                <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Close"><i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Close"></i></a>
-                                <h4 class="fs-6">Your cart (2 Items)</h4>
-                            </div>
-                            <div class="minicart-content">
-                                <ul class="clearfix">
-                                    <li class="item d-flex justify-content-center align-items-center">
-                                        <a class="product-image" href="product-detail.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
-                                        </a>
-                                        <div class="product-details">
-                                            <a class="product-title" href="product-detail.html">Floral Crop Top</a>
-                                            <div class="variant-cart">Black / XL</div>
-                                            <div class="priceRow">
-                                                <div class="product-price">
-                                                    <span class="money">$59.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="qtyDetail text-center">
-                                            <div class="wrapQtyBtn">
-                                                <div class="qtyField">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
-                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
-                                        </div>
-                                    </li>
-                                    <li class="item d-flex justify-content-center align-items-center">
-                                        <a class="product-image" href="product-detail.html">
-                                            <img class="blur-up lazyload" src="assets/images/products/cart-product-img1.jpg" data-src="assets/images/products/cart-product-img1.jpg" alt="image" title="">
-                                        </a>
-                                        <div class="product-details">
-                                            <a class="product-title" href="product-detail.html">V Neck T-shirts</a>
-                                            <div class="variant-cart">Blue / XL</div>
-                                            <div class="priceRow">
-                                                <div class="product-price">
-                                                    <span class="money">$199.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="qtyDetail text-center">
-                                            <div class="wrapQtyBtn">
-                                                <div class="qtyField">
-                                                    <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon an an-minus-r" aria-hidden="true"></i></a>
-                                                    <input type="text" name="quantity" value="1" class="qty">
-                                                    <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon an an-plus-l" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                            <a href="#" class="edit-i remove"><i class="icon an an-edit-l" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"></i></a>
-                                            <a href="#" class="remove"><i class="an an-times-r" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove"></i></a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="minicart-bottom">
-                                <div class="shipinfo text-center mb-3 text-uppercase">
-                                    <p class="freeShipMsg"><i class="an an-truck fs-5 me-2 align-middle"></i>SPENT <b>$199.00</b> MORE FOR FREE SHIPPING</p>
-                                </div>
-                                <div class="subtotal">
-                                    <span>Total:</span>
-                                    <span class="product-price">$93.13</span>
-                                </div>
-                                <a href="checkout-style1.html" class="w-100 p-2 my-2 btn btn-outline-primary proceed-to-checkout rounded">Proceed to Checkout</a>
-                                <a href="cart-style1.html" class="w-100 btn-primary cart-btn rounded">View Cart</a>
-                            </div>
-                        </div>
-                    </div>
+                <!--MiniCart Drawer-->
+<div class="minicart-right-drawer modal right fade" id="minicart-drawer" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div id="cart-drawer" class="block block-cart">
+
+        <div class="minicart-header">
+          <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
+            <i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Fermer"></i>
+          </a>
+
+          <h4 class="fs-6 text-black">
+            Votre panier (<span id="minicart-count">0</span>)
+          </h4>
+        </div>
+
+        <div class="minicart-content">
+          <!-- LISTE RENDUE PAR cart_ui.js -->
+          <ul id="minicart-items" class="m-0 clearfix" aria-live="polite" aria-busy="false"></ul>
+
+          <!-- TEMPLATE UTILISÉ PAR cart_ui.js -->
+          <template id="minicart-item-tpl">
+            <li class="item d-flex align-items-start" data-line-id="">
+              <a class="product-image" href="">
+                <img class="blur-up lazyload" src="" data-src="" alt="" title="">
+              </a>
+
+              <div class="product-details">
+                <a class="product-title" href=""></a>
+                <div class="variant-cart my-1"></div>
+                <div class="priceRow">
+                  <div class="product-price">
+                    <span class="money"></span>
+                  </div>
                 </div>
-            </div>
+              </div>
+
+              <div class="qtyDetail text-center ms-auto">
+                <div class="wrapQtyBtn">
+                  <div class="qtyField">
+                    <!-- IMPORTANT: data-action pour ton JS -->
+                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">
+                      <i class="icon an an-minus-r" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- IMPORTANT: input.qty pour ton JS -->
+                    <input type="number" min="1" value="1" class="qty rounded-0">
+
+                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">
+                      <i class="icon an an-plus-l" aria-hidden="true"></i>
+                    </button>
+                  </div>
+
+                  <!-- IMPORTANT: data-action remove pour ton JS -->
+                  <button type="button" class="remove btn btn-link p-0" data-action="remove" aria-label="Supprimer">
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+            </li>
+          </template>
+
+          <!-- Etat vide, géré par cart_ui.js -->
+          <div id="minicart-empty" style="display:none;" class="py-4 text-center">
+            <p class="mb-3">Votre panier est vide.</p>
+            <a href="index.html" class="btn btn-outline-dark">Continuer mes achats</a>
+          </div>
+        </div>
+
+        <!-- Bottom du thème, mais connecté au subtotal dynamique -->
+        <div class="minicart-bottom text-black">
+          <div class="shipinfo text-center mb-3 text-uppercase">
+            <p class="freeShipMsg">
+              <i class="an an-truck fs-5 me-2 align-middle"></i>
+              Livraison offerte selon conditions.
+            </p>
+          </div>
+
+          <div class="subtotal">
+            <span>Sous-total :</span>
+            <span class="product-price" id="minicart-subtotal">0,00 €</span>
+          </div>
+
+          <!-- (Optionnel) tu peux garder ou retirer cette case -->
+          <div class="agree-check customCheckbox clearfix">
+            <input id="prTearm" name="tearm" type="checkbox" value="tearm">
+            <label for="prTearm"> J’accepte les conditions générales</label>
+          </div>
+
+          <!-- Commander (hook JS) -->
+          <button type="button" class="w-100 px-2 py-2 lh-base my-2 btn btn-outline-primary proceed-to-checkout" data-minicart-checkout="">
+            Commander
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--End MiniCart Drawer-->
             <!--End MiniCart Drawer-->
+            
             <div class="modalOverly"></div>
 
-
-            <!-- Including Jquery -->
             <!--Including Javascript-->
             <!-- Including Jquery -->
 <script src="assets/js/vendor/jquery-min.js"></script>
@@ -491,6 +496,237 @@
 <script type="module" src="assets/js/cart_ui.js"></script>
 <script type="module" src="assets/js/header_auth_ui.js"></script>
 
+
+            <!-- Favoris logic (module) -->
+            <script type="module">
+                import { CONFIG } from "./assets/js/config.js";
+                import { AUTH_STORAGE_KEYS } from "./assets/js/auth_storage_keys.js";
+
+                const API_BASE_URL = CONFIG?.API_BASE_URL;
+
+                const $ = (sel) => document.querySelector(sel);
+
+                function show(el, on) {
+                    if (!el) return;
+                    el.classList.toggle("d-none", !on);
+                }
+
+                function safeJsonParse(s) {
+                    if (!s) return null;
+                    try { return JSON.parse(s); } catch { return null; }
+                }
+
+                function getStoredTokens() {
+                    return safeJsonParse(localStorage.getItem(AUTH_STORAGE_KEYS.tokens));
+                }
+
+                function pickJwt(tokensObj) {
+                    if (!tokensObj) return null;
+
+                    // OAuth classique
+                    if (typeof tokensObj.access_token === "string" && tokensObj.access_token.length > 20) return tokensObj.access_token;
+                    if (typeof tokensObj.id_token === "string" && tokensObj.id_token.length > 20) return tokensObj.id_token;
+
+                    // Formats alternatifs
+                    if (typeof tokensObj.tokens?.accessToken === "string") return tokensObj.tokens.accessToken;
+                    if (typeof tokensObj.tokens?.idToken === "string") return tokensObj.tokens.idToken;
+
+                    if (typeof tokensObj.accessToken === "string") return tokensObj.accessToken;
+                    if (typeof tokensObj.idToken === "string") return tokensObj.idToken;
+
+                    return null;
+                }
+
+                function getAuthHeaderValue() {
+                    const tokens = getStoredTokens();
+                    const jwt = pickJwt(tokens);
+                    if (!jwt) return null;
+                    return jwt.startsWith("Bearer ") ? jwt : `Bearer ${jwt}`;
+                }
+
+                function ensureConfigured() {
+                    if (!API_BASE_URL) {
+                        throw new Error("CONFIG.API_BASE_URL est vide (assets/js/config.js).");
+                    }
+                }
+
+                async function apiFetch(path, opts = {}) {
+                    ensureConfigured();
+
+                    const auth = getAuthHeaderValue();
+                    if (!auth) {
+                        // Mémorise la page de retour (si votre flow l'utilise)
+                        try { localStorage.setItem(AUTH_STORAGE_KEYS.next, "my-wishlist.html"); } catch {}
+                        throw new Error("Non authentifié : jeton manquant. Veuillez vous connecter pour consulter vos favoris.");
+                    }
+
+                    const url = API_BASE_URL.replace(/\/$/, "") + path;
+
+                    const res = await fetch(url, {
+                        ...opts,
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": auth,
+                            ...(opts.headers || {}),
+                        },
+                    });
+
+                    const text = await res.text();
+                    let data = null;
+                    try { data = text ? JSON.parse(text) : null; } catch { data = { raw: text }; }
+
+                    if (!res.ok) {
+                        const msg = data?.error || data?.message || `Erreur HTTP ${res.status}`;
+                        const err = new Error(msg);
+                        err.status = res.status;
+                        err.data = data;
+                        throw err;
+                    }
+
+                    return data;
+                }
+
+                /**
+                 * NOTE :
+                 * Le backend renvoie actuellement des items de table :
+                 * { code_client, code_produit, created_at? }
+                 * Les colonnes Image / Prix / Stock restent donc en "—" (placeholders),
+                 * jusqu'à ce que vous décidiez d'hydrater via GET /products/{code}
+                 * ou un endpoint batch.
+                 */
+
+                function renderRows(items) {
+                    const tbody = $("#wishlist-tbody");
+                    if (!tbody) return;
+
+                    if (!items.length) {
+                        tbody.innerHTML = "";
+                        return;
+                    }
+
+                    tbody.innerHTML = items.map((it) => {
+                        const codeProduit = it.code_produit ?? it.code ?? "";
+                        const safeCode = escapeHtml(String(codeProduit));
+                        const productUrl = `product-detail.html?code=${encodeURIComponent(codeProduit)}`;
+
+                        return `
+                            <tr data-code="${safeCode}">
+                                <td class="product-remove text-center">
+                                    <a href="#" class="js-wishlist-remove" data-code="${safeCode}" data-bs-toggle="tooltip" data-bs-placement="top" title="Supprimer">
+                                        <i class="icon icon an an-times-l"></i>
+                                    </a>
+                                </td>
+
+                                <td class="product-thumbnail text-center">
+                                    <a href="${productUrl}">
+                                        <img src="assets/images/products/100x120.jpg" width="100" alt="" title="">
+                                    </a>
+                                </td>
+
+                                <td class="product-name">
+                                    <h6 class="mb-0">
+                                        <a href="${productUrl}">${safeCode}</a>
+                                    </h6>
+                                    ${it.created_at ? `<div class="small text-muted mt-1">${escapeHtml(it.created_at)}</div>` : ``}
+                                </td>
+
+                                <td class="product-price text-center">
+                                    <span class="amount fw-500">—</span>
+                                </td>
+
+                                <td class="stock text-center">
+                                    <span class="text-in-stock">—</span>
+                                </td>
+
+                                <td class="product-subtotal text-center">
+                                    <a href="cart-style1.html" class="btn btn-small rounded-1 text-nowrap">
+                                        Ajouter au panier
+                                    </a>
+                                </td>
+                            </tr>
+                        `;
+                    }).join("");
+                }
+
+                function escapeHtml(s) {
+                    return s
+                        .replaceAll("&", "&amp;")
+                        .replaceAll("<", "&lt;")
+                        .replaceAll(">", "&gt;")
+                        .replaceAll('"', "&quot;")
+                        .replaceAll("'", "&#039;");
+                }
+
+                async function loadFavorites() {
+                    const loadingEl = $("#wishlist-loading");
+                    const emptyEl = $("#wishlist-empty");
+                    const tbody = $("#wishlist-tbody");
+
+                    show(loadingEl, true);
+                    show(emptyEl, false);
+
+                    try {
+                        if (tbody) tbody.innerHTML = "";
+
+                        const data = await apiFetch("/clients/me/wishlist", { method: "GET" });
+                        const items = data?.items || [];
+
+                        if (!items.length) {
+                            renderRows([]);
+                            show(emptyEl, true);
+                            return;
+                        }
+
+                        renderRows(items);
+                        wireRemoveHandlers();
+                    } catch (err) {
+                        if (tbody) {
+                            tbody.innerHTML = `
+                                <tr>
+                                    <td colspan="6" class="text-center py-4 text-danger">
+                                        ${escapeHtml(err.message || "Une erreur est survenue lors du chargement de vos favoris.")}
+                                    </td>
+                                </tr>
+                            `;
+                        }
+                    } finally {
+                        show(loadingEl, false);
+                    }
+                }
+
+                async function removeItem(codeProduit) {
+                    await apiFetch(`/clients/me/wishlist/${encodeURIComponent(codeProduit)}`, { method: "DELETE" });
+                }
+
+                function wireRemoveHandlers() {
+                    document.querySelectorAll(".js-wishlist-remove").forEach((a) => {
+                        a.addEventListener("click", async (e) => {
+                            e.preventDefault();
+                            const code = e.currentTarget.getAttribute("data-code");
+                            if (!code) return;
+
+                            e.currentTarget.classList.add("disabled");
+                            try {
+                                await removeItem(code);
+
+                                const tr = document.querySelector(`tr[data-code="${CSS.escape(code)}"]`);
+                                if (tr) tr.remove();
+
+                                const tbody = $("#wishlist-tbody");
+                                const emptyEl = $("#wishlist-empty");
+                                const stillHasRows = tbody && tbody.querySelectorAll("tr").length > 0;
+                                show(emptyEl, !stillHasRows);
+                            } catch (err) {
+                                alert(err.message || "Une erreur est survenue lors de la suppression de ce favori.");
+                                e.currentTarget.classList.remove("disabled");
+                            }
+                        });
+                    });
+                }
+
+                // Chargement auto
+                loadFavorites();
+            </script>
 
         </div>
         <!--End Page Wrapper-->
