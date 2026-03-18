@@ -5,12 +5,14 @@ Parameters:
   CognitoUserPoolId:
     Type: String
     Description: ID du User Pool Cognito (ex. eu-west-3_XXXXXXXXX)
+    Default: eu-west-3_AJUivW7KE
   CognitoUserPoolClientId:
     Type: String
     Description: ID du Client Cognito (App Client ID)
+    Default: 5r39n9eqr2qj3j9sqqkku7tl7c
   StageName:
     Type: String
-    Default: prod
+    Default: dev
     Description: Nom du stage API Gateway
 Globals:
   Function:
@@ -25,6 +27,7 @@ Globals:
         TABLE_CLIENT: iabag_client
         TABLE_AVIS: iabag_avis
         TABLE_COMMANDE: iabag_commande
+        TABLE_WISHLIST: iabag_wishlist
         REGION:
           Ref: AWS::Region
 Resources:
@@ -37,6 +40,7 @@ Resources:
         AllowMethods:
         - GET
         - POST
+        - DELETE
         - OPTIONS
         AllowHeaders:
         - Content-Type
@@ -123,6 +127,21 @@ Resources:
           KeyType: RANGE
         Projection:
           ProjectionType: ALL
+  WishlistTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_wishlist
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+      - AttributeName: code_client
+        AttributeType: S
+      - AttributeName: code_produit
+        AttributeType: S
+      KeySchema:
+      - AttributeName: code_client
+        KeyType: HASH
+      - AttributeName: code_produit
+        KeyType: RANGE
   DynamoPolicy:
     Type: AWS::IAM::ManagedPolicy
     Properties:
@@ -152,6 +171,9 @@ Resources:
             - CommandeTable
             - Arn
           - Fn::Sub: ${CommandeTable.Arn}/index/*
+          - Fn::GetAtt:
+            - WishlistTable
+            - Arn
   GetListProductFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -304,6 +326,84 @@ Resources:
               Authorizer: CognitoJwtAuthorizer
     Metadata:
       SamResourceId: GetOrderFunction
+  WishlistListMyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-wishlist-list-my
+      CodeUri: WishlistListMyFunction
+      Handler: functions/wishlist_get_list.handler
+      Policies:
+      - Ref: DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId:
+              Ref: IabagHttpApi
+            Method: GET
+            Path: /clients/me/wishlist
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+    Metadata:
+      SamResourceId: WishlistListMyFunction
+  WishlistPutFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-wishlist-put
+      CodeUri: WishlistPutFunction
+      Handler: functions/wishlist_put.handler
+      Policies:
+      - Ref: DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId:
+              Ref: IabagHttpApi
+            Method: POST
+            Path: /clients/me/wishlist
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+    Metadata:
+      SamResourceId: WishlistPutFunction
+  WishlistDeleteFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-wishlist-delete
+      CodeUri: WishlistDeleteFunction
+      Handler: functions/wishlist_delete.handler
+      Policies:
+      - Ref: DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId:
+              Ref: IabagHttpApi
+            Method: DELETE
+            Path: /clients/me/wishlist/{code}
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+    Metadata:
+      SamResourceId: WishlistDeleteFunction
+  GetProductsBatchFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-products-batch
+      CodeUri: GetProductsBatchFunction
+      Handler: functions/products_get_batch.handler
+      Policies:
+      - Ref: DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId:
+              Ref: IabagHttpApi
+            Method: POST
+            Path: /products/batch
+    Metadata:
+      SamResourceId: GetProductsBatchFunction
 Outputs:
   ApiBaseUrl:
     Description: "URL de base de l'API (\xE0 mettre dans assets/js/config.js)"

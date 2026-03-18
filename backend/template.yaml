@@ -9,9 +9,11 @@ Parameters:
   CognitoUserPoolId:
     Type: String
     Description: ID du User Pool Cognito (ex. eu-west-3_XXXXXXXXX)
+    Default: eu-west-3_AJUivW7KE
   CognitoUserPoolClientId:
     Type: String
     Description: ID du Client Cognito (App Client ID)
+    Default: 5r39n9eqr2qj3j9sqqkku7tl7c
   StageName:
     Type: String
     Default: dev
@@ -181,8 +183,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-list-product
-      CodeUri: src/functions/
-      Handler: products_get_list.handler
+      CodeUri: src/
+      Handler: functions/products_get_list.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -198,8 +200,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-product
-      CodeUri: src/functions/
-      Handler: products_get_one.handler
+      CodeUri: src/
+      Handler: functions/products_get_one.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -215,8 +217,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-product-by-sku
-      CodeUri: src/functions/
-      Handler: products_get_by_sku.handler
+      CodeUri: src/
+      Handler: functions/products_get_by_sku.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -232,8 +234,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-reviews
-      CodeUri: src/functions/
-      Handler: reviews_get_list.handler
+      CodeUri: src/
+      Handler: functions/reviews_get_list.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -249,8 +251,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-put-review
-      CodeUri: src/functions/
-      Handler: reviews_put.handler
+      CodeUri: src/
+      Handler: functions/reviews_put.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -268,8 +270,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-create-order
-      CodeUri: src/functions/
-      Handler: orders_create.handler
+      CodeUri: src/
+      Handler: functions/orders_create.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -287,8 +289,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-list-my-orders
-      CodeUri: src/functions/
-      Handler: orders_list_my.handler
+      CodeUri: src/
+      Handler: functions/orders_list_my.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -306,8 +308,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-order
-      CodeUri: src/functions/
-      Handler: orders_get_one.handler
+      CodeUri: src/
+      Handler: functions/orders_get_one.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -325,8 +327,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-wishlist-list-my
-      CodeUri: src/functions/
-      Handler: wishlist_get_list.handler
+      CodeUri: src/
+      Handler: functions/wishlist_get_list.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -344,8 +346,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-wishlist-put
-      CodeUri: src/functions/
-      Handler: wishlist_put.handler
+      CodeUri: src/
+      Handler: functions/wishlist_put.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -363,8 +365,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-wishlist-delete
-      CodeUri: src/functions/
-      Handler: wishlist_delete.handler
+      CodeUri: src/
+      Handler: functions/wishlist_delete.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
@@ -382,8 +384,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: iabag-get-products-batch
-      CodeUri: src/functions/
-      Handler: products_get_batch.handler
+      CodeUri: src/
+      Handler: functions/products_get_batch.handler
       Policies:
         - !Ref DynamoPolicy
       Events:
