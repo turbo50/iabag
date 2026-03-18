@@ -377,6 +377,23 @@ Resources:
             Auth:
               Authorizer: CognitoJwtAuthorizer
 
+  # POST /products/batch
+  GetProductsBatchFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-get-products-batch
+      CodeUri: src/functions/
+      Handler: products_get_batch.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: POST
+            Path: /products/batch
+
 # ─────────────────────────────────────────────
 # Outputs
 # ─────────────────────────────────────────────
