@@ -4,6 +4,10 @@ window.__GRILL_LOADED__ = true;
 // Config globale (mock + API Gateway base URL)
 import { CONFIG } from "./config.js";
 
+// Auth (pour routes protégées wishlist)
+import { AUTH_STORAGE_KEYS } from "./auth_storage_keys.js";
+import { isAuthenticated, getIdToken, setNextUrl } from "./auth_social_cognito.js";
+
 function joinUrl(base, path) {
   return `${String(base).replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
 }
@@ -20,6 +24,39 @@ async function fetchJson(url) {
   return await res.json();
 }
 
+async function fetchJsonAuth(url, { method = "GET", body } = {}) {
+  const token = getIdToken?.();
+  const auth = token ? (token.startsWith("Bearer ") ? token : `Bearer ${token}`) : null;
+
+  const res = await fetch(url, {
+    method,
+    cache: "no-store",
+    headers: {
+      ...(body ? { "Content-Type": "application/json" } : {}),
+      ...(auth ? { Authorization: auth } : {}),
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+
+  const text = await res.text().catch(() => "");
+  let json = null;
+  try {
+    json = text ? JSON.parse(text) : null;
+  } catch {
+    json = null;
+  }
+
+  if (!res.ok) {
+    const msg = json?.error || json?.message || text || `${res.status} ${res.statusText}`;
+    const err = new Error(msg);
+    err.status = res.status;
+    err.body = json || text;
+    throw err;
+  }
+
+  return json;
+}
+
 export async function fetchProducts() {
   // 1) Mode mock = lit CONFIG.MOCK_PRODUCTS_URL (ex: data/product.json)
   if (CONFIG?.USE_MOCK) {
@@ -33,7 +70,7 @@ export async function fetchProducts() {
     const data = await fetchJson(mockUrl);
 
     // mock JSON attendu: tableau de produits
-    const products = Array.isArray(data) ? data : (data?.items ?? []);
+    const products = Array.isArray(data) ? data : data?.items ?? [];
     window.PRODUCTS = products;
     return products;
   }
@@ -51,7 +88,7 @@ export async function fetchProducts() {
   const data = await fetchJson(url);
 
   // API peut renvoyer [] ou { items: [] }
-  const products = Array.isArray(data) ? data : (data?.items ?? []);
+  const products = Array.isArray(data) ? data : data?.items ?? [];
   window.PRODUCTS = products;
   return products;
 }
@@ -73,6 +110,91 @@ function fillTemplate(template, product) {
   });
 }
 
+/**
+ * =========================
+ * ✅ WISHLIST state (préchargement)
+ * =========================
+ *
+ * - On précharge la wishlist de l'utilisateur connecté (si token dispo)
+ * - On stocke les code_produit dans un Set
+ * - On remplit les coeurs lors du rendu des cartes
+ * - On met à jour le Set lors des toggles (POST/DELETE)
+ */
+let wishlistCodes = new Set(); // codes produits déjà en wishlist
+let wishlistLoaded = false;
+
+function getAuthHeaderValueOrNull() {
+  const token = getIdToken?.();
+  if (!token) return null;
+  return token.startsWith("Bearer ") ? token : `Bearer ${token}`;
+}
+
+async function preloadWishlistCodes() {
+  // Ne tente rien si pas connecté (page publique)
+  if (!isAuthenticated?.()) {
+    wishlistCodes = new Set();
+    wishlistLoaded = true;
+    return wishlistCodes;
+  }
+
+  // Si "auth" OK mais token absent => considère comme non connecté
+  const auth = getAuthHeaderValueOrNull();
+  if (!auth) {
+    wishlistCodes = new Set();
+    wishlistLoaded = true;
+    return wishlistCodes;
+  }
+
+  try {
+    const url = joinUrl(CONFIG.API_BASE_URL, "/clients/me/wishlist");
+    const data = await fetchJsonAuth(url, { method: "GET" });
+    const items = Array.isArray(data?.items) ? data.items : [];
+    wishlistCodes = new Set(
+      items
+        .map((it) => it?.code_produit)
+        .filter((x) => typeof x === "string" && x.length > 0)
+    );
+    wishlistLoaded = true;
+    console.log("✅ Wishlist préchargée", { count: wishlistCodes.size });
+    return wishlistCodes;
+  } catch (err) {
+    // Si le token est expiré / 401, on n'empêche pas la page produits d'afficher
+    wishlistCodes = new Set();
+    wishlistLoaded = true;
+    console.warn("⚠️ Impossible de précharger la wishlist (on continue sans état)", err);
+    return wishlistCodes;
+  }
+}
+
+function setHeartUi(btn, active) {
+  if (!btn) return;
+  btn.classList.toggle("is-active", !!active);
+
+  const icon = btn.querySelector?.("i");
+  if (!icon) return;
+
+  // Thème: outline = an-heart-l / plein = an-heart
+  if (active) {
+    icon.classList.remove("an-heart-l");
+    icon.classList.add("an-heart");
+  } else {
+    icon.classList.remove("an-heart");
+    icon.classList.add("an-heart-l");
+  }
+}
+
+function applyWishlistUiState(card, codeProduit) {
+  if (!card || !codeProduit) return;
+  const btn = card.querySelector?.(".js-wishlist-toggle");
+  if (!btn) return;
+
+  // Si preload pas encore fait, on laisse le coeur en "outline"
+  if (!wishlistLoaded) return;
+
+  const active = wishlistCodes.has(String(codeProduit));
+  setHeartUi(btn, active);
+}
+
 function buildProductHTML(product) {
   const template = document.getElementById("product-template").innerHTML;
 
@@ -86,6 +208,23 @@ function buildProductHTML(product) {
   // Ajout pour navigation fiable
   if (card && product?.code_produit) {
     card.dataset.code = product.code_produit;
+  }
+
+  // ✅ MODIF WISHLIST:
+  // On transforme le lien "wishlist" de la card (template) en bouton qui toggle wishlist,
+  // au lieu de naviguer vers my-wishlist.html.
+  // Dans ton template, le coeur a: <a class="btn-icon wishlist add-to-wishlist" href="my-wishlist.html">...</a>
+  const wishlistBtn = card?.querySelector?.(".add-to-wishlist");
+  if (wishlistBtn && product?.code_produit) {
+    wishlistBtn.classList.add("js-wishlist-toggle");
+    wishlistBtn.setAttribute("href", "#"); // empêche la navigation
+    wishlistBtn.dataset.code = product.code_produit;
+    wishlistBtn.setAttribute("aria-label", "Ajouter à mes favoris");
+  }
+
+  // ✅ applique l'état (coeur plein/outline) si wishlist préchargée
+  if (card && product?.code_produit) {
+    applyWishlistUiState(card, product.code_produit);
   }
 
   return card;
@@ -237,6 +376,84 @@ function applyRatingStars(card, product) {
   });
 }
 
+async function wishlistAdd(codeProduit) {
+  const url = joinUrl(CONFIG.API_BASE_URL, "/clients/me/wishlist");
+  await fetchJsonAuth(url, { method: "POST", body: { code_produit: String(codeProduit) } });
+
+  // ✅ update cache
+  wishlistCodes.add(String(codeProduit));
+}
+
+async function wishlistRemove(codeProduit) {
+  const url = joinUrl(CONFIG.API_BASE_URL, `/clients/me/wishlist/${encodeURIComponent(String(codeProduit))}`);
+  await fetchJsonAuth(url, { method: "DELETE" });
+
+  // ✅ update cache
+  wishlistCodes.delete(String(codeProduit));
+}
+
+function redirectToLogin() {
+  try {
+    if (typeof setNextUrl === "function") setNextUrl(window.location.pathname);
+    else localStorage.setItem(AUTH_STORAGE_KEYS.next, window.location.pathname);
+  } catch {}
+  window.location.href = "login.html";
+}
+
+/**
+ * Event delegation: marche même si la grille est générée dynamiquement.
+ * Toggle:
+ * - si pas actif => POST
+ * - si actif => DELETE
+ */
+function wireWishlistToggle() {
+  document.addEventListener("click", async (e) => {
+    const btn = e.target?.closest?.(".js-wishlist-toggle");
+    if (!btn) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof e.stopImmediatePropagation === "function") e.stopImmediatePropagation();
+
+    // Auth check
+    if (!isAuthenticated?.() || !getIdToken?.()) {
+      return redirectToLogin();
+    }
+
+    const code = btn.dataset.code || btn.closest?.("[data-code]")?.dataset?.code;
+    if (!code) {
+      console.warn("⚠️ Wishlist click mais code_produit introuvable", { btn });
+      return;
+    }
+
+    const codeStr = String(code);
+
+    // état depuis notre cache (plus fiable que lire la classe)
+    const wasActive = wishlistLoaded ? wishlistCodes.has(codeStr) : btn.classList.contains("is-active");
+
+    // UI optimiste
+    setHeartUi(btn, !wasActive);
+    btn.classList.add("disabled");
+
+    try {
+      if (!wasActive) await wishlistAdd(codeStr);
+      else await wishlistRemove(codeStr);
+    } catch (err) {
+      // rollback UI + cache (cache déjà modifié dans add/remove uniquement en cas de succès)
+      setHeartUi(btn, wasActive);
+
+      // si 401 => login
+      if (err?.status === 401 || /unauthorized/i.test(String(err?.message || ""))) {
+        return redirectToLogin();
+      }
+
+      alert(err?.message || "Erreur lors de la mise à jour des favoris.");
+    } finally {
+      btn.classList.remove("disabled");
+    }
+  });
+}
+
 async function renderProductGrid() {
   const products = await fetchProducts();
   const grid = document.getElementById("product-grid");
@@ -254,10 +471,15 @@ async function renderProductGrid() {
   });
 
   // Active les boutons QuickView maintenant que la grille est générée
-    setupQuickViewButtons();
+  setupQuickViewButtons();
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
+  wireWishlistToggle();
+
+  // ✅ précharge la wishlist si connecté (sinon no-op)
+  await preloadWishlistCodes();
+
+  // rend la grille ensuite (comme ça on peut set l'état des coeurs)
   await renderProductGrid();
 });
-
