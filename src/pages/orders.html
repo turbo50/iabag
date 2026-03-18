@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <include src="../src/partials/header.html"></include>
+  </head>
+
+  <body class="my-wishlist-page">
+    <!-- Page Loader -->
+    <div id="pre-loader"><img src="assets/images/loader.gif" alt="Chargement..." /></div>
+    <!-- End Page Loader -->
+
+    <!--Page Wrapper-->
+    <div class="page-wrapper">
+      <include src="../src/partials/haut_de_page.html"></include>
+
+      <!--Body Container-->
+      <div id="page-content">
+        <!--Collection Banner-->
+        <div class="collection-header">
+          <div class="collection-hero">
+            <div class="collection-hero__image"></div>
+            <div class="collection-hero__title-wrapper container">
+              <h1 class="collection-hero__title">Mes commandes</h1>
+              <div class="breadcrumbs text-uppercase mt-1 mt-lg-2">
+                <a href="index.html" title="Retour à l’accueil">Accueil</a><span>|</span><span class="fw-bold">Mes commandes</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Collection Banner-->
+
+        <!--Main Content-->
+        <div class="container">
+          <div class="checkout-success-content py-2">
+            <!--Header card-->
+            <div class="row">
+              <div class="col-12">
+                <div class="checkout-scard card border-0 rounded">
+                  <div class="card-body">
+                    <div class="d-flex flex-wrap align-items-center justify-content-between gap-2">
+                      <div>
+                        <h4 class="card-title mb-1">Suivi et historique</h4>
+                        <p class="card-text mb-0 text-muted">
+                          Vos commandes sont affichées de la plus récente à la plus ancienne.
+                        </p>
+                      </div>
+                      <div class="d-flex gap-2">
+                        <a href="index.html" class="btn btn-outline-dark rounded">Retour boutique</a>
+                        <button type="button" class="btn btn-outline-primary rounded" id="btn-refresh">Rafraîchir</button>
+                      </div>
+                    </div>
+
+                    <!-- States -->
+                    <div class="mt-3">
+                      <div id="orders-loading" class="text-muted" style="display:none;">Chargement de vos commandes…</div>
+
+                      <div id="orders-error" class="alert alert-warning text-start" style="display:none;">
+                        <div class="fw-bold mb-1">Impossible de charger vos commandes.</div>
+                        <div id="orders-error-msg" class="small"></div>
+                        <div class="mt-2">
+                          <a class="btn btn-outline-primary btn-sm rounded" href="login.html" id="login-link">Se connecter</a>
+                          <a class="btn btn-outline-dark btn-sm rounded" href="index.html">Retour à l’accueil</a>
+                        </div>
+                      </div>
+
+                      <div id="orders-empty" class="alert alert-info" style="display:none;">
+                        Vous n’avez pas encore de commande.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Orders table-->
+            <div class="row mt-3">
+              <div class="col-12">
+                <div class="table-content table-responsive order-table mb-4">
+                  <table class="table table-bordered align-middle table-hover mb-0">
+                    <thead>
+                      <tr class="text-center">
+                        <th class="fw-bold">N°</th>
+                        <th class="fw-bold">Date</th>
+                        <th class="fw-bold text-end">Total</th>
+                        <th class="fw-bold text-center">Articles</th>
+                        <th class="fw-bold">Statut</th>
+                        <th class="fw-bold text-center">Détail</th>
+                      </tr>
+                    </thead>
+                    <tbody id="orders-tbody">
+                      <tr>
+                        <td colspan="6" class="text-muted">
+                          La liste de vos commandes apparaîtra ici.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="small text-muted">
+                  Conseil : gardez votre numéro de commande pour toute demande de support.
+                </div>
+              </div>
+            </div>
+            <!--End Orders table-->
+          </div>
+        </div>
+        <!--End Main Content-->
+      </div>
+      <!--End Body Container-->
+
+      <!--Footer-->
+      <include src="../src/partials/footer.html"></include>
+      <!--End Footer-->
+
+      <!--Scoll Top-->
+      <span id="site-scroll"><i class="icon an an-chevron-up"></i></span>
+      <!--End Scoll Top-->
+
+      <!--MiniCart Drawer-->
+      <include src="../src/partials/minicart-drawer.html"></include>
+      <!--End MiniCart Drawer-->
+      <div class="modalOverly"></div>
+
+      <!--Including Javascript-->
+      <include src="../src/partials/scripts.html"></include>
+
+      <script type="module">
+        import { CONFIG } from "./assets/js/config.js";
+        import { isAuthenticated, getIdToken, setNextUrl } from "./assets/js/auth_social_cognito.js";
+
+        function joinUrl(base, path) {
+          return `${String(base).replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
+        }
+
+        function show(id, visible) {
+          const el = document.getElementById(id);
+          if (!el) return;
+          el.style.display = visible ? "" : "none";
+        }
+
+        function setText(id, value) {
+          const el = document.getElementById(id);
+          if (el) el.textContent = value ?? "";
+        }
+
+        function formatMoney(value) {
+          if (value == null || Number.isNaN(Number(value))) return "—";
+          return new Intl.NumberFormat(CONFIG.LOCALE || "fr-FR", {
+            style: "currency",
+            currency: CONFIG.CURRENCY || "EUR",
+          }).format(Number(value));
+        }
+
+        function formatDate(iso) {
+          if (!iso) return "—";
+          const d = new Date(iso);
+          if (Number.isNaN(d.getTime())) return iso;
+          return d.toLocaleString(CONFIG.LOCALE || "fr-FR");
+        }
+
+        async function getJson(url, token) {
+          const res = await fetch(url, {
+            method: "GET",
+            headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}) },
+          });
+
+          const text = await res.text().catch(() => "");
+          let json = null;
+          try {
+            json = text ? JSON.parse(text) : null;
+          } catch {
+            json = null;
+          }
+
+          if (!res.ok) {
+            const msg = json?.error || json?.message || text || `${res.status} ${res.statusText}`;
+            const err = new Error(msg);
+            err.status = res.status;
+            err.body = json || text;
+            throw err;
+          }
+
+          return json;
+        }
+
+        function normalizeOrders(payload) {
+          // Pour être tolérant: certains handlers renvoient { items: [...] } ou { orders: [...] }
+          if (Array.isArray(payload)) return payload;
+          if (Array.isArray(payload?.items)) return payload.items;
+          if (Array.isArray(payload?.orders)) return payload.orders;
+          if (Array.isArray(payload?.commandes)) return payload.commandes;
+          return [];
+        }
+
+        function escapeHtml(str) {
+          return String(str ?? "")
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;")
+            .replaceAll("'", "&#039;");
+        }
+
+        function orderDate(o) {
+          return o?.date_commande || o?.date || o?.created_at || o?.createdAt || "";
+        }
+
+        function orderCode(o) {
+          return o?.code_commande || o?.code || o?.id || "";
+        }
+
+        function orderTotal(o) {
+          return o?.total ?? o?.montant_total ?? null;
+        }
+
+        function orderItemsCount(o) {
+          const lignes = o?.lignes || o?.items || o?.lines;
+          if (Array.isArray(lignes)) {
+            return lignes.reduce((sum, l) => sum + (Number(l?.quantite || l?.qty || 0) || 0), 0);
+          }
+          return Number(o?.nb_articles || o?.items_count || 0) || 0;
+        }
+
+        function orderStatus(o) {
+          return o?.statut || o?.status || "Enregistrée";
+        }
+
+        function renderTable(orders) {
+          const tbody = document.getElementById("orders-tbody");
+          if (!tbody) return;
+
+          if (!orders.length) {
+            tbody.innerHTML = `<tr><td colspan="6" class="text-muted">Aucune commande.</td></tr>`;
+            return;
+          }
+
+          tbody.innerHTML = orders
+            .map((o) => {
+              const code = orderCode(o);
+              const dt = orderDate(o);
+              const total = orderTotal(o);
+              const count = orderItemsCount(o);
+              const status = orderStatus(o);
+
+              const detailHref = code ? `checkout-success.html?code=${encodeURIComponent(code)}` : "#";
+
+              return `
+                <tr>
+                  <td class="text-center fw-600">${escapeHtml(code || "—")}</td>
+                  <td class="text-center">${escapeHtml(formatDate(dt))}</td>
+                  <td class="text-end fw-600">${escapeHtml(formatMoney(total))}</td>
+                  <td class="text-center">${escapeHtml(String(count || "—"))}</td>
+                  <td class="text-center"><span class="badge bg-light text-dark">${escapeHtml(status)}</span></td>
+                  <td class="text-center">
+                    ${
+                      code
+                        ? `<a class="btn btn-outline-primary btn-sm rounded" href="${detailHref}">Voir</a>`
+                        : `<span class="text-muted small">—</span>`
+                    }
+                  </td>
+                </tr>
+              `;
+            })
+            .join("");
+        }
+
+        function showError(message) {
+          show("orders-loading", false);
+          show("orders-empty", false);
+          show("orders-error", true);
+          setText("orders-error-msg", message || "Erreur inconnue.");
+          setNextUrl(window.location.href);
+        }
+
+        async function loadOrders() {
+          show("orders-error", false);
+          show("orders-empty", false);
+          show("orders-loading", true);
+
+          if (!isAuthenticated()) {
+            showError("Connectez-vous pour afficher vos commandes.");
+            show("orders-loading", false);
+            return;
+          }
+
+          if (!CONFIG?.API_BASE_URL) {
+            showError("CONFIG.API_BASE_URL manquant.");
+            show("orders-loading", false);
+            return;
+          }
+
+          try {
+            const token = getIdToken();
+            const url = joinUrl(CONFIG.API_BASE_URL, "/clients/me/orders");
+            const payload = await getJson(url, token);
+            const orders = normalizeOrders(payload);
+
+            // tri: plus récente d'abord
+            orders.sort((a, b) => {
+              const da = new Date(orderDate(a)).getTime() || 0;
+              const db = new Date(orderDate(b)).getTime() || 0;
+              return db - da;
+            });
+
+            if (!orders.length) {
+              renderTable([]);
+              show("orders-empty", true);
+              return;
+            }
+
+            renderTable(orders);
+          } catch (err) {
+            console.error(err);
+            showError(err?.message || "Impossible de récupérer vos commandes.");
+          } finally {
+            show("orders-loading", false);
+          }
+        }
+
+        // Bind refresh
+        const btnRefresh = document.getElementById("btn-refresh");
+        if (btnRefresh && !btnRefresh.dataset.bound) {
+          btnRefresh.dataset.bound = "1";
+          btnRefresh.addEventListener("click", loadOrders);
+        }
+
+        loadOrders();
+      </script>
+    </div>
+  </body>
+</html>

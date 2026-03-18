@@ -22,6 +22,9 @@ export function updateHeaderAuthUI() {
   const logoutItem = document.getElementById("nav-logout-item");
   const logoutLink = document.getElementById("nav-logout-link");
 
+  // ✅ AJOUT: item "Mes commandes"
+  const ordersItem = document.getElementById("nav-orders-item");
+
   // header pas présent sur toutes pages ? => on sort sans erreur
   if (!welcomeBox || !welcomeName) return;
 
@@ -30,11 +33,17 @@ export function updateHeaderAuthUI() {
   welcomeBox.classList.add("d-none"); // garde bootstrap si dispo
   welcomeName.textContent = "";
 
+  // ✅ AJOUT: cacher "Mes commandes" par défaut (évite flash)
+  if (ordersItem) ordersItem.style.display = "none";
+
   // bind logout (une seule fois)
   if (logoutLink && !logoutLink.dataset.bound) {
     logoutLink.dataset.bound = "1";
     logoutLink.addEventListener("click", (e) => {
       e.preventDefault();
+       // ✅ purge immédiate (ne dépend pas de isAuthenticated() ni d'événements)
+      sessionStorage.removeItem(SESSION_CUSTOMER_ID_KEY);
+      localStorage.removeItem("iabag_cart_v1"); // optionnel: vider le panier
       logout();
     });
   }
@@ -49,6 +58,10 @@ export function updateHeaderAuthUI() {
 
     // cacher Déconnexion
     if (logoutItem) logoutItem.style.display = "none";
+
+    // ✅ AJOUT: cacher Mes commandes
+    if (ordersItem) ordersItem.style.display = "none";
+
     return;
   }
 
@@ -75,9 +88,13 @@ export function updateHeaderAuthUI() {
   // afficher Déconnexion
   if (logoutItem) logoutItem.style.display = "";
 
+  // ✅ AJOUT: afficher Mes commandes
+  if (ordersItem) ordersItem.style.display = "";
+
   // stocker l'identifiant utilisateur pour lier les commandes
   if (user?.sub) sessionStorage.setItem(SESSION_CUSTOMER_ID_KEY, String(user.sub));
 }
 
 document.addEventListener("DOMContentLoaded", updateHeaderAuthUI);
 window.addEventListener("auth:changed", updateHeaderAuthUI);
+window.dispatchEvent(new Event("auth:changed"));

@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/responsive.css">
 <link rel="stylesheet" href="assets/css/social-auth.css">
+<link rel="stylesheet" href="assets/css/minicart-fix.css">
+
 
   </head>
 
@@ -112,11 +114,13 @@
             <ul class="user-links">
               <li><a href="login.html">Connexion</a></li>
               <li><a href="register.html">S'inscrire</a></li>
-              <li><a href="my-wishlist.html">Ma collection</a></li>
 
               <!-- ✅ AJOUT: visible seulement si connecté -->
               <li id="nav-logout-item" style="display:none;">
                 <a href="#" id="nav-logout-link">Déconnexion</a>
+              </li>              
+              <li id="nav-orders-item" style="display:none;">
+                <a href="orders.html">Mes commandes</a>
               </li>
             </ul>
           </div>
@@ -344,61 +348,92 @@
       <div id="cart-drawer" class="block block-cart">
 
         <div class="minicart-header">
-          <button type="button" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
-            <i class="an an-times-r" aria-hidden="true"></i>
-          </button>
+          <a href="javascript:void(0);" class="close-cart" data-bs-dismiss="modal" aria-label="Fermer">
+            <i class="an an-times-r" aria-hidden="true" data-bs-toggle="tooltip" data-bs-placement="left" title="Fermer"></i>
+          </a>
 
-          <h4 class="fs-6">
-            Panier (<span id="minicart-count">0</span>)
+          <h4 class="fs-6 text-black">
+            Votre panier (<span id="minicart-count">0</span>)
           </h4>
         </div>
 
         <div class="minicart-content">
-          <ul id="minicart-items" class="clearfix" aria-live="polite" aria-busy="false"></ul>
+          <!-- LISTE RENDUE PAR cart_ui.js -->
+          <ul id="minicart-items" class="m-0 clearfix" aria-live="polite" aria-busy="false"></ul>
 
+          <!-- TEMPLATE UTILISÉ PAR cart_ui.js -->
           <template id="minicart-item-tpl">
-            <li class="item d-flex justify-content-center align-items-center" data-line-id="">
+            <li class="item d-flex align-items-start" data-line-id="">
               <a class="product-image" href="">
-                <img class="blur-up lazyload" src="" data-src="" alt="">
+                <img class="blur-up lazyload" src="" data-src="" alt="" title="">
               </a>
 
               <div class="product-details">
                 <a class="product-title" href=""></a>
-                <div class="variant-cart"></div>
+                <div class="variant-cart my-1"></div>
                 <div class="priceRow">
-                  <div class="product-price"><span class="money"></span></div>
+                  <div class="product-price">
+                    <span class="money"></span>
+                  </div>
                 </div>
               </div>
 
-              <div class="qtyDetail text-center">
+              <div class="qtyDetail text-center ms-auto">
                 <div class="wrapQtyBtn">
                   <div class="qtyField">
-                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">-</button>
-                    <input type="number" class="qty" min="1" value="1">
-                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">+</button>
+                    <!-- IMPORTANT: data-action pour ton JS -->
+                    <button type="button" class="qtyBtn minus" data-action="dec" aria-label="Diminuer">
+                      <i class="icon an an-minus-r" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- IMPORTANT: input.qty pour ton JS -->
+                    <input type="number" min="1" value="1" class="qty rounded-0">
+
+                    <button type="button" class="qtyBtn plus" data-action="inc" aria-label="Augmenter">
+                      <i class="icon an an-plus-l" aria-hidden="true"></i>
+                    </button>
                   </div>
-                  <button type="button" class="remove" data-action="remove">Supprimer</button>
+
+                  <!-- IMPORTANT: data-action remove pour ton JS -->
+                  <button type="button" class="remove btn btn-link p-0" data-action="remove" aria-label="Supprimer">
+                    Supprimer
+                  </button>
                 </div>
               </div>
             </li>
           </template>
-          <div class="product-form__item--buyit clearfix">
-              <!--<button type="button" class="btn rounded btn-outline-primary proceed-to-checkout">Commander</button>-->
-              <button type="button" class="btn rounded btn-outline-primary proceed-to-checkout" data-minicart-checkout="">
-                Commander
-              </button>
-          </div>
+
+          <!-- Etat vide, géré par cart_ui.js -->
           <div id="minicart-empty" style="display:none;" class="py-4 text-center">
             <p class="mb-3">Votre panier est vide.</p>
             <a href="index.html" class="btn btn-outline-dark">Continuer mes achats</a>
           </div>
         </div>
 
-        <div class="minicart-footer">
-          <div class="d-flex justify-content-between">
-            <span>Sous-total </span>
-            <strong id="minicart-subtotal">0,00 €</strong>
+        <!-- Bottom du thème, mais connecté au subtotal dynamique -->
+        <div class="minicart-bottom text-black">
+          <div class="shipinfo text-center mb-3 text-uppercase">
+            <p class="freeShipMsg">
+              <i class="an an-truck fs-5 me-2 align-middle"></i>
+              Livraison offerte selon conditions.
+            </p>
           </div>
+
+          <div class="subtotal">
+            <span>Sous-total :</span>
+            <span class="product-price" id="minicart-subtotal">0,00 €</span>
+          </div>
+
+          <!-- (Optionnel) tu peux garder ou retirer cette case -->
+          <div class="agree-check customCheckbox clearfix">
+            <input id="prTearm" name="tearm" type="checkbox" value="tearm">
+            <label for="prTearm"> J’accepte les conditions générales</label>
+          </div>
+
+          <!-- Commander (hook JS) -->
+          <button type="button" class="w-100 px-2 py-2 lh-base my-2 btn btn-outline-primary proceed-to-checkout" data-minicart-checkout="">
+            Commander
+          </button>
         </div>
 
       </div>
