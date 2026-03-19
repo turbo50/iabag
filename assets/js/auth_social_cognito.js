@@ -92,7 +92,8 @@ export async function startSocialLogin(providerKey) {
 
   // Force the IdP (e.g., Google)
   u.searchParams.set("identity_provider", provider);
-
+  u.searchParams.set("prompt", "login");
+  
   window.location.assign(u.toString());
 }
 
