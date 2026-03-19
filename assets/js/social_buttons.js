@@ -1,13 +1,6 @@
 import { COGNITO_OAUTH } from "./cognito_oauth_config.js";
 import { startSocialLogin, setNextUrl } from "./auth_social_cognito.js";
 
-/**
- * But:
- * - Ne pas dupliquer la logique "où rediriger après login"
- * - Utiliser la clé officielle AUTH_STORAGE_KEYS.next via setNextUrl()
- * - Ne PAS écraser une redirection déjà posée (ex: clic "Commander" minicart)
- */
-
 function providerClass(key) {
   if (key === "google") return "social-btn--google";
   if (key === "facebook") return "social-btn--facebook";
@@ -16,9 +9,7 @@ function providerClass(key) {
 }
 
 function providerIconSvg(key) {
-  // SVGs inline (simples, nets, sans libs externes)
   if (key === "google") {
-    // "G" multicolore (simplifié, mais fidèle visuellement)
     return `
       <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
         <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303C33.644 32.657 29.229 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.967 3.033l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.651-.389-3.917z"/>
@@ -45,12 +36,10 @@ function providerIconSvg(key) {
     `;
   }
 
-  // fallback
   return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>`;
 }
 
 function getRedirectFromQuery() {
-  // Support optionnel: login.html?redirect=...
   try {
     const u = new URL(window.location.href);
     return u.searchParams.get("redirect");
@@ -59,7 +48,16 @@ function getRedirectFromQuery() {
   }
 }
 
-export function renderSocialButtons(containerSelector, { nextUrl = "index.html", preserveExistingNext = true } = {}) {
+/**
+ * PATCH: Ajout d'un handler onAuthSuccess en option
+ * Appelé après le login Cognito social.
+ * Le parent peut gérer la création du profil DynamoDB (pseudo, code_client).
+ */
+export function renderSocialButtons(containerSelector, {
+  nextUrl = "index.html",
+  preserveExistingNext = true,
+  onAuthSuccess = null
+} = {}) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
@@ -87,20 +85,9 @@ export function renderSocialButtons(containerSelector, { nextUrl = "index.html",
     `;
 
     btn.addEventListener("click", async () => {
-      /**
-       * Priorité de redirection:
-       * 1) login.html?redirect=... (si tu l’utilises)
-       * 2) nextUrl passé en param
-       *
-       * Et surtout: si preserveExistingNext=true, on n’écrase pas une valeur
-       * déjà posée par minicart checkout (setNextUrl(window.location.href)).
-       */
       const desiredNext = getRedirectFromQuery() || nextUrl || "index.html";
 
       if (preserveExistingNext) {
-        // setNextUrl() écrase toujours; donc on ne l'appelle que si on n'a pas déjà posé une valeur.
-        // Comme on ne veut pas dépendre de la structure interne, on refait une lecture simple :
-        // (si tu veux 0 duplication totale, on peut aussi exposer getNextUrl() dans auth_social_cognito.js)
         try {
           const existing = localStorage.getItem("iabag_auth_next_v1");
           if (!existing) setNextUrl(desiredNext);
@@ -111,7 +98,27 @@ export function renderSocialButtons(containerSelector, { nextUrl = "index.html",
         setNextUrl(desiredNext);
       }
 
-      await startSocialLogin(key);
+      // Lance authentification sociale Cognito (ex: Hosted UI)
+      // PATCH: startSocialLogin retourne un objet { idToken, user } (adapte selon ton module)
+      // Existant: await startSocialLogin(key);
+      let result = await startSocialLogin(key);
+      // result peut être JWT, user obj, etc. Adapte selon ton startSocialLogin (ex: retourne idToken/user)
+
+      // PATCH: handler après login
+      if (onAuthSuccess && typeof onAuthSuccess === "function") {
+        // Adapte selon ce que retourne startSocialLogin:
+        // Si result = { idToken, user }, ok
+        // Si result = string JWT, on peut parser
+        // Si tu veux plus d'infos, adapte le callback
+        if (typeof result === "object") {
+          await onAuthSuccess(result.idToken || "", result.user || result);
+        } else {
+          await onAuthSuccess(result || "", {});
+        }
+      } else {
+        // Sinon : redirige (comportement par défaut)
+        if (nextUrl) window.location.href = nextUrl;
+      }
     });
 
     container.appendChild(btn);

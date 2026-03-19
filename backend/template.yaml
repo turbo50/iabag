@@ -402,6 +402,25 @@ Resources:
             Method: POST
             Path: /products/batch
 
+  # POST /clients/me/profile (protected)
+  ClientPutProfileFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-client-put-profile
+      CodeUri: src/
+      Handler: functions/client_put_profile.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: POST
+            Path: /clients/me/profile
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+
 # ─────────────────────────────────────────────
 # Outputs
 # ─────────────────────────────────────────────
