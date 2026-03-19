@@ -187,3 +187,47 @@ export function logout() {
     window.location.assign(COGNITO_OAUTH.logoutUri);
   }
 }
+
+export function logoutAll() {
+  // Purge tout le localStorage (optionnel, mais safe)
+  try {
+    localStorage.clear(); // attention aux autres applis sur le domaine, sinon...
+  } catch {}
+
+  // Option : purger uniquement les clés connues
+  [
+    K.tokens,
+    K.next,
+    K.pkceVerifier,
+    K.oauthState,
+    "iabag_cart_v1",
+    "iabag_customer_id_v1",
+    // Ajoute d'autres clés si tu utilises d'autres storage (ex: wishlist, etc.)
+  ].forEach(key => {
+    try { localStorage.removeItem(key); } catch {}
+    try { sessionStorage.removeItem(key); } catch {}
+  });
+
+  // Purge sessionStorage entier
+  try { sessionStorage.clear(); } catch {}
+
+  // Purge cookies (si tu en as utilisés, ex: "CognitoIdentityServiceProvider...")
+  document.cookie.split(";").forEach((c) => {
+    const [name] = c.split("=");
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;path=/';
+  });
+
+  // Notifie l’UI
+  window.dispatchEvent(new Event("auth:changed"));
+
+  // Redirection Hosted UI logout Cognito (nettoie tous les tokens Cognito côté serveur)
+  try {
+    const domain = COGNITO_OAUTH.domain.replace(/\/$/, "");
+    const u = new URL(`${domain}/logout`);
+    u.searchParams.set("client_id", COGNITO_OAUTH.clientId);
+    u.searchParams.set("logout_uri", COGNITO_OAUTH.logoutUri);
+    window.location.assign(u.toString());
+  } catch {
+    window.location.assign(COGNITO_OAUTH.logoutUri);
+  }
+}

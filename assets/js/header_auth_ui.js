@@ -1,4 +1,4 @@
-import { isAuthenticated, getUserFromIdToken, logout } from "./auth_social_cognito.js";
+import { isAuthenticated, getUserFromIdToken, logoutAll } from "./auth_social_cognito.js";
 
 const SESSION_CUSTOMER_ID_KEY = "iabag_customer_id_v1";
 
@@ -49,7 +49,7 @@ export function updateHeaderAuthUI() {
        // ✅ purge immédiate (ne dépend pas de isAuthenticated() ni d'événements)
       sessionStorage.removeItem(SESSION_CUSTOMER_ID_KEY);
       localStorage.removeItem("iabag_cart_v1"); // optionnel: vider le panier
-      logout();
+      logoutAll();
     });
   }
 
