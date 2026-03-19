@@ -1,6 +1,8 @@
 import { COGNITO_OAUTH } from "./cognito_oauth_config.js";
 import { startSocialLogin, setNextUrl } from "./auth_social_cognito.js";
 
+console.log("✅ social_buttons.js chargé");
+
 function providerClass(key) {
   if (key === "google") return "social-btn--google";
   if (key === "facebook") return "social-btn--facebook";
@@ -39,6 +41,7 @@ function providerIconSvg(key) {
   return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>`;
 }
 
+
 function getRedirectFromQuery() {
   try {
     const u = new URL(window.location.href);
@@ -49,9 +52,8 @@ function getRedirectFromQuery() {
 }
 
 /**
- * PATCH: Ajout d'un handler onAuthSuccess en option
- * Appelé après le login Cognito social.
- * Le parent peut gérer la création du profil DynamoDB (pseudo, code_client).
+ * PATCH: Handler bouton social ne fait plus window.location.href ! 
+ * Seule action : startSocialLogin(key)
  */
 export function renderSocialButtons(containerSelector, {
   nextUrl = "index.html",
@@ -98,27 +100,10 @@ export function renderSocialButtons(containerSelector, {
         setNextUrl(desiredNext);
       }
 
-      // Lance authentification sociale Cognito (ex: Hosted UI)
-      // PATCH: startSocialLogin retourne un objet { idToken, user } (adapte selon ton module)
-      // Existant: await startSocialLogin(key);
-      let result = await startSocialLogin(key);
-      // result peut être JWT, user obj, etc. Adapte selon ton startSocialLogin (ex: retourne idToken/user)
+      // 🚩 Seule action à faire ici : startSocialLogin
+      await startSocialLogin(key);
 
-      // PATCH: handler après login
-      if (onAuthSuccess && typeof onAuthSuccess === "function") {
-        // Adapte selon ce que retourne startSocialLogin:
-        // Si result = { idToken, user }, ok
-        // Si result = string JWT, on peut parser
-        // Si tu veux plus d'infos, adapte le callback
-        if (typeof result === "object") {
-          await onAuthSuccess(result.idToken || "", result.user || result);
-        } else {
-          await onAuthSuccess(result || "", {});
-        }
-      } else {
-        // Sinon : redirige (comportement par défaut)
-        if (nextUrl) window.location.href = nextUrl;
-      }
+      // Ne PAS faire window.location.href ici ! Cognito fait la redirection.
     });
 
     container.appendChild(btn);
