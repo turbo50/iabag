@@ -1,8 +1,6 @@
 import { COGNITO_OAUTH } from "./cognito_oauth_config.js";
 import { startSocialLogin, setNextUrl } from "./auth_social_cognito.js";
 
-console.log("✅ social_buttons.js chargé");
-
 function providerClass(key) {
   if (key === "google") return "social-btn--google";
   if (key === "facebook") return "social-btn--facebook";
@@ -41,7 +39,6 @@ function providerIconSvg(key) {
   return `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="currentColor"/></svg>`;
 }
 
-
 function getRedirectFromQuery() {
   try {
     const u = new URL(window.location.href);
@@ -51,15 +48,14 @@ function getRedirectFromQuery() {
   }
 }
 
-/**
- * PATCH: Handler bouton social ne fait plus window.location.href ! 
- * Seule action : startSocialLogin(key)
- */
-export function renderSocialButtons(containerSelector, {
-  nextUrl = "index.html",
-  preserveExistingNext = true,
-  onAuthSuccess = null
-} = {}) {
+export function renderSocialButtons(
+  containerSelector,
+  {
+    nextUrl = "index.html",
+    preserveExistingNext = true,
+    beforeStart = null,
+  } = {}
+) {
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
@@ -87,23 +83,30 @@ export function renderSocialButtons(containerSelector, {
     `;
 
     btn.addEventListener("click", async () => {
-      const desiredNext = getRedirectFromQuery() || nextUrl || "index.html";
+      try {
+        if (typeof beforeStart === "function") {
+          const ok = await beforeStart({ providerKey: key });
+          if (ok === false) return;
+        }
 
-      if (preserveExistingNext) {
-        try {
-          const existing = localStorage.getItem("iabag_auth_next_v1");
-          if (!existing) setNextUrl(desiredNext);
-        } catch {
+        const desiredNext = getRedirectFromQuery() || nextUrl || "index.html";
+
+        if (preserveExistingNext) {
+          try {
+            const existing = localStorage.getItem("iabag_auth_next_v1");
+            if (!existing) setNextUrl(desiredNext);
+          } catch {
+            setNextUrl(desiredNext);
+          }
+        } else {
           setNextUrl(desiredNext);
         }
-      } else {
-        setNextUrl(desiredNext);
+
+        await startSocialLogin(key);
+      } catch (err) {
+        console.error("Erreur démarrage social login:", err);
+        alert(err?.message || "Erreur lors du démarrage de la connexion sociale.");
       }
-
-      // 🚩 Seule action à faire ici : startSocialLogin
-      await startSocialLogin(key);
-
-      // Ne PAS faire window.location.href ici ! Cognito fait la redirection.
     });
 
     container.appendChild(btn);
