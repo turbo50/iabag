@@ -379,7 +379,7 @@ Resources:
             Auth:
               Authorizer: CognitoJwtAuthorizer
 
-  # POST /products/batch
+ # POST /products/batch
   GetProductsBatchFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -388,6 +388,12 @@ Resources:
       Handler: functions/products_get_batch.handler
       Policies:
         - !Ref DynamoPolicy
+        - Statement:                         # <-- AJOUT POUR BatchGetItem
+            Effect: Allow
+            Action:
+              - dynamodb:BatchGetItem
+            Resource:
+              - !GetAtt ProduitTable.Arn
       Events:
         Api:
           Type: HttpApi

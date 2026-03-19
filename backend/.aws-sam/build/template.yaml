@@ -394,6 +394,14 @@ Resources:
       Handler: functions/products_get_batch.handler
       Policies:
       - Ref: DynamoPolicy
+      - Statement:
+          Effect: Allow
+          Action:
+          - dynamodb:BatchGetItem
+          Resource:
+          - Fn::GetAtt:
+            - ProduitTable
+            - Arn
       Events:
         Api:
           Type: HttpApi
