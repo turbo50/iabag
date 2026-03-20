@@ -421,6 +421,25 @@ Resources:
             Auth:
               Authorizer: CognitoJwtAuthorizer
 
+  # GET /clients/me/profile (protected)
+  ClientGetProfileFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-client-get-profile
+      CodeUri: src/
+      Handler: functions/client_get_profile.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: GET
+            Path: /clients/me/profile
+            Auth:
+              Authorizer: CognitoJwtAuthorizer
+    
 # ─────────────────────────────────────────────
 # Outputs
 # ─────────────────────────────────────────────
