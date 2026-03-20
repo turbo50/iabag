@@ -1,23 +1,17 @@
 import { CONFIG } from "./config.js";
 import { getProductByCode, getProductCodeFromUrl } from "./product_service.js";
-import { rebindProductTabs } from "./product_tabs_fix.js";
 
 console.log("🧭 product_page loaded", { href: location.href, search: location.search });
 
 /**
  * Récupère le code produit de façon robuste:
  * - 1) ?code=... (ou ?code_produit=...) via getProductCodeFromUrl()
- * - 2) sessionStorage("selected_product_code") (posé par nav_product_force.js)
- *
- * IMPORTANT:
- * - On NE fait PLUS de location.replace(...) (ça te créait une boucle avec le thème).
+ * - 2) sessionStorage("selected_product_code")
  */
 function getSelectedProductCode() {
-  // 1) URL (querystring)
   const fromUrl = getProductCodeFromUrl();
   if (fromUrl) return fromUrl;
 
-  // 2) sessionStorage
   try {
     const fromSession = sessionStorage.getItem("selected_product_code");
     if (fromSession) return fromSession;
@@ -30,12 +24,20 @@ function getSelectedProductCode() {
 
 function formatMoney(value) {
   if (value == null || Number.isNaN(Number(value))) return "";
-  return new Intl.NumberFormat(CONFIG.LOCALE, { style: "currency", currency: CONFIG.CURRENCY }).format(Number(value));
+  return new Intl.NumberFormat(CONFIG.LOCALE, {
+    style: "currency",
+    currency: CONFIG.CURRENCY,
+  }).format(Number(value));
 }
 
 function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value ?? "";
+}
+
+function setHTML(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.innerHTML = value ?? "";
 }
 
 function setAttr(id, attr, value) {
@@ -55,30 +57,28 @@ function showEl(el, visible) {
 }
 
 function hasValue(v) {
-  // true si non null/undefined et non vide (pour string)
   if (v == null) return false;
   if (typeof v === "string") return v.trim().length > 0;
   return true;
 }
 
 function renderOptionalFields(p) {
-  // 1) Label (dans l'image)
+  // 1) Label
   const labelWrap = document.querySelector(".product-labels");
   const labelSpan = document.querySelector(".product-labels .pr-label1");
-  const labelValue = p?.label; // <= adapte ici si ta clé a un autre nom
+  const labelValue = p?.label;
 
   if (hasValue(labelValue)) {
     if (labelSpan) labelSpan.textContent = String(labelValue);
     showEl(labelWrap, true);
   } else {
-    // masque tout le bloc pour ne rien afficher
     showEl(labelWrap, false);
     if (labelSpan) labelSpan.textContent = "";
   }
 
-  // 2) From (subtitle)
+  // 2) From
   const fromEl = document.querySelector(".product-single__subtitle");
-  const fromValue = p?.from ?? p?.From; // tolère "From" si jamais
+  const fromValue = p?.from ?? p?.From;
 
   if (hasValue(fromValue)) {
     if (fromEl) fromEl.textContent = String(fromValue);
@@ -88,12 +88,11 @@ function renderOptionalFields(p) {
     if (fromEl) fromEl.textContent = "";
   }
 
-  // 3) Quantité (message)
+  // 3) Quantité
   const qtyMsg = document.getElementById("quantity_message");
   const qtySpan = qtyMsg?.querySelector(".items");
-  const qtyValue = p?.quantite ?? p?.quantité ?? p?.qty; // tolérant
+  const qtyValue = p?.quantite ?? p?.quantité ?? p?.qty;
 
-  // Choix: afficher seulement si quantite est un nombre > 0
   const qtyNumber = qtyValue == null ? NaN : Number(qtyValue);
   const showQty = Number.isFinite(qtyNumber) && qtyNumber > 0;
 
@@ -104,6 +103,25 @@ function renderOptionalFields(p) {
     showEl(qtyMsg, false);
     if (qtySpan) qtySpan.textContent = "";
   }
+}
+
+function renderDescription(p) {
+  const description =
+    p?.description ??
+    p?.descirption ?? // au cas où la clé aurait été écrite ainsi
+    p?.descriptif ??
+    p?.description_produit ??
+    "";
+
+  const descEl = document.getElementById("p-description");
+  if (!descEl) return;
+
+  // Si ta description est du texte simple
+  descEl.textContent = description;
+
+  // Si plus tard tu veux autoriser du HTML venant de l'objet,
+  // remplace la ligne ci-dessus par :
+  // descEl.innerHTML = description || "";
 }
 
 function renderColors(colors) {
@@ -158,7 +176,7 @@ function renderGallery(mainImage, otherImages) {
 
     const lb = document.createElement("a");
     lb.href = src;
-    lb.dataset.size = "1000x1280"; // tu pourras calculer plus tard
+    lb.dataset.size = "1000x1280";
     lightbox.appendChild(lb);
   });
 
@@ -172,7 +190,11 @@ function renderPrices(p) {
   setText("p-price", formatMoney(p.prix_actuel));
   setText("p-oldprice", p.ancien_prix ? formatMoney(p.ancien_prix) : "");
 
-  const hasDiscount = p.ancien_prix && p.prix_actuel && Number(p.ancien_prix) > Number(p.prix_actuel);
+  const hasDiscount =
+    p.ancien_prix &&
+    p.prix_actuel &&
+    Number(p.ancien_prix) > Number(p.prix_actuel);
+
   show("p-discount", !!hasDiscount);
 
   if (hasDiscount) {
@@ -183,10 +205,6 @@ function renderPrices(p) {
   }
 }
 
-/**
- * Injecte le produit dans la page.
- * Nécessite que la page ait des IDs (voir plus bas).
- */
 export function injectProduct(p) {
   // titre + SEO
   setText("p-title", p.nom_produit || "Produit");
@@ -197,7 +215,10 @@ export function injectProduct(p) {
   setText("p-name", p.nom_produit);
   setText("p-sku", p.sku);
 
-  // champs optionnels (label/from/quantite)
+  // description sous le SKU
+  renderDescription(p);
+
+  // champs optionnels
   renderOptionalFields(p);
 
   // prix
@@ -224,7 +245,6 @@ async function init() {
   }
 
   injectProduct(product);
-  rebindProductTabs();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

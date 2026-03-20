@@ -1,400 +1,396 @@
 <!doctype html>
 <html lang="fr">
-    <head>
-        <include src="../src/partials/header.html"></include>
-    </head>
+  <head>
+    <include src="../src/partials/header.html"></include>
+  </head>
 
-    <body class="template-product product-detail">
-        <!-- Page Loader -->
-        <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
-        <!-- End Page Loader -->
+  <body class="template-product product-detail">
+    <div id="pre-loader"><img src="assets/images/loader.gif" alt="Loading..." /></div>
 
-        <!--Page Wrapper-->
-        <div class="page-wrapper">
-            
-            <include src="../src/partials/haut_de_page.html"></include>
+    <div class="page-wrapper">
+      <include src="../src/partials/haut_de_page.html"></include>
 
-            <!--Body Container-->
-            <div id="page-content">   
-                <!--Breadcrumbs-->
-                <div class="breadcrumbs-wrapper text-uppercase">
-                    <div class="container">
-                        <div class="breadcrumbs"><a href="index.html" title="Retour à l'accueil">Accueil</a><span>|</span><span class="fw-bold">Fiche produit</span></div>
-                    </div>
-                </div>
-                <!--End Breadcrumbs-->
-
-                <!--Main Content-->
-                <div class="container">
-                    <!--Product Content-->
-                    <div class="product-single">
-                        <div class="row">
-                            <div class="col-lg-7 col-md-6 col-sm-12 col-12">
-                                <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
-                                    <div class="product-thumb">
-                                        <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                        </div>
-                                    </div>
-                                    <div class="zoompro-wrap product-zoom-right">
-                                        <div class="zoompro-span"><img id="zoompro" class="zoompro" src="assets/images/products/product-detail1.jpg" data-zoom-image="assets/images/products/product-detail1.jpg" alt="product" /></div>
-                                        <div class="product-labels"><span class="lbl pr-label1">$label</span></div>
-                                        <div class="product-wish"><a class="wishIcon wishlist rounded m-0" href="my-wishlist.html"><i class="icon an an-heart"></i><span class="tooltip-label left">Available in Wishlist</span></a></div>
-                                    </div>
-                                    <div class="lightboximages" id="p-lightbox">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-5 col-md-6 col-sm-12 col-12">
-                                <!-- Product Info -->
-                                <div class="product-single__meta">
-                                    <h1 class="product-single__title" id="p-title">Fiche détaillée du produit</h1>
-                                    <div class="product-single__subtitle">$From</div>
-                                    <!-- Product Reviews -->
-                                    <div class="product-review mb-2"><a class="reviewLink d-flex-center" href="#reviews"><i class="an an-star"></i><i class="an an-star mx-1"></i><i class="an an-star"></i><i class="an an-star mx-1"></i><i class="an an-star-o"></i><span class="spr-badge-caption ms-2">16 Reviews</span></a></div>
-                                    <!-- End Product Reviews -->
-                                    <!-- Product Info -->
-                                    <div class="product-info">
-                                        <p class="product-type">Marque: <span id="p-brand">$marque_produit</span></p>  
-                                        <p class="product-type">Désignation: <span id="p-name">$nom_produit</span></p>  
-                                        <p class="product-sku">SKU: <span class="variant-sku" id="p-sku">$sku</span></p>
-                                    </div>
-                                    <!-- End Product Info -->
-                                    <!-- Product Price -->
-                                    <div class="product-single__price pb-1">
-                                        <span class="visually-hidden">Prix nominal</span>
-                                        <span class="product-price__sale--single">
-                                            <span class="product-price-old-price" id="p-oldprice">$ancien_prix</span><span class="product-price__price product-price__sale" id="p-price">$prix_actuel</span>   
-                                            <span class="discount-badge" id="p-discount" ><span class="devider me-2">|</span><span>Remise: </span><span class="product-single__save-amount"><span class="money" id="p-save">$remise</span></span><span class="off ms-1">(<span id="p-save-rate">$taux_remise</span>%)</span></span> 
-                                        </span>
-                                        
-                                    </div>
-                                    <!-- End Product Price -->
-                                    <!-- Countdown -->
-                                    <!--
-                                    <div class="countdown-text d-flex-wrap mb-3 pb-1">
-                                        <label class="mb-2 mb-lg-0">Limited-Time Offer :</label>
-                                        <div class="prcountdown d-flex" data-countdown="2024/10/01"></div>
-                                    </div>
-                                    -->
-                                    <!-- End Countdown -->
-                                    <!-- Product Sold -->
-                                    <div class="orderMsg d-flex-center" data-user="23" data-time="24">
-                                        <img src="assets/images/order-icon.jpg" alt="order" />
-                                        <!--<p class="m-0"><strong class="items">8</strong> Sold in last <strong class="time">14</strong> hours</p>-->
-                                        <p id="quantity_message" class="ms-2 ps-2 border-start">Dépêchez-vous! Seulement  <span class="items fw-bold">$quantite</span>  Restant.</p>
-                                    </div>
-                                    <!-- End Product Sold -->
-                                </div>
-                                <!-- End Product Info -->
-                                <!-- Product Form -->
-                                <form method="post" action="#" class="product-form hidedropdown">
-                                    <!-- Swatches Color -->
-                                    <div class="swatches-image swatch clearfix swatch-0 option1" data-option-index="0">
-                                        <div class="product-form__item">
-                                            <label class="label d-flex">Couleur disponible <span class="required d-none">*</span></label>
-                                            <ul class="swatches d-flex-wrap list-unstyled clearfix" id="p-colors">
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- End Swatches Color -->
-                                    <!-- Swatches Size -->
-                                    <!-- End Swatches Size -->
-                                    <!-- Product Action -->
-                                    <div class="product-action w-100 clearfix">
-                                        <div class="product-form__item--submit">
-                                            <button type="submit" name="add" class="btn rounded product-form__cart-submit"><span>Ajouter à ma liste</span></button>
-                                            <button type="submit" name="add" class="btn rounded product-form__sold-out d-none" disabled="disabled">Sold out</button>
-                                        </div>
-                                        <!--<div class="agree-check custom Checkbox clearfix d-none">
-                                            <input id="prTearm" name="tearm" type="checkbox" value="tearm" required />
-                                        </div>-->
-                                    </div>
-                                    <!-- End Product Action -->
-                                    <!-- Product Info link -->
-
-                                    <!-- End Product Info link -->
-                                </form>
-                                <!-- End Product Form -->
-                            </div>
-                        </div>
-                    </div>
-                    <!--Product Content-->
-
-                    <!--Product Nav-->
-                    
-                    <!--End Product Nav-->
-
-                    <!--Product Tabs-->
-                    <div class="tabs-listing mt-2 mt-md-5">
-                        <ul class="product-tabs list-unstyled d-flex-wrap border-bottom m-0 d-none d-md-flex">
-                            <li rel="description" class="active"><a class="tablink">Description</a></li>
-                            <li rel="reviews"><a class="tablink">Avis</a></li>
-                        </ul>
-                        <div class="tab-container">
-                            <h3 class="tabs-ac-style d-md-none active" rel="description">Description</h3>
-                            <!--DIV description du produit-->
-                            <div id="description" class="tab-content">
-                                <div class="product-description">
-                                    <div class="row">
-                                        <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-4 mb-md-0">
-                                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 class="tabs-ac-style d-md-none" rel="reviews">Avis</h3>
-                            <!--DIV Avis des clients-->
-                            <div id="reviews" class="tab-content">
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="spr-header clearfix d-flex-center justify-content-between">
-                                            <div class="product-review d-flex-center me-auto">
-                                                <a class="reviewLink" href="#"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></a>
-                                                <span class="spr-summary-actions-togglereviews ms-2">Based on 6 reviews 234</span>
-                                            </div>
-                                            <div class="spr-summary-actions mt-3 mt-sm-0">
-                                                <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded"><i class="icon an-1x an an-pencil-alt me-2"></i>Laisser un avis</a>
-                                            </div>
-                                        </div>
-                                        
-                                        <!--Formulaire Laisser un avis-->
-                                        <form method="post" action="#" class="product-review-form new-review-form mb-4">
-                                            <h4 class="spr-form-title text-uppercase">Laisser un avis</h4>
-                                            <fieldset class="spr-form-contact">
-                                                <div class="spr-form-contact-name form-group">
-                                                    <label class="spr-form-label" for="nickname">Nom <span class="required">*</span></label>
-                                                    <input class="spr-form-input spr-form-input-text" id="nickname" type="text" name="name" placeholder="Pseudo" required />
-                                                </div>
-                                                <div class="spr-form-contact-email form-group">
-                                                    <label class="spr-form-label" for="email">Email <span class="required">*</span></label>
-                                                    <input class="spr-form-input spr-form-input-email " id="email" type="email" name="email" placeholder="example@gmail.com" required />
-                                                </div>
-                                                <div class="spr-form-review-rating form-group">
-                                                    <label class="spr-form-label">Note</label>
-                                                    <div class="product-review pt-1">
-                                                        <div class="review-rating">
-                                                            <input type="radio" name="rating" id="rating-5"><label for="rating-5"></label>
-                                                            <input type="radio" name="rating" id="rating-4"><label for="rating-4"></label>
-                                                            <input type="radio" name="rating" id="rating-3"><label for="rating-3"></label>
-                                                            <input type="radio" name="rating" id="rating-2"><label for="rating-2"></label>
-                                                            <input type="radio" name="rating" id="rating-1"><label for="rating-1"></label>
-                                                        </div>
-                                                        <a class="reviewLink d-none" href="#"><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></a>
-                                                    </div>
-                                                </div>
-                                                <div class="spr-form-review-title form-group">
-                                                    <label class="spr-form-label" for="review">Libellé de l'avis </label>
-                                                    <input class="spr-form-input spr-form-input-text " id="review" type="text" name="review" placeholder="Give your review a title" />
-                                                </div>
-                                                <div class="spr-form-review-body form-group">
-                                                    <label class="spr-form-label" for="message">Texte de l'avis <span class="spr-form-review-body-charactersremaining">(1500) caractères maximum</span></label>
-                                                    <div class="spr-form-input">
-                                                        <textarea class="spr-form-input spr-form-input-textarea " id="message" name="message" rows="5" placeholder="Write your comments here"></textarea>
-                                                    </div>
-                                                </div>
-                                            </fieldset>
-                                            <div class="spr-form-actions clearfix">
-                                                <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="Submit Review">
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                                        <!--Bloc Avis des clients-->
-                                        <div class="spr-reviews">
-                                            <h4 class="spr-form-title text-uppercase mb-3">Avis des clients</h4>
-                                            <div class="review-inner">
-                                                <div class="spr-review">
-                                                    <div class="spr-review-header">
-                                                        <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                        <h5 class="spr-review-header-title mt-1">Lorem ipsum dolor sit amet</h5>
-                                                        <span class="spr-review-header-byline"><strong>Avone</strong> on <strong>Apr 09, 2021</strong></span>
-                                                    </div>
-                                                    <div class="spr-review-content">
-                                                        <p class="spr-review-content-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="spr-review">
-                                                    <div class="spr-review-header">
-                                                        <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                        <h5 class="spr-review-header-title mt-1">Simply text of the printing</h5>
-                                                        <span class="spr-review-header-byline"><strong>Diva</strong> on <strong>May 30, 2021</strong></span>
-                                                    </div>
-
-                                                    <div class="spr-review-content">
-                                                        <p class="spr-review-content-body">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div class="spr-review">
-                                                    <div class="spr-review-header">
-                                                        <span class="product-review spr-starratings"><span class="reviewLink"><i class="icon an an-star"></i><i class="icon an an-star mx-1"></i><i class="icon an an-star-o"></i><i class="icon an an-star-o mx-1"></i><i class="icon an an-star-o"></i></span></span>
-                                                        <h5 class="spr-review-header-title mt-1">Neque porro quisquam est qui dolorem ipsum</h5>
-                                                        <span class="spr-review-header-byline"><strong>Belle</strong> on <strong>Dec 30, 2021</strong></span>
-                                                    </div>
-
-                                                    <div class="spr-review-content">
-                                                        <p class="spr-review-content-body">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <!--End Product Tabs-->
-                </div>
-                <!--End Container-->
-
-                <!--You May Also Like Products-->
-                
-                <!--End You May Also Like Products-->
-
-                <!--Recently Viewed Products-->
-                
-                <!--End Recently Viewed Products-->
-
-                <!--Customize Services-->
-                
-                <!--End Customize Services-->
+      <div id="page-content">
+        <div class="breadcrumbs-wrapper text-uppercase">
+          <div class="container">
+            <div class="breadcrumbs">
+              <a href="index.html" title="Retour à l'accueil">Accueil</a>
+              <span>|</span>
+              <span class="fw-bold">Fiche produit</span>
             </div>
-            <!--End Body Container-->
-
-            <!--Footer-->
-            <include src="../src/partials/footer.html"></include>
-            <!--End Footer-->
-
-            <!--Scoll Top-->
-            <!--End Scoll Top-->
-
-            
-            <!--MiniCart Drawer-->
-                <include src="../src/partials/minicart-drawer.html"></include>
-            <!--End MiniCart Drawer-->
-            
-            <div class="modalOverly"></div>
-
-
-            <!--Product Enuiry Popup-->
-            <!--End Product Enuiry Popup-->
-
-            <!--Size Chart-->
-            <!--End Size Chart-->
-            <!-- Sticky Cart -->
-            <!-- End Sticky Cart -->
-            <!--Quickview Popup-->           
-            <!--End Quickview Popup-->
-
-            <!--Addtocart Added Popup-->
-            <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
-                <button title="Close (Esc)" type="button" class="mfp-close">×</button>
-                <div class="addtocart-inner text-center clearfix">
-                    <h4 class="title mb-3 text-success">Added to your shopping cart successfully.</h4>
-                    <div class="pro-img mb-3">
-                        <img class="img-fluid blur-up lazyload" src="assets/images/products/add-to-cart-popup.jpg" data-src="assets/images/products/add-to-cart-popup.jpg" alt="Added to your shopping cart successfully." title="Added to your shopping cart successfully." />
-                    </div>
-                    <div class="pro-details">   
-                        <h5 class="pro-name mb-0">Ditsy Floral Dress</h5>
-                        <p class="sku my-2">Color: Gray</p>
-                        <p class="mb-0 qty-total">1 X $113.88</p>
-                        <div class="addcart-total bg-light mt-3 mb-3 p-2">
-                            Total: <b class="price">$113.88</b>
-                        </div>
-                        <div class="button-action">
-                            <a href="checkout-style1.html" class="btn btn-primary view-cart mx-1 rounded">Go To Checkout</a>
-                            <a href="index.html" class="btn btn-secondary rounded">Continue Shopping</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End Addtocart Added Popup-->
-
-
-            <!-- Including Jquery -->
-            <!--Including Javascript-->
-            <include src="../src/partials/scripts.html"></include>
-            <script type="module" src="assets/js/product_page.js"></script>
-            <script type="module" src="assets/js/add_to_cart_product.js"></script>
-            <!-- Photoswipe Gallery -->
-            <script src="assets/js/vendor/photoswipe.min.js"></script>
-            <script>
-                $(function () {
-                    var $pswp = $('.pswp')[0],
-                            image = [],
-                            getItems = function () {
-                                var items = [];
-                                $('.lightboximages a').each(function () {
-                                    var $href = $(this).attr('href'),
-                                            $size = $(this).data('size').split('x'),
-                                            item = {
-                                                src: $href,
-                                                w: $size[0],
-                                                h: $size[1]
-                                            };
-                                    items.push(item);
-                                });
-                                return items;
-                            };
-                    var items = getItems();
-
-                    $.each(items, function (index, value) {
-                        image[index] = new Image();
-                        image[index].src = value['src'];
-                    });
-                    $('.prlightbox').on('click', function (event) {
-                        event.preventDefault();
-
-                        var $index = $(".active-thumb").parent().attr('data-slick-index');
-                        $index++;
-                        $index = $index - 1;
-
-                        var options = {
-                            index: $index,
-                            bgOpacity: 0.7,
-                            showHideOpacity: true
-                        };
-                        var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
-                        lightBox.init();
-                    });
-                });
-            </script>
-            <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="pswp__bg"></div>
-                <div class="pswp__scroll-wrap">
-                    <div class="pswp__container">
-                        <div class="pswp__item"></div>
-                        <div class="pswp__item"></div>
-                        <div class="pswp__item"></div>
-                    </div>
-                    <div class="pswp__ui pswp__ui--hidden">
-                        <div class="pswp__top-bar">
-                            <div class="pswp__counter"></div>
-                            <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                            <button class="pswp__button pswp__button--share" title="Share"></button>
-                            <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                            <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                            <div class="pswp__preloader">
-                                <div class="pswp__preloader__icn">
-                                    <div class="pswp__preloader__cut">
-                                        <div class="pswp__preloader__donut"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                            <div class="pswp__share-tooltip"></div>
-                        </div>
-                        <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
-                        <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
-                        <div class="pswp__caption"><div class="pswp__caption__center"></div></div>
-                    </div>
-                </div>
-            </div>
-
+          </div>
         </div>
-        <!--End Page Wrapper-->
-    </body>
+
+        <div class="container">
+          <div class="product-single">
+            <div class="row">
+              <div class="col-lg-7 col-md-6 col-sm-12 col-12">
+                <div class="product-details-img thumb-left clearfix d-flex-wrap mb-3 mb-md-0">
+                  <div class="product-thumb">
+                    <div id="gallery" class="product-dec-slider-2 product-tab-left"></div>
+                  </div>
+
+                  <div class="zoompro-wrap product-zoom-right">
+                    <div class="zoompro-span">
+                      <img
+                        id="zoompro"
+                        class="zoompro"
+                        src="assets/images/products/product-detail1.jpg"
+                        data-zoom-image="assets/images/products/product-detail1.jpg"
+                        alt="product"
+                      />
+                    </div>
+
+                    <div class="product-labels">
+                      <span class="lbl pr-label1">$label</span>
+                    </div>
+
+                    <div class="product-wish">
+                      <a class="wishIcon wishlist rounded m-0" href="my-wishlist.html">
+                        <i class="icon an an-heart"></i>
+                        <span class="tooltip-label left">Available in Wishlist</span>
+                      </a>
+                    </div>
+                  </div>
+
+                  <div class="lightboximages" id="p-lightbox"></div>
+                </div>
+              </div>
+
+              <div class="col-lg-5 col-md-6 col-sm-12 col-12">
+                <div class="product-single__meta">
+                  <h1 class="product-single__title" id="p-title">Fiche détaillée du produit</h1>
+                  <div class="product-single__subtitle">$From</div>
+
+                  <div class="product-review mb-2">
+                    <a class="reviewLink d-flex-center" href="#reviews">
+                      <i class="an an-star"></i>
+                      <i class="an an-star mx-1"></i>
+                      <i class="an an-star"></i>
+                      <i class="an an-star mx-1"></i>
+                      <i class="an an-star-o"></i>
+                      <span class="spr-badge-caption ms-2">Avis</span>
+                    </a>
+                  </div>
+
+                  <div class="product-info">
+                    <p class="product-type">Marque: <span id="p-brand">$marque_produit</span></p>
+                    <p class="product-type">Désignation: <span id="p-name">$nom_produit</span></p>
+                    <p class="product-sku">SKU: <span class="variant-sku" id="p-sku">$sku</span></p>
+
+                    <div class="product-description-inline mt-3">
+                      <h5 class="mb-2">Description</h5>
+                      <div id="p-description"></div>
+                    </div>
+                  </div>
+
+                  <div class="product-single__price pb-1">
+                    <span class="visually-hidden">Prix nominal</span>
+                    <span class="product-price__sale--single">
+                      <span class="product-price-old-price" id="p-oldprice">$ancien_prix</span>
+                      <span class="product-price__price product-price__sale" id="p-price">$prix_actuel</span>
+                      <span class="discount-badge" id="p-discount">
+                        <span class="devider me-2">|</span>
+                        <span>Remise: </span>
+                        <span class="product-single__save-amount"><span class="money" id="p-save">$remise</span></span>
+                        <span class="off ms-1">(<span id="p-save-rate">$taux_remise</span>%)</span>
+                      </span>
+                    </span>
+                  </div>
+
+                  <div class="orderMsg d-flex-center" data-user="23" data-time="24">
+                    <img src="assets/images/order-icon.jpg" alt="order" />
+                    <p id="quantity_message" class="ms-2 ps-2 border-start">
+                      Dépêchez-vous! Seulement <span class="items fw-bold">$quantite</span> restant.
+                    </p>
+                  </div>
+                </div>
+
+                <form method="post" action="#" class="product-form hidedropdown">
+                  <div class="swatches-image swatch clearfix swatch-0 option1" data-option-index="0">
+                    <div class="product-form__item">
+                      <label class="label d-flex">Couleur disponible <span class="required d-none">*</span></label>
+                      <ul class="swatches d-flex-wrap list-unstyled clearfix" id="p-colors"></ul>
+                    </div>
+                  </div>
+
+                  <div class="product-action w-100 clearfix">
+                    <div class="product-form__item--submit">
+                      <button type="submit" name="add" class="btn rounded product-form__cart-submit">
+                        <span>Ajouter à ma liste</span>
+                      </button>
+                      <button type="submit" name="add" class="btn rounded product-form__sold-out d-none" disabled="disabled">
+                        Sold out
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-reviews-section mt-4 mt-md-5" id="reviews">
+            <div class="row">
+              <div class="col-12">
+                <div class="spr-header clearfix d-flex-center justify-content-between">
+                  <div class="product-review d-flex-center me-auto">
+                    <a class="reviewLink" href="#">
+                      <i class="icon an an-star"></i>
+                      <i class="icon an an-star mx-1"></i>
+                      <i class="icon an an-star"></i>
+                      <i class="icon an an-star mx-1"></i>
+                      <i class="icon an an-star-o"></i>
+                    </a>
+                    <span class="spr-summary-actions-togglereviews ms-2">Based on 6 reviews 234</span>
+                  </div>
+
+                  <div class="spr-summary-actions mt-3 mt-sm-0">
+                    <a href="#" class="spr-summary-actions-newreview write-review-btn btn rounded">
+                      <i class="icon an-1x an an-pencil-alt me-2"></i>Laisser un avis
+                    </a>
+                  </div>
+                </div>
+
+                <form method="post" action="#" class="product-review-form new-review-form mb-4">
+                  <h4 class="spr-form-title text-uppercase">Laisser un avis</h4>
+
+                  <fieldset class="spr-form-contact">
+                    <div class="spr-form-contact-name form-group">
+                      <label class="spr-form-label" for="nickname">Nom <span class="required">*</span></label>
+                      <input class="spr-form-input spr-form-input-text" id="nickname" type="text" name="name" placeholder="Pseudo" required />
+                    </div>
+
+                    <div class="spr-form-contact-email form-group">
+                      <label class="spr-form-label" for="email">Email <span class="required">*</span></label>
+                      <input class="spr-form-input spr-form-input-email" id="email" type="email" name="email" placeholder="example@gmail.com" required />
+                    </div>
+
+                    <div class="spr-form-review-rating form-group">
+                      <label class="spr-form-label">Note</label>
+                      <div class="product-review pt-1">
+                        <div class="review-rating">
+                          <input type="radio" name="rating" id="rating-5" /><label for="rating-5"></label>
+                          <input type="radio" name="rating" id="rating-4" /><label for="rating-4"></label>
+                          <input type="radio" name="rating" id="rating-3" /><label for="rating-3"></label>
+                          <input type="radio" name="rating" id="rating-2" /><label for="rating-2"></label>
+                          <input type="radio" name="rating" id="rating-1" /><label for="rating-1"></label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="spr-form-review-title form-group">
+                      <label class="spr-form-label" for="review">Libellé de l'avis</label>
+                      <input class="spr-form-input spr-form-input-text" id="review" type="text" name="review" placeholder="Sujet de l'avis" />
+                    </div>
+
+                    <div class="spr-form-review-body form-group">
+                      <label class="spr-form-label" for="message">
+                        Texte de l'avis
+                        <span class="spr-form-review-body-charactersremaining">(1500) caractères maximum</span>
+                      </label>
+                      <div class="spr-form-input">
+                        <textarea class="spr-form-input spr-form-input-textarea" id="message" name="message" rows="5" placeholder="Ecrivez votre commentaire ici"></textarea>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <div class="spr-form-actions clearfix">
+                    <input type="submit" class="btn btn-primary rounded spr-button spr-button-primary" value="Submit Review" />
+                  </div>
+                </form>
+              </div>
+
+              <div class="col-12">
+                <div class="spr-reviews">
+                  <h4 class="spr-form-title text-uppercase mb-3">Avis des clients</h4>
+
+                  <div class="review-inner">
+                    <div class="spr-review">
+                      <div class="spr-review-header">
+                        <span class="product-review spr-starratings">
+                          <span class="reviewLink">
+                            <i class="icon an an-star"></i>
+                            <i class="icon an an-star mx-1"></i>
+                            <i class="icon an an-star"></i>
+                            <i class="icon an an-star mx-1"></i>
+                            <i class="icon an an-star-o"></i>
+                          </span>
+                        </span>
+                        <h5 class="spr-review-header-title mt-1">Lorem ipsum dolor sit amet</h5>
+                        <span class="spr-review-header-byline"><strong>Avone</strong> on <strong>Apr 09, 2021</strong></span>
+                      </div>
+                      <div class="spr-review-content">
+                        <p class="spr-review-content-body">
+                          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="spr-review">
+                      <div class="spr-review-header">
+                        <span class="product-review spr-starratings">
+                          <span class="reviewLink">
+                            <i class="icon an an-star"></i>
+                            <i class="icon an an-star mx-1"></i>
+                            <i class="icon an an-star"></i>
+                            <i class="icon an an-star-o mx-1"></i>
+                            <i class="icon an an-star-o"></i>
+                          </span>
+                        </span>
+                        <h5 class="spr-review-header-title mt-1">Simply text of the printing</h5>
+                        <span class="spr-review-header-byline"><strong>Diva</strong> on <strong>May 30, 2021</strong></span>
+                      </div>
+                      <div class="spr-review-content">
+                        <p class="spr-review-content-body">
+                          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="spr-review">
+                      <div class="spr-review-header">
+                        <span class="product-review spr-starratings">
+                          <span class="reviewLink">
+                            <i class="icon an an-star"></i>
+                            <i class="icon an an-star mx-1"></i>
+                            <i class="icon an an-star-o"></i>
+                            <i class="icon an an-star-o mx-1"></i>
+                            <i class="icon an an-star-o"></i>
+                          </span>
+                        </span>
+                        <h5 class="spr-review-header-title mt-1">Neque porro quisquam est qui dolorem ipsum</h5>
+                        <span class="spr-review-header-byline"><strong>Belle</strong> on <strong>Dec 30, 2021</strong></span>
+                      </div>
+                      <div class="spr-review-content">
+                        <p class="spr-review-content-body">
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Container -->
+
+        <include src="../src/partials/footer.html"></include>
+        <include src="../src/partials/minicart-drawer.html"></include>
+
+        <div class="modalOverly"></div>
+
+        <div id="pro-addtocart-popup" class="mfp-with-anim mfp-hide">
+          <button title="Close (Esc)" type="button" class="mfp-close">×</button>
+          <div class="addtocart-inner text-center clearfix">
+            <h4 class="title mb-3 text-success">Added to your shopping cart successfully.</h4>
+            <div class="pro-img mb-3">
+              <img
+                class="img-fluid blur-up lazyload"
+                src="assets/images/products/add-to-cart-popup.jpg"
+                data-src="assets/images/products/add-to-cart-popup.jpg"
+                alt="Added to your shopping cart successfully."
+                title="Added to your shopping cart successfully."
+              />
+            </div>
+            <div class="pro-details">
+              <h5 class="pro-name mb-0">Ditsy Floral Dress</h5>
+              <p class="sku my-2">Color: Gray</p>
+              <p class="mb-0 qty-total">1 X $113.88</p>
+              <div class="addcart-total bg-light mt-3 mb-3 p-2">
+                Total: <b class="price">$113.88</b>
+              </div>
+              <div class="button-action">
+                <a href="checkout-style1.html" class="btn btn-primary view-cart mx-1 rounded">Go To Checkout</a>
+                <a href="index.html" class="btn btn-secondary rounded">Continue Shopping</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <include src="../src/partials/scripts.html"></include>
+        <script type="module" src="assets/js/product_page.js"></script>
+        <script type="module" src="assets/js/add_to_cart_product.js"></script>
+
+        <script src="assets/js/vendor/photoswipe.min.js"></script>
+        <script>
+          $(function () {
+            var $pswp = $('.pswp')[0],
+              image = [],
+              getItems = function () {
+                var items = [];
+                $('.lightboximages a').each(function () {
+                  var $href = $(this).attr('href'),
+                    $size = $(this).data('size').split('x'),
+                    item = {
+                      src: $href,
+                      w: $size[0],
+                      h: $size[1]
+                    };
+                  items.push(item);
+                });
+                return items;
+              };
+
+            var items = getItems();
+
+            $.each(items, function (index, value) {
+              image[index] = new Image();
+              image[index].src = value['src'];
+            });
+
+            $('.prlightbox').on('click', function (event) {
+              event.preventDefault();
+
+              var $index = $(".active-thumb").parent().attr('data-slick-index');
+              $index++;
+              $index = $index - 1;
+
+              var options = {
+                index: $index,
+                bgOpacity: 0.7,
+                showHideOpacity: true
+              };
+
+              var lightBox = new PhotoSwipe($pswp, PhotoSwipeUI_Default, items, options);
+              lightBox.init();
+            });
+          });
+        </script>
+
+        <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="pswp__bg"></div>
+          <div class="pswp__scroll-wrap">
+            <div class="pswp__container">
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+              <div class="pswp__item"></div>
+            </div>
+            <div class="pswp__ui pswp__ui--hidden">
+              <div class="pswp__top-bar">
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <div class="pswp__preloader">
+                  <div class="pswp__preloader__icn">
+                    <div class="pswp__preloader__cut">
+                      <div class="pswp__preloader__donut"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+              </div>
+              <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+              <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
+              <div class="pswp__caption"><div class="pswp__caption__center"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
