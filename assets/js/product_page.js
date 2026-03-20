@@ -3,11 +3,6 @@ import { getProductByCode, getProductCodeFromUrl } from "./product_service.js";
 
 console.log("🧭 product_page loaded", { href: location.href, search: location.search });
 
-/**
- * Récupère le code produit de façon robuste:
- * - 1) ?code=... (ou ?code_produit=...) via getProductCodeFromUrl()
- * - 2) sessionStorage("selected_product_code")
- */
 function getSelectedProductCode() {
   const fromUrl = getProductCodeFromUrl();
   if (fromUrl) return fromUrl;
@@ -35,11 +30,6 @@ function setText(id, value) {
   if (el) el.textContent = value ?? "";
 }
 
-function setHTML(id, value) {
-  const el = document.getElementById(id);
-  if (el) el.innerHTML = value ?? "";
-}
-
 function setAttr(id, attr, value) {
   const el = document.getElementById(id);
   if (el && value != null) el.setAttribute(attr, value);
@@ -63,7 +53,6 @@ function hasValue(v) {
 }
 
 function renderOptionalFields(p) {
-  // 1) Label
   const labelWrap = document.querySelector(".product-labels");
   const labelSpan = document.querySelector(".product-labels .pr-label1");
   const labelValue = p?.label;
@@ -76,7 +65,6 @@ function renderOptionalFields(p) {
     if (labelSpan) labelSpan.textContent = "";
   }
 
-  // 2) From
   const fromEl = document.querySelector(".product-single__subtitle");
   const fromValue = p?.from ?? p?.From;
 
@@ -88,7 +76,6 @@ function renderOptionalFields(p) {
     if (fromEl) fromEl.textContent = "";
   }
 
-  // 3) Quantité
   const qtyMsg = document.getElementById("quantity_message");
   const qtySpan = qtyMsg?.querySelector(".items");
   const qtyValue = p?.quantite ?? p?.quantité ?? p?.qty;
@@ -108,7 +95,7 @@ function renderOptionalFields(p) {
 function renderDescription(p) {
   const description =
     p?.description ??
-    p?.descirption ?? // au cas où la clé aurait été écrite ainsi
+    p?.descirption ??
     p?.descriptif ??
     p?.description_produit ??
     "";
@@ -116,12 +103,7 @@ function renderDescription(p) {
   const descEl = document.getElementById("p-description");
   if (!descEl) return;
 
-  // Si ta description est du texte simple
   descEl.textContent = description;
-
-  // Si plus tard tu veux autoriser du HTML venant de l'objet,
-  // remplace la ligne ci-dessus par :
-  // descEl.innerHTML = description || "";
 }
 
 function renderColors(colors) {
@@ -205,26 +187,77 @@ function renderPrices(p) {
   }
 }
 
+function renderRatingStars(container, rating) {
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const safeRating = Number(rating);
+  const normalized = Number.isFinite(safeRating) ? Math.max(0, Math.min(5, safeRating)) : 0;
+
+  const fullStars = Math.floor(normalized);
+  const halfStar = normalized % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+  for (let i = 0; i < fullStars; i++) {
+    container.innerHTML += '<i class="an an-star"></i>';
+  }
+
+  if (halfStar) {
+    container.innerHTML += '<i class="an an-star-half-o"></i>';
+  }
+
+  for (let i = 0; i < emptyStars; i++) {
+    container.innerHTML += '<i class="an an-star-o"></i>';
+  }
+}
+
+function renderTopReviewSummary(p) {
+  const rating =
+    p?.notation ??
+    p?.rating ??
+    p?.note ??
+    p?.average_rating ??
+    p?.moyenne_avis ??
+    0;
+
+  const starsEl = document.getElementById("p-top-review-stars");
+  renderRatingStars(starsEl, rating);
+
+  const wrapper = document.getElementById("p-top-review");
+  if (wrapper) {
+    wrapper.setAttribute("data-rating", String(rating ?? 0));
+  }
+
+  const count =
+    p?.nombre_avis ??
+    p?.nb_avis ??
+    p?.reviews_count ??
+    p?.avis_count;
+
+  const labelEl = document.getElementById("p-top-review-label");
+  if (labelEl) {
+    if (Number.isFinite(Number(count)) && Number(count) > 0) {
+      const n = Number(count);
+      labelEl.textContent = `${n} avis`;
+    } else {
+      labelEl.textContent = "Avis";
+    }
+  }
+}
+
 export function injectProduct(p) {
-  // titre + SEO
   setText("p-title", p.nom_produit || "Produit");
   document.title = `${p.nom_produit || "Produit"} - IA BAG`;
 
-  // infos
   setText("p-brand", p.marque_produit);
   setText("p-name", p.nom_produit);
   setText("p-sku", p.sku);
 
-  // description sous le SKU
   renderDescription(p);
-
-  // champs optionnels
   renderOptionalFields(p);
-
-  // prix
   renderPrices(p);
-
-  // couleurs + galerie
+  renderTopReviewSummary(p);
   renderColors(p.liste_couleur);
   renderGallery(p.image_produit, p.autres_images);
 }
