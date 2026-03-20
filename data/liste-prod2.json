@@ -54,7 +54,7 @@
           "prix_actuel": { "N": "249.99" },
           "notation": { "N": "4.9" },
           "sku": { "S": "LX-P003" },
-          "liste_couleur":{"L":[{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Black"},"cssClass":{"S":"black"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Bleu"},"cssClass":{"S":"bleu"}}}]},
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Black"},"cssClass":{"S":"black"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}},{"M":{"name":{"S":"Bleu"},"cssClass":{"S":"blue"}}}]},
           "autres_images": {
             "L": [
               { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
@@ -120,7 +120,7 @@
           "prix_actuel": { "N": "249.99" },
           "notation": { "N": "4.9" },
           "sku": { "S": "LX-P003" },
-          "liste_couleur": { "L": [ { "S": "beige" }, { "S": "noir" } ] },
+          "liste_couleur":{"L":[{"M":{"name":{"S":"Maroon"},"cssClass":{"S":"maroon"}}},{"M":{"name":{"S":"Purple"},"cssClass":{"S":"purple"}}},{"M":{"name":{"S":"Black"},"cssClass":{"S":"black"}}}]},
           "autres_images": {
             "L": [
               { "S": "https://s3.eu-west-3.amazonaws.com/iabag.fr/assets/images/products/P003-800-960.png" },
