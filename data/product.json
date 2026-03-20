@@ -8,20 +8,7 @@
     "ancien_prix": 320,
     "nom_produit": "Sac à Main Prestige 2",
     "notation": 4.9,
-    "liste_couleur": [
-      {
-        "name": "Gray",
-        "cssClass": "gray"
-      },
-      {
-        "name": "Orange",
-        "cssClass": "orange"
-      },
-      {
-        "name": "Red",
-        "cssClass": "red"
-      }
-    ],
+    "liste_couleur":{"L":[{"M":{"name":{"S":"Green"},"cssClass":{"S":"green"}}},{"M":{"name":{"S":"Orange"},"cssClass":{"S":"orange"}}},{"M":{"name":{"S":"Red"},"cssClass":{"S":"red"}}}]},
     "autres_images": [
       "assets/images/products/P003-800-960.png",
       "assets/images/products/P003-800-960.png",
