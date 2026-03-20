@@ -232,17 +232,18 @@ function buildProductHTML(product) {
 
 function fillColorList(container, colors) {
   container.innerHTML = "";
+
   colors.forEach((color) => {
-    // Selon le format reçu :
     const name = typeof color === "string" ? color : color.name;
     const cssClass = typeof color === "string" ? color.toLowerCase() : color.cssClass;
 
     const li = document.createElement("li");
     li.className = `medium radius ${cssClass}`;
+    li.setAttribute("title", name || "");
 
     li.innerHTML = `
-      <span class="swacth-btn"></span>
-      <span class="tooltip-label">${name}</span>
+      <span class="swacth-btn" title="${name || ""}"></span>
+      <span class="tooltip-label top">${name || ""}</span>
     `;
 
     container.appendChild(li);
