@@ -230,20 +230,61 @@ function buildProductHTML(product) {
   return card;
 }
 
+function normalizeOneColor(color) {
+  if (!color) return null;
+
+  // cas simple string
+  if (typeof color === "string") {
+    return {
+      name: color,
+      cssClass: color.toLowerCase(),
+    };
+  }
+
+  // cas objet normal
+  if (color.name || color.cssClass) {
+    return {
+      name: color.name || "",
+      cssClass: color.cssClass || (color.name ? String(color.name).toLowerCase() : ""),
+    };
+  }
+
+  // cas DynamoDB { M: { name: { S: ... }, cssClass: { S: ... } } }
+  if (color.M) {
+    return {
+      name: color.M?.name?.S || "",
+      cssClass: color.M?.cssClass?.S || "",
+    };
+  }
+
+  return null;
+}
+
+function normalizeColorList(colors) {
+  // cas DynamoDB complet: { L: [...] }
+  const list = Array.isArray(colors) ? colors : (colors?.L || []);
+
+  return list
+    .map(normalizeOneColor)
+    .filter(Boolean)
+    .filter((c) => c.name || c.cssClass);
+}
+
 function fillColorList(container, colors) {
   container.innerHTML = "";
 
-  colors.forEach((color) => {
-    const name = typeof color === "string" ? color : color.name;
-    const cssClass = typeof color === "string" ? color.toLowerCase() : color.cssClass;
+  const normalizedColors = normalizeColorList(colors);
+
+  normalizedColors.forEach((color) => {
+    const name = color.name || "";
+    const cssClass = color.cssClass || "";
 
     const li = document.createElement("li");
-    li.className = `medium radius ${cssClass}`;
-    li.setAttribute("title", name || "");
+    li.className = `swatch-element color available ${cssClass}`.trim();
 
     li.innerHTML = `
-      <span class="swacth-btn" title="${name || ""}"></span>
-      <span class="tooltip-label top">${name || ""}</span>
+      <label class="rounded-0 swatchLbl small color ${cssClass}" title="${name}"></label>
+      <span class="tooltip-label top">${name}</span>
     `;
 
     container.appendChild(li);

@@ -106,20 +106,64 @@ function renderDescription(p) {
   descEl.textContent = description;
 }
 
+function normalizeOneColor(color) {
+  if (!color) return null;
+
+  // cas simple string
+  if (typeof color === "string") {
+    return {
+      name: color,
+      cssClass: color.toLowerCase(),
+    };
+  }
+
+  // cas objet normal
+  if (color.name || color.cssClass) {
+    return {
+      name: color.name || "",
+      cssClass: color.cssClass || (color.name ? String(color.name).toLowerCase() : ""),
+    };
+  }
+
+  // cas DynamoDB { M: { name: { S: ... }, cssClass: { S: ... } } }
+  if (color.M) {
+    return {
+      name: color.M?.name?.S || "",
+      cssClass: color.M?.cssClass?.S || "",
+    };
+  }
+
+  return null;
+}
+
+function normalizeColorList(colors) {
+  // cas DynamoDB complet: { L: [...] }
+  const list = Array.isArray(colors) ? colors : (colors?.L || []);
+
+  return list
+    .map(normalizeOneColor)
+    .filter(Boolean)
+    .filter((c) => c.name || c.cssClass);
+}
+
 function renderColors(colors) {
   const ul = document.getElementById("p-colors");
   if (!ul) return;
 
   ul.innerHTML = "";
 
-  (colors || []).forEach((c, idx) => {
+  const normalizedColors = normalizeColorList(colors);
+
+  normalizedColors.forEach((color, idx) => {
+    const name = color.name || "";
+    const cssClass = color.cssClass || "";
+
     const li = document.createElement("li");
-    li.className = `swatch-element color ${c.cssClass || ""} available ${idx === 0 ? "active" : ""}`;
-    li.dataset.value = c.name || "";
+    li.className = `swatch-element color available ${idx === 0 ? "active" : ""}`.trim();
 
     li.innerHTML = `
-      <label class="swatchLbl rounded color xlarge ${c.cssClass || ""}" title="${c.name || ""}"></label>
-      <span class="tooltip-label top">${c.name || ""}</span>
+      <label class="rounded-0 swatchLbl small color ${cssClass}" title="${name}"></label>
+      <span class="tooltip-label top">${name}</span>
     `;
 
     li.addEventListener("click", () => {
