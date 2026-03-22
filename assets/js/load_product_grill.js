@@ -410,11 +410,13 @@ function renderRatingStars(container, rating) {
 }
 
 function applyRatingStars(card, product) {
+  const fallbackRating =
+    Number(product?.average_rating ?? product?.notation ?? product?.rating ?? product?.note ?? 0) || 0;
+
   card.querySelectorAll(".product-review").forEach((el) => {
-    const rating = parseFloat(el.getAttribute("data-rating"));
-    if (!isNaN(rating)) {
-      renderRatingStars(el, rating);
-    }
+    const domRating = parseFloat(el.getAttribute("data-rating"));
+    const rating = Number.isFinite(domRating) ? domRating : fallbackRating;
+    renderRatingStars(el, rating);
   });
 }
 
