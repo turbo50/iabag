@@ -1,6 +1,13 @@
-import { isAuthenticated, getUserFromIdToken, logoutAll } from "./auth_social_cognito.js";
+import { CONFIG } from "./config.js";
+import {
+  isAuthenticated,
+  getUserFromIdToken,
+  getIdToken,
+  logoutAll,
+} from "./auth_social_cognito.js";
 
 const SESSION_CUSTOMER_ID_KEY = "iabag_customer_id_v1";
+const PROFILE_CACHE_KEY = "iabag_profile_cache_v1";
 
 function hideLiFromHref(href) {
   document.querySelectorAll(`#userLinks a[href="${href}"]`).forEach((a) => {
@@ -16,93 +23,164 @@ function showLiFromHref(href) {
   });
 }
 
-export function updateHeaderAuthUI() {
+function getCachedProfile() {
+  try {
+    const raw = localStorage.getItem(PROFILE_CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedProfile(profile) {
+  try {
+    localStorage.setItem(PROFILE_CACHE_KEY, JSON.stringify(profile || {}));
+  } catch {
+    // ignore
+  }
+}
+
+function clearCachedProfile() {
+  try {
+    localStorage.removeItem(PROFILE_CACHE_KEY);
+  } catch {
+    // ignore
+  }
+}
+
+async function readJsonResponse(res) {
+  const text = await res.text().catch(() => "");
+  let json = null;
+
+  try {
+    json = text ? JSON.parse(text) : null;
+  } catch {
+    json = null;
+  }
+
+  if (!res.ok) {
+    const msg = json?.error || json?.message || text || `${res.status} ${res.statusText}`;
+    const err = new Error(msg);
+    err.status = res.status;
+    err.body = json || text;
+    throw err;
+  }
+
+  return json;
+}
+
+async function fetchProfile() {
+  const token = getIdToken();
+  if (!token) return null;
+
+  try {
+    const res = await fetch(`${CONFIG.API_BASE_URL}/clients/me/profile`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const profile = await readJsonResponse(res);
+    setCachedProfile(profile);
+    return profile;
+  } catch (err) {
+    console.warn("Impossible de charger le profil client pour le header", err);
+    return getCachedProfile();
+  }
+}
+
+function resetWelcomeUI(welcomeBox, welcomeName) {
+  welcomeBox.style.display = "none";
+  welcomeBox.classList.add("d-none");
+  welcomeName.textContent = "";
+}
+
+function showWelcome(welcomeBox, welcomeName, label) {
+  if (!label) {
+    resetWelcomeUI(welcomeBox, welcomeName);
+    return;
+  }
+
+  welcomeName.textContent = `Bonjour ${label} !`;
+  welcomeBox.classList.remove("d-none");
+  welcomeBox.style.display = "";
+}
+
+export async function updateHeaderAuthUI() {
   const welcomeBox = document.getElementById("auth-welcome");
   const welcomeName = document.getElementById("auth-welcome-name");
   const logoutItem = document.getElementById("nav-logout-item");
   const logoutLink = document.getElementById("nav-logout-link");
-
-  // ✅ AJOUT: item "Mes commandes"
   const ordersItem = document.getElementById("nav-orders-item");
-  // ✅ AJOUT: item "Mes favoris"
   const wishListItem = document.getElementById("nav-wishlist-item");
-  
 
-  // header pas présent sur toutes pages ? => on sort sans erreur
   if (!welcomeBox || !welcomeName) return;
 
-  // ✅ sécurité: caché par défaut à chaque update (évite tout flash)
-  welcomeBox.style.display = "none";
-  welcomeBox.classList.add("d-none"); // garde bootstrap si dispo
-  welcomeName.textContent = "";
+  resetWelcomeUI(welcomeBox, welcomeName);
 
-  // ✅ AJOUT: cacher "Mes commandes" par défaut (évite flash)
   if (ordersItem) ordersItem.style.display = "none";
-  // ✅ AJOUT: cacher "Mes favoris" par défaut (évite flash)
   if (wishListItem) wishListItem.style.display = "none";
 
-  // bind logout (une seule fois)
   if (logoutLink && !logoutLink.dataset.bound) {
     logoutLink.dataset.bound = "1";
     logoutLink.addEventListener("click", (e) => {
       e.preventDefault();
-       // ✅ purge immédiate (ne dépend pas de isAuthenticated() ni d'événements)
+
       sessionStorage.removeItem(SESSION_CUSTOMER_ID_KEY);
-      localStorage.removeItem("iabag_cart_v1"); // optionnel: vider le panier
+      clearCachedProfile();
+      localStorage.removeItem("iabag_cart_v1");
       logoutAll();
     });
   }
 
   if (!isAuthenticated()) {
-    // pas connecté
     sessionStorage.removeItem(SESSION_CUSTOMER_ID_KEY);
+    clearCachedProfile();
 
-    // afficher Connexion/S'inscrire
     showLiFromHref("login.html");
     showLiFromHref("register.html");
 
-    // cacher Déconnexion
     if (logoutItem) logoutItem.style.display = "none";
-
-    // ✅ AJOUT: cacher Mes commandes
     if (ordersItem) ordersItem.style.display = "none";
-    // ✅ AJOUT: cacher Mes favoris
     if (wishListItem) wishListItem.style.display = "none";
 
     return;
   }
 
-  // connecté
   const user = getUserFromIdToken();
-  const email = user?.email || "";
+  const fallbackEmail = user?.email || "";
 
-  // Afficher uniquement si email est présent
-  if (email) {
-    welcomeName.textContent = `Bonjour ${email} !`;
-    welcomeBox.classList.remove("d-none");
-    welcomeBox.style.display = ""; // ou "flex"
-  } else {
-    // email absent => on garde caché
-    welcomeBox.style.display = "none";
-    welcomeBox.classList.add("d-none");
-    welcomeName.textContent = "";
+  if (user?.sub) {
+    sessionStorage.setItem(SESSION_CUSTOMER_ID_KEY, String(user.sub));
   }
 
-  // masquer Connexion/S'inscrire
   hideLiFromHref("login.html");
   hideLiFromHref("register.html");
 
-  // afficher Déconnexion
   if (logoutItem) logoutItem.style.display = "";
-
-  // ✅ AJOUT: afficher Mes commandes
   if (ordersItem) ordersItem.style.display = "";
   if (wishListItem) wishListItem.style.display = "";
 
-  // stocker l'identifiant utilisateur pour lier les commandes
-  if (user?.sub) sessionStorage.setItem(SESSION_CUSTOMER_ID_KEY, String(user.sub));
+  const profile = await fetchProfile();
+  const pseudo = String(profile?.pseudo || "").trim();
+
+  if (pseudo) {
+    showWelcome(welcomeBox, welcomeName, pseudo);
+  } else if (fallbackEmail) {
+    showWelcome(welcomeBox, welcomeName, fallbackEmail);
+  } else {
+    resetWelcomeUI(welcomeBox, welcomeName);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", updateHeaderAuthUI);
-window.addEventListener("auth:changed", updateHeaderAuthUI);
+document.addEventListener("DOMContentLoaded", () => {
+  updateHeaderAuthUI().catch((err) => console.error(err));
+});
+
+window.addEventListener("auth:changed", () => {
+  updateHeaderAuthUI().catch((err) => console.error(err));
+});
+
 window.dispatchEvent(new Event("auth:changed"));
