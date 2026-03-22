@@ -35,6 +35,8 @@ Globals:
         TABLE_AVIS: iabag_avis
         TABLE_COMMANDE: iabag_commande
         TABLE_WISHLIST: iabag_wishlist
+        TABLE_CONTACT: iabag_contact
+        GEOIP_BASE_URL: https://ipapi.co
         REGION: !Ref AWS::Region
 
 # ─────────────────────────────────────────────
@@ -151,6 +153,18 @@ Resources:
           KeyType: HASH
         - AttributeName: code_produit
           KeyType: RANGE
+  
+  ContactTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: iabag_contact
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: message_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: message_id
+          KeyType: HASH
 
   # ── IAM Policy (shared) ──────────────────
   DynamoPolicy:
@@ -175,6 +189,7 @@ Resources:
               - !GetAtt CommandeTable.Arn
               - !Sub "${CommandeTable.Arn}/index/*"
               - !GetAtt WishlistTable.Arn
+              - !GetAtt ContactTable.Arn
 
   # ── Lambda Functions ──────────────────────
 
@@ -439,6 +454,23 @@ Resources:
             Path: /clients/me/profile
             Auth:
               Authorizer: CognitoJwtAuthorizer
+
+  # POST /contact/messages
+  ContactCreateFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: iabag-contact-create
+      CodeUri: src/
+      Handler: functions/contact_create.handler
+      Policies:
+        - !Ref DynamoPolicy
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref IabagHttpApi
+            Method: POST
+            Path: /contact/messages
     
 # ─────────────────────────────────────────────
 # Outputs
