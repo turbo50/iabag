@@ -148,14 +148,16 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-3"><a href="product-detail.html">VOIR PLUS DE DETAILS</a></div>
+                        <div class="text-center mt-3">
+                            <a href="product-detail.html" id="qv-details-link">VOIR PLUS DE DETAILS</a>
+                        </div>
                     </div>
 
                     <div class="col-12 col-sm-6 col-md-6 col-lg-6">
                         <h2 class="product-title fw-normal" id="qv-title">Aperçu rapide du produit</h2>
 
                         <div class="product-info">
-                            <p class="product-vendor">Marque:  <span class="fw-normal" id="qv-marque"></span></p>
+                            <p class="product-vendor">Marque: <span class="fw-normal" id="qv-marque"></span></p>
                             <p class="product-sku">SKU: <span class="fw-normal" id="qv-sku"></span></p>
                         </div>
 
@@ -166,29 +168,44 @@
 
                         <form id="product_form--option" class="product-form">
                             <div class="product-options d-flex-wrap">
-
                                 <div class="swatch clearfix swatch-0 option1">
                                     <div class="product-form__item">
                                         <label class="label d-flex">Color:<span class="required d-none">*</span></label>
                                         <ul class="swatches-image swatches d-flex-wrap list-unstyled clearfix" id="qv-colors"></ul>
                                     </div>
                                 </div>
-
                             </div>
-                        </form>
-                        <div class="wishlist-btn d-flex-center">
-                            <a class="add-wishlist d-flex-center text-uppercase me-3" href="my-wishlist.html" title="Add to Wishlist"><i class="icon an an-heart-l me-1"></i> <span>Ajouter à ma liste</span></a>
-                            <a class="add-compare d-flex-center text-uppercase" href="compare-style1.html" title="Add to Compare"><i class="icon an an-random-r me-2"></i> <span>Ajouter à mes comparaisons</span></a>
-                        </div>
+
+                            <div class="product-action w-100 clearfix mt-3">
+                                <div class="product-form__item--submit">
+                                    <button type="button" id="qv-add-to-cart" class="btn rounded product-form__cart-submit">
+                                        <span>Ajouter au panier</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>    
+
                         <!-- Social Sharing -->
                         <div class="social-sharing share-icon d-flex-center mx-0 mt-3">
                             <span class="sharing-lbl me-2">Share :</span>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-facebook" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Facebook"><i class="icon an an-facebook mx-1"></i><span class="share-title d-none">Facebook</span></a>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-twitter" data-bs-toggle="tooltip" data-bs-placement="top" title="Tweet on Twitter"><i class="icon an an-twitter mx-1"></i><span class="share-title d-none">Tweet</span></a>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-pinterest" data-bs-toggle="tooltip" data-bs-placement="top" title="Pin on Pinterest"><i class="icon an an-pinterest-p mx-1"></i> <span class="share-title d-none">Pin it</span></a>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-linkedin" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on Instagram"><i class="icon an an-instagram mx-1"></i><span class="share-title d-none">Instagram</span></a>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-whatsapp" data-bs-toggle="tooltip" data-bs-placement="top" title="Share on WhatsApp"><i class="icon an an-whatsapp mx-1"></i><span class="share-title d-none">WhatsApp</span></a>
-                            <a href="#" class="d-flex-center btn btn-link btn--share share-email" data-bs-toggle="tooltip" data-bs-placement="top" title="Share by Email"><i class="icon an an-envelope-l mx-1"></i><span class="share-title d-none">Email</span></a>
+
+                            <a href="#" id="qv-share-facebook" class="d-flex-center btn btn-link btn--share share-facebook"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Partager sur Facebook" target="_blank" rel="noopener noreferrer">
+                                <i class="icon an an-facebook mx-1"></i>
+                                <span class="share-title d-none">Facebook</span>
+                            </a>
+
+                            <a href="#" id="qv-share-whatsapp" class="d-flex-center btn btn-link btn--share share-whatsapp"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Partager sur WhatsApp" target="_blank" rel="noopener noreferrer">
+                                <i class="icon an an-whatsapp mx-1"></i>
+                                <span class="share-title d-none">WhatsApp</span>
+                            </a>
+
+                            <a href="#" id="qv-share-sms" class="d-flex-center btn btn-link btn--share share-sms"
+                            data-bs-toggle="tooltip" data-bs-placement="top" title="Partager par message">
+                                <i class="icon an an-comment-alt-dots mx-1"></i>
+                                <span class="share-title d-none">Message</span>
+                            </a>
                         </div>
                         <!-- End Social Sharing -->
 

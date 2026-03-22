@@ -3,10 +3,79 @@ window.__GRILL_LOADED__ = true;
 
 // Config globale (mock + API Gateway base URL)
 import { CONFIG } from "./config.js";
+import { addItem } from "./cart_service.js";
 
 // Auth (pour routes protégées wishlist)
 import { AUTH_STORAGE_KEYS } from "./auth_storage_keys.js";
 import { isAuthenticated, getIdToken, setNextUrl } from "./auth_social_cognito.js";
+
+function buildProductDetailUrl(product) {
+  const code = product?.code_produit || "";
+  return code ? `product-detail.html?code=${encodeURIComponent(code)}` : "product-detail.html";
+}
+
+function getQuickViewSelectedColor() {
+  const active = document.querySelector("#qv-colors li.active");
+  const label = active?.querySelector("label");
+  return active?.dataset?.value || label?.getAttribute("title") || "";
+}
+
+function openMinicartDrawer() {
+  const drawerEl = document.getElementById("minicart-drawer");
+  if (drawerEl && window.bootstrap?.Modal) {
+    window.bootstrap.Modal.getOrCreateInstance(drawerEl).show();
+  }
+}
+
+function setupQuickViewAddToCart(product) {
+  const btn = document.getElementById("qv-add-to-cart");
+  if (!btn) return;
+
+  btn.onclick = () => {
+    const color = getQuickViewSelectedColor();
+    const image = product.image_produit || product.image_principale || product.image || "";
+
+    addItem({
+      id: product.code_produit || "",
+      title: product.nom_produit || "Produit",
+      variant: color ? `Couleur: ${color}` : "",
+      price: product.prix_actuel || 0,
+      qty: 1,
+      image,
+      url: buildProductDetailUrl(product),
+    });
+
+    openMinicartDrawer();
+  };
+}
+
+function setupQuickViewShare(product) {
+  const productUrl = new URL(buildProductDetailUrl(product), window.location.origin).toString();
+  const title = product?.nom_produit || "Produit";
+  const text = `${title} - ${productUrl}`;
+
+  const facebook = document.getElementById("qv-share-facebook");
+  const whatsapp = document.getElementById("qv-share-whatsapp");
+  const sms = document.getElementById("qv-share-sms");
+  const details = document.getElementById("qv-details-link");
+
+  if (facebook) {
+    facebook.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(productUrl)}`;
+  }
+
+  if (whatsapp) {
+    whatsapp.href = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  }
+
+  if (sms) {
+    sms.href = `sms:?body=${encodeURIComponent(text)}`;
+  }
+
+  if (details) {
+    details.href = buildProductDetailUrl(product);
+  }
+}
+
 
 function joinUrl(base, path) {
   return `${String(base).replace(/\/$/, "")}/${String(path).replace(/^\//, "")}`;
@@ -322,11 +391,11 @@ function fillQuickView(product) {
   // ---------------------------
   // TITRE, SKU, PRIX
   // ---------------------------
-  document.getElementById("qv-title").textContent = product.nom_produit;
-  document.getElementById("qv-sku").textContent = product.sku;
-  document.getElementById("qv-marque").textContent = product.marque_produit;
-  document.getElementById("qv-oldprice").textContent = product.ancien_prix + " €";
-  document.getElementById("qv-price").textContent = product.prix_actuel + " €";
+  document.getElementById("qv-title").textContent = product.nom_produit || "";
+  document.getElementById("qv-sku").textContent = product.sku || "";
+  document.getElementById("qv-marque").textContent = product.marque_produit || "";
+  document.getElementById("qv-oldprice").textContent = product.ancien_prix ? `${product.ancien_prix} €` : "";
+  document.getElementById("qv-price").textContent = product.prix_actuel ? `${product.prix_actuel} €` : "";
 
   // ---------------------------
   // IMAGES DU CAROUSSEL
@@ -337,18 +406,15 @@ function fillQuickView(product) {
   carousel.innerHTML = "";
   thumbs.innerHTML = "";
 
-  // Image principale
-  const allImages = [product.image_produit, ...(product.autres_images || [])];
+  const allImages = [product.image_produit, ...(product.autres_images || [])].filter(Boolean);
 
   allImages.forEach((imgUrl, index) => {
-    // Slide principal
     carousel.innerHTML += `
       <div class="carousel-item ${index === 0 ? "active" : ""}">
         <img class="blur-up lazyload" src="${imgUrl}" alt="">
       </div>
     `;
 
-    // Miniature
     thumbs.innerHTML += `
       <div class="list-inline-item ${index === 0 ? "active" : ""}"
            data-bs-slide-to="${index}" data-bs-target="#quickView">
@@ -363,18 +429,31 @@ function fillQuickView(product) {
   const colorBox = document.getElementById("qv-colors");
   colorBox.innerHTML = "";
 
-  (product.liste_couleur || []).forEach((color) => {
-    // Si mock/API fournit un objet {name, cssClass}, on supporte aussi
-    const name = typeof color === "string" ? color : color.name;
-    const cssClass = typeof color === "string" ? color : color.cssClass;
+  const colors = normalizeColorList(product.liste_couleur || []);
 
-    colorBox.innerHTML += `
-      <li class="swatch-element color available">
-        <label class="rounded-0 swatchLbl small color ${cssClass}" title="${name}"></label>
-        <span class="tooltip-label top">${name}</span>
-      </li>
+  colors.forEach((color, index) => {
+    const name = color.name || "";
+    const cssClass = color.cssClass || "";
+
+    const li = document.createElement("li");
+    li.className = `swatch-element color available ${index === 0 ? "active" : ""}`.trim();
+    li.dataset.value = name;
+
+    li.innerHTML = `
+      <label class="rounded-0 swatchLbl small color ${cssClass}" title="${name}"></label>
+      <span class="tooltip-label top">${name}</span>
     `;
+
+    li.addEventListener("click", () => {
+      colorBox.querySelectorAll("li").forEach((x) => x.classList.remove("active"));
+      li.classList.add("active");
+    });
+
+    colorBox.appendChild(li);
   });
+
+  setupQuickViewAddToCart(product);
+  setupQuickViewShare(product);
 }
 
 function setupQuickViewButtons() {
