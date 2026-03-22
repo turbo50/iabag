@@ -1,6 +1,8 @@
 import { COGNITO_OAUTH } from "./cognito_oauth_config.js";
 import { startSocialLogin, setNextUrl } from "./auth_social_cognito.js";
 
+console.log("✅ social_buttons.js chargé");
+
 function providerClass(key) {
   if (key === "google") return "social-btn--google";
   if (key === "facebook") return "social-btn--facebook";

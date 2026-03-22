@@ -4,7 +4,7 @@ export const AUTH_STORAGE_KEYS = {
   tokens: "iabag_auth_tokens_v1",
   next: "iabag_auth_next_v1",
 
-  // flow inscription sociale
+  // flow inscription
   registerFlow: "iabag_register_flow_v1",
   registerPseudo: "iabag_register_pseudo_v1",
 };

@@ -21,23 +21,6 @@ function safeJsonParse(raw) {
   }
 }
 
-function base64UrlToString(b64url) {
-  const pad = "=".repeat((4 - (b64url.length % 4)) % 4);
-  const b64 = (b64url + pad).replace(/-/g, "+").replace(/_/g, "/");
-  return atob(b64);
-}
-
-function decodeJwtPayload(jwt) {
-  if (!jwt || typeof jwt !== "string") return null;
-  const parts = jwt.split(".");
-  if (parts.length !== 3) return null;
-  try {
-    return JSON.parse(base64UrlToString(parts[1]));
-  } catch {
-    return null;
-  }
-}
-
 async function exchangeCodeForTokens({ code, codeVerifier }) {
   const body = toFormUrlEncoded({
     grant_type: "authorization_code",
@@ -74,28 +57,9 @@ function getIdToken() {
   return t?.id_token || "";
 }
 
-function getAccessToken() {
-  const t = getStoredTokens();
-  return t?.access_token || "";
-}
-
-function getUserFromIdToken() {
-  return decodeJwtPayload(getIdToken());
-}
-
-async function postJson(url, body, token) {
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-    },
-    body: JSON.stringify(body),
-  });
-
+async function readJsonResponse(res) {
   const text = await res.text().catch(() => "");
   let json = null;
-
   try {
     json = text ? JSON.parse(text) : null;
   } catch {
@@ -113,36 +77,58 @@ async function postJson(url, body, token) {
   return json;
 }
 
+async function authFetch(path, { method = "GET", body } = {}) {
+  const token = getIdToken();
+  if (!token) throw new Error("Token d'authentification introuvable.");
+
+  const res = await fetch(`${CONFIG.API_BASE_URL}${path}`, {
+    method,
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    ...(body ? { body: JSON.stringify(body) } : {}),
+  });
+
+  return readJsonResponse(res);
+}
+
+async function loadProfile() {
+  try {
+    return await authFetch("/clients/me/profile");
+  } catch {
+    return null;
+  }
+}
+
 async function finalizeRegisterIfNeeded() {
   const isRegisterFlow = localStorage.getItem(K.registerFlow) === "1";
-  if (!isRegisterFlow) return;
+  if (!isRegisterFlow) return false;
 
   const pseudo = (localStorage.getItem(K.registerPseudo) || "").trim();
   if (!pseudo) {
     throw new Error("Pseudo introuvable après le retour Cognito.");
   }
 
-  const user = getUserFromIdToken();
-  const code_client = user?.sub;
-  if (!code_client) {
-    throw new Error("sub Cognito introuvable dans l'id_token.");
-  }
-
-  // Par défaut on tente id_token, puisque ton front actuel s'appuie dessus.
-  // Si ton authorizer attend access_token, remplace idToken par accessToken ci-dessous.
-  const idToken = getIdToken();
-  if (!idToken) {
-    throw new Error("Token d'authentification introuvable.");
-  }
-
-  await postJson(
-    `${CONFIG.API_BASE_URL}/clients/me/profile`,
-    { pseudo, code_client },
-    idToken
-  );
+  await authFetch("/clients/me/profile", {
+    method: "POST",
+    body: { pseudo },
+  });
 
   localStorage.removeItem(K.registerFlow);
   localStorage.removeItem(K.registerPseudo);
+  return true;
+}
+
+async function ensureRegisteredClientOrRedirect() {
+  const profile = await loadProfile();
+
+  if (profile?.pseudo) {
+    return true;
+  }
+
+  window.location.replace("register.html");
+  return false;
 }
 
 async function main() {
@@ -182,8 +168,14 @@ async function main() {
       })
     );
 
-    setStatus("Finalisation du compte…");
-    await finalizeRegisterIfNeeded();
+    setStatus("Vérification du compte…");
+
+    const justRegistered = await finalizeRegisterIfNeeded();
+
+    if (!justRegistered) {
+      const allowed = await ensureRegisteredClientOrRedirect();
+      if (!allowed) return;
+    }
 
     setStatus("Connecté. Redirection…");
     window.location.replace(getNextUrl());
