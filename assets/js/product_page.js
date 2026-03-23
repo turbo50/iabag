@@ -240,10 +240,44 @@ function renderColors(colors) {
   });
 }
 
+function initProductZoom() {
+  const img = document.getElementById("zoompro");
+  if (!img) return;
+
+  try {
+    // si elevateZoom est déjà actif, on le détruit proprement
+    if (window.jQuery && window.jQuery(img).data("elevateZoom")) {
+      window.jQuery(".zoomContainer").remove();
+      window.jQuery(img).removeData("elevateZoom");
+      window.jQuery(img).removeData("zoomImage");
+    }
+  } catch (err) {
+    console.warn("Impossible de nettoyer l'ancien zoom", err);
+  }
+
+  try {
+    if (window.jQuery && typeof window.jQuery(img).elevateZoom === "function") {
+      window.jQuery(img).elevateZoom({
+        zoomType: "inner",
+        cursor: "crosshair",
+        responsive: true,
+        zoomWindowFadeIn: 300,
+        zoomWindowFadeOut: 300,
+        lensFadeIn: 300,
+        lensFadeOut: 300
+      });
+    }
+  } catch (err) {
+    console.warn("Impossible d'initialiser le zoom produit", err);
+  }
+}
+
 function renderGallery(mainImage, otherImages) {
   const gallery = document.getElementById("gallery");
   const lightbox = document.getElementById("p-lightbox");
-  if (!gallery || !lightbox) return;
+  const zoomImg = document.getElementById("zoompro");
+
+  if (!gallery || !lightbox || !zoomImg) return;
 
   const images = [mainImage, ...(otherImages || [])].filter(Boolean);
 
@@ -255,12 +289,20 @@ function renderGallery(mainImage, otherImages) {
     a.setAttribute("data-image", src);
     a.setAttribute("data-zoom-image", src);
     a.className = `slick-slide ${i === 0 ? "active" : ""}`;
+    a.href = "#";
     a.innerHTML = `<img class="blur-up lazyload" data-src="${src}" src="${src}" alt="product" />`;
 
     a.addEventListener("click", (e) => {
       e.preventDefault();
+
+      gallery.querySelectorAll("a").forEach((el) => el.classList.remove("active"));
+      a.classList.add("active");
+
       setAttr("zoompro", "src", src);
       setAttr("zoompro", "data-zoom-image", src);
+
+      // relance le zoom sur la nouvelle image
+      initProductZoom();
     });
 
     gallery.appendChild(a);
@@ -275,6 +317,9 @@ function renderGallery(mainImage, otherImages) {
     setAttr("zoompro", "src", images[0]);
     setAttr("zoompro", "data-zoom-image", images[0]);
   }
+
+  // initialise le zoom sur l'image par défaut
+  initProductZoom();
 }
 
 function renderPrices(p) {
